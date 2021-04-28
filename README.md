@@ -1,6 +1,6 @@
 # 🏎 Auto Bots
 
-> Authors:
+> Authors:  
 > Rajbir Johar  
 > Danial Beg  
 > Matthew Lee  
