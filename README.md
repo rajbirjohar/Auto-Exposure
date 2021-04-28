@@ -1,10 +1,10 @@
 # 🏎 Auto Bots
 
 > Authors:
-> Rajbir Johar
-> Danial Beg
-> Matthew Lee
-> Isaac Curiel
+> Rajbir Johar  
+> Danial Beg  
+> Matthew Lee  
+> Isaac Curiel  
 
 ## Purpose
 
