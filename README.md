@@ -28,6 +28,7 @@ Features included or will be included:
 ## Technologies Used
 
 What we used or will use to build this:
+- Yarn
 - Next.JS
 - TailwindCSS (Styling?)
 - MongoDB (Database?)
