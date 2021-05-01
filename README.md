@@ -39,9 +39,11 @@ Features included or will be included:
 What we used or will use to build this:
 - Yarn
 - Next.JS
-- TailwindCSS (Styling?)
+- TailwindCSS
 - MongoDB (Database?)
 
 ## File Structure
 
 ## Third Party Packages and Libraries
+
+- [TailwindCSS](https://tailwindcss.com)
