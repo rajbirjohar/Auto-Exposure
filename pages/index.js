@@ -1,11 +1,16 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Layout from "../components/Layout";
 
 export default function Home() {
   return (
-    <main>
-      <h1>Main Page</h1>
-    </main>
-  )
+    <Layout main>
+      <section className="mx-auto">
+        <div className="h-screen">
+          <h1>Home Page</h1>
+        </div>
+        <div className="h-screen">
+          <h1>Details</h1>
+        </div>
+      </section>
+    </Layout>
+  );
 }
