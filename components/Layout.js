@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export const siteTitle = "Auto Bots";
+export const siteTitle = "Auto Exposure";
 
 export default function Layout({ children }) {
   return (
