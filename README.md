@@ -1,4 +1,4 @@
-# 🏎 Auto Bots
+# 🏎 Auto Exposure
 
 > Authors:  
 > Rajbir Johar  
@@ -8,9 +8,10 @@
 
 ## Table of Contents
 1. [Purpose](#purpose)
-2. [Technologies](#technologies-used)
-3. [File Structure](#file-structure)
-4. [Third Party](#third-party-packages-and-libraries)
+2. [Instructions](#instructions)
+3. [Technologies](#technologies-used)
+4. [File Structure](#file-structure)
+5. [Third Party](#third-party-packages-and-libraries)
 
 ## Purpose
 
@@ -24,6 +25,14 @@ Features included or will be included:
 - Social interaction
 - Sharing
 - Liking
+
+## Instructions
+
+1. `git clone https://github.com/CS-UCR/Auto-Exposure.git`  
+2. `cd Auto-Exposure/`  
+3. `yarn`  
+4. `yarn run dev`  
+5. `localhost:3000` in your browser.
 
 ## Technologies Used
 
