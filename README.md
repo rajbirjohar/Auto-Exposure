@@ -44,6 +44,24 @@ What we used or will use to build this:
 
 ## File Structure
 
+```bash
+├── master
+│   ├── branch frontend
+│   │   ├── pages
+│   │   │   ├── index.js
+│   │   │   ├── _app.js
+│   │   ├── ...
+│   ├── branch backend
+│   │   ├── api
+│   │   │   ├── feed.js
+│   │   │   ├── profile.js
+│   │   ├── ...
+│   ├── ...
+└── .gitignore
+```
+
+There will be two separate branches for frontend and backend where we implement specific features within each branch and merge into master.
+
 ## Third Party Packages and Libraries
 
 - [TailwindCSS](https://tailwindcss.com)
