@@ -40,7 +40,8 @@ What we used or will use to build this:
 - Yarn
 - Next.JS
 - TailwindCSS
-- MongoDB (Database?)
+- MongoDB
+- Firebase
 
 ## File Structure
 
