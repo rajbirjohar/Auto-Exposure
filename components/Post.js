@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function Post({ image, href, name, caption }) {
   return (
     <figure
-      className="bg-white flex flex-col flex-1 p-6 sm:min-w-1/2 md:min-w-1/3 m-2 shadow-lg hover:shadow-xl
+      className="bg-white flex flex-col items-center flex-1 p-6 sm:min-w-1/2 md:min-w-1/3 m-2 shadow-lg hover:shadow-xl
       transition duration-300 ease-in-out rounded-lg"
     >
       <div className="h-80 w-80 relative ring-2">
@@ -21,7 +21,7 @@ export default function Post({ image, href, name, caption }) {
           objectFit="contain" // change to suit your needs
         />
       </div>
-      <div className="text-left mt-6">
+      <div className="flex flex-col w-full text-left items-left mt-6">
         <p className="font-bold text-xl">Lightning McQueen</p>
         <p>I am speed.</p>
       </div>
