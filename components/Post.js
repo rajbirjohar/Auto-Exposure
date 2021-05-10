@@ -13,7 +13,7 @@ export default function Post({ image, href, name, caption }) {
       className="bg-white flex flex-col items-center flex-1 p-6 sm:min-w-1/2 md:min-w-1/3 m-2 shadow-lg hover:shadow-xl
       transition duration-300 ease-in-out rounded-lg"
     >
-      <div className="h-80 w-80 relative ring-2">
+      <div className="h-80 w-80 relative">
         <Image
           src="/dummy.jpg"
           alt="Dummy Image"
