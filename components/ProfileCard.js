@@ -2,14 +2,14 @@ export default function ProfileCarD() {
   return (
     <figure
       className="bg-white flex flex-col flex-initial p-6 m-2 shadow-lg hover:shadow-xl
-        transition duration-300 ease-in-out rounded-lg w-full lg:w-96 h-full"
+        transition duration-300 ease-in-out rounded-lg w-full xl:w-96 h-full"
     >
       <img
-        className="w-36 h-36 rounded-full ring-2 mb-4"
+        className="w-36 h-36 md:w-48 md:h-48 rounded-full ring-2 mb-4"
         src="/dummy.jpg"
         alt="dummy image"
       />
-      <h1>Lightning McQueen</h1>
+      <h1 className="font-bold text-2xl my-2">Lightning McQueen</h1>
       <p>
         Montgomery McQueen, more commonly known as Lightning McQueen, is an
         anthropomorphic stock car in the animated Pixar film Cars (2006), its
