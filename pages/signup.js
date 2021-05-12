@@ -26,7 +26,7 @@ const Signup = ({ submitForm }) => {
           <div className="flex flex-col">
             <label className="font-medium">Username:</label>
             <input
-              className="border-2 border-gray-200 py-1 px-3 rounded-md"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-1 px-3 rounded-md"
               type="text"
               name="username"
               placeholder="Enter your username"
@@ -40,7 +40,7 @@ const Signup = ({ submitForm }) => {
           <div className="flex flex-col">
             <label className="font-medium">Email: </label>
             <input
-              className="border-2 border-gray-200 py-1 px-3 rounded-md"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-1 px-3 rounded-md"
               type="email"
               name="email"
               placeholder="Enter your email"
@@ -53,7 +53,7 @@ const Signup = ({ submitForm }) => {
           <div className="flex flex-col">
             <label className="font-medium">Password: </label>
             <input
-              className="border-2 border-gray-200 py-1 px-3 rounded-md"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-1 px-3 rounded-md"
               type="password"
               name="password"
               placeholder="Enter your password"
@@ -67,7 +67,7 @@ const Signup = ({ submitForm }) => {
           <div className="flex flex-col pb-4">
             <label className="font-medium">Confirm Password: </label>
             <input
-              className="border-2 border-gray-200 py-1 px-3 rounded-md"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-1 px-3 rounded-md"
               type="password"
               name="password2"
               placeholder="Confirm your password"

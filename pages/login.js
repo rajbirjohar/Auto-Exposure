@@ -53,13 +53,13 @@ const Login = () => {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border-2 border-gray-200 py-1 px-3 rounded-md min-w-full"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-1 px-3 rounded-md min-w-full"
             />
           </div>
           <div className="flex flex-col pb-4">
             <label className="font-medium">Password: </label>
             <input
-              className="border-2 border-gray-200 py-1 px-3 rounded-md min-w-full"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-1 px-3 rounded-md min-w-full"
               type="password"
               name="password"
               placeholder="Enter your password"
