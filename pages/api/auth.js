@@ -46,12 +46,12 @@ export default (req, res) => {
           return;
         }
         if (!user) {
-          res.status(404).json({ error: true, message: "User not found" });
+          res.status(404).json({ error: true, message: "No account associated with this email." });
           return;
         } else {
           authUser(db, email, password, user.password, function (err, match) {
             if (err) {
-              res.status(500).json({ error: true, message: "Auth Failed" });
+              res.status(500).json({ error: true, message: "Wrong email or password." });
             }
             if (match) {
               const token = jwt.sign(
@@ -64,7 +64,7 @@ export default (req, res) => {
               res.status(200).json({ token });
               return;
             } else {
-              res.status(401).json({ error: true, message: "Auth Failed" });
+              res.status(401).json({ error: true, message: "Wrong email or password." });
               return;
             }
           });
