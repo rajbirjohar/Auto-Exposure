@@ -14,8 +14,8 @@ export default function Navigation() {
     loggedIn = true;
   }
   return (
-    <nav className="sticky-nav bg-black bg-opacity-80 text-gray-50 flex justify-end py-4 px-4 md:px-12 w-full">
-      <ul className="flex space-x-4 items-center">
+    <nav className="sticky-nav bg-black bg-opacity-80 text-gray-50 flex justify-end w-full">
+      <ul className="flex space-x-4 items-center justify-end max-w-7xl w-full py-4 px-4 md:px-12">
         <Link href="/">Home</Link>
         <Link href="/feed">Feed</Link>
         {loggedIn && (
@@ -36,9 +36,9 @@ export default function Navigation() {
         {!loggedIn && (
           <div className="flex space-x-4">
             <Link href="/login">
-              <button className="bg-gray-200 text-black py-1 px-3 rounded-md">
+              <a className="bg-gray-200 text-black py-1 px-3 rounded-md">
                 Login
-              </button>
+              </a>
             </Link>
             <Link href="/signup">
               <button className="bg-black text-white py-1 px-3 rounded-md">
