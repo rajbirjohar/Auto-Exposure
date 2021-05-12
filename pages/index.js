@@ -10,7 +10,7 @@ export default function Home() {
     const res = await fetch(args);
     return res.json();
   });
-  if (!data) return <h1></h1>; 
+  if (!data) return <h1></h1>;
   let loggedIn = false;
   if (data.email) {
     loggedIn = true;
@@ -38,10 +38,26 @@ export default function Home() {
           </>
         )}
         {!loggedIn && (
-          <div className="flex space-x-4 max-w-sm min-w-full justify-center">
-            <Link href="/login">Login</Link>
-            <Link href="/signup">Sign Up</Link>
-          </div>
+          <Link href="/login">
+            <button
+              className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium mr-2"
+              type="submit"
+              value="Submit"
+            >
+              Login
+            </button>
+          </Link>
+        )}
+        {!loggedIn && (
+          <Link href="/signup">
+            <button
+              className="bg-black rounded-md py-1 px-3 text-white font-medium ml-2"
+              type="submit"
+              value="Submit"
+            >
+              Sign Up
+            </button>
+          </Link>
         )}
       </section>
     </Layout>
