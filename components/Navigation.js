@@ -14,29 +14,37 @@ export default function Navigation() {
     loggedIn = true;
   }
   return (
-    <nav className="sticky-nav bg-black bg-opacity-80 text-gray-50 flex justify-end w-full">
-      <ul className="flex space-x-4 items-center justify-end max-w-7xl w-full py-4 px-4 md:px-12">
-        <Link href="/"><a className="mr-2">Home</a></Link>
-        <Link href="/feed"><a className="mx-2">Feed</a></Link>
+    <nav className="sticky-nav bg-black bg-opacity-80 text-gray-50 flex justify-end w-full p-4">
+      <ul className="flex items-center space-x-4">
+        <Link href="/">Home</Link>
+        <Link href="/feed">Feed</Link>
         {loggedIn && (
-          <div className="flex items-center space-x-4">
+          <>
             <Link href="/profile">Profile</Link>
             <button
               onClick={() => {
                 cookie.remove("token");
                 revalidate();
               }}
-              className="mx-2"
+              className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium"
             >
               Logout
             </button>
-          </div>
+          </>
         )}
 
         {!loggedIn && (
-          <div className="flex items-center space-x-4">
-            <Link href="/login"><a className="mx-2">Login</a></Link>
-            <Link href="/signup"><a className="ml-2">Sign Up</a></Link>
+          <div className="space-x-4">
+            <Link href="/login">
+              <button className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium mx-4">
+                Login
+              </button>
+            </Link>
+            <Link href="/signup">
+              <button className="bg-black text-white rounded-md py-1 px-3 font-medium">
+                Sign Up
+              </button>
+            </Link>
           </div>
         )}
       </ul>
