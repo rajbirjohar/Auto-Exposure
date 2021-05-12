@@ -16,38 +16,43 @@ export default function Home() {
     loggedIn = true;
   }
   return (
-    <div>
+    <Layout>
       <Head>
-        <title>Welcome to landing page</title>
+        <title>Auto Exposure</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <h1>Simplest login</h1>
-
-      <h2>Proudly using Next.js, Mongodb and deployed with Now</h2>
-      {loggedIn && (
-        <>
-          <p>Welcome {data.email}!</p>
-          <button
-            onClick={() => {
-              cookie.remove("token");
-              revalidate();
-            }}
-          >
-            Logout
-          </button>
-        </>
-      )}
-      {!loggedIn && (
-        <>
-          <Link href="/login">
-            <a className="underline">Login</a>
-          </Link>
-          <p>or</p>
-          <Link href="/signup">
-            <a className="underline">Sign Up</a>
-          </Link>
-        </>
-      )}
-    </div>
+      <section className="max-w-7xl mx-auto text-center">
+        <h1 className="font-bold text-6xl my-10">Auto Exposure</h1>
+        <h2 className="mb-10">Instagram but for cars.</h2>
+        {loggedIn && (
+          <>
+            <p className="mb-2">Welcome {data.email}!</p>
+            <button
+              onClick={() => {
+                cookie.remove("token");
+                revalidate();
+              }}
+              className="bg-gray-100 py-1 px-3 rounded-md"
+            >
+              Logout
+            </button>
+          </>
+        )}
+        {!loggedIn && (
+          <div className="flex space-x-4 max-w-sm min-w-full justify-center">
+            <Link href="/login">
+              <button className="bg-gray-100 py-1 px-3 rounded-md">
+                Login
+              </button>
+            </Link>
+            <Link href="/signup">
+              <button className="bg-black text-white py-1 px-3 rounded-md">
+                Sign Up
+              </button>
+            </Link>
+          </div>
+        )}
+      </section>
+    </Layout>
   );
 }
