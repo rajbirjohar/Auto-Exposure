@@ -8,6 +8,7 @@ export default function Navigation() {
         <Link href="/profile">Profile</Link>
         <Link href="/feed">Feed</Link>
         <Link href="/login">Log In</Link>
+        <Link href="/signup">Sign Up</Link>
       </ul>
     </nav>
   );
