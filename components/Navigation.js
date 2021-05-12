@@ -34,7 +34,7 @@ export default function Navigation() {
         )}
 
         {!loggedIn && (
-          <div className="flex space-y-4">
+          <div className="flex space-x-4">
             <Link href="/login">
               <button className="bg-gray-200 text-black py-1 px-3 rounded-md">
                 Login
