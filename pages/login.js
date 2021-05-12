@@ -42,13 +42,13 @@ const Login = () => {
     <Layout>
       <form onSubmit={handleSubmit}>
         <p>Login</p>
-        <input
+        {/* <input
           name="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="ring-2 mr-4"
-        />
+        /> */}
         <input
           name="username"
           type="username"

@@ -15,7 +15,7 @@ const client = new MongoClient(url, {
 
 function findUser(db, email, username, callback) {
   const collection = db.collection("user");
-  collection.findOne({ email }, callback);
+  collection.findOne({ username }, callback);
 }
 
 function authUser(db, email, password, hash, username, callback) {
