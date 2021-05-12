@@ -10,6 +10,7 @@ const useForm = (callback, validate) => {
     password2: "",
   });
   const [errors, setErrors] = useState({});
+  const [signupError, setSignupError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -38,6 +39,8 @@ const useForm = (callback, validate) => {
       .then((data) => {
         if (errors) {
           setErrors(validate(values));
+        } else if (data && data.error) {
+          setSignupError(data.message);
         }
         if (data && data.token) {
           //set cookie
@@ -46,8 +49,6 @@ const useForm = (callback, validate) => {
           Router.push("/");
         }
       });
-    // setErrors(validate(values));
-    // setIsSubmitting(true);
   };
 
   useEffect(() => {

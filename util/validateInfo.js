@@ -3,11 +3,9 @@ export default function validateInfo(values) {
 
   if (!values.username.trim()) {
     errors.username = "Username required";
+  } else if (!/^[A-Za-z]+/.test(values.username.trim())) {
+    errors.username = "Enter a valid name";
   }
-  // else if (!/^[A-Za-z]+/.test(values.name.trim())) {
-  //   errors.name = 'Enter a valid name';
-  // }
-
   if (!values.email) {
     errors.email = "Email required";
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
@@ -24,5 +22,6 @@ export default function validateInfo(values) {
   } else if (values.password2 !== values.password) {
     errors.password2 = "Passwords do not match";
   }
+
   return errors;
 }
