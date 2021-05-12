@@ -1,13 +1,12 @@
 import Layout from "../components/Layout";
+import Head from "next/head";
+import fetch from "isomorphic-unfetch";
+import useSWR from "swr";
+import Link from "next/link";
+import cookie from "js-cookie";
 
-import Head from 'next/head';
-import fetch from 'isomorphic-unfetch';
-import useSWR from 'swr';
-import Link from 'next/link';
-import cookie from 'js-cookie';
-
-function Home() {
-  const {data, revalidate} = useSWR('/api/me', async function(args) {
+export default function Home() {
+  const { data, revalidate } = useSWR("/api/me", async function (args) {
     const res = await fetch(args);
     return res.json();
   });
@@ -30,22 +29,25 @@ function Home() {
           <p>Welcome {data.username}!</p>
           <button
             onClick={() => {
-              cookie.remove('token');
+              cookie.remove("token");
               revalidate();
-            }}>
+            }}
+          >
             Logout
           </button>
         </>
       )}
       {!loggedIn && (
         <>
-          <Link href="/login"><a className="underline">Login</a></Link>
+          <Link href="/login">
+            <a className="underline">Login</a>
+          </Link>
           <p>or</p>
-          <Link href="/signup"><a className="underline">Sign Up</a></Link>
+          <Link href="/signup">
+            <a className="underline">Sign Up</a>
+          </Link>
         </>
       )}
     </div>
   );
 }
-
-export default Home;

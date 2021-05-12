@@ -7,6 +7,7 @@ const Signup = () => {
   const [signupError, setSignupError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   function handleSubmit(e) {
@@ -19,6 +20,7 @@ const Signup = () => {
       body: JSON.stringify({
         email,
         password,
+        username,
       }),
     })
       .then((r) => r.json())
@@ -27,7 +29,7 @@ const Signup = () => {
           setSignupError(data.message);
         }
         if (data && data.token) {
-          //set cookie
+          //Set cookie
           cookie.set("token", data.token, { expires: 2 });
           Router.push("/");
         }
@@ -56,6 +58,18 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
             name="password"
             type="password"
+          />
+        </label>
+
+        <br />
+
+        <label for="username">
+          username
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            type="username"
           />
         </label>
 
