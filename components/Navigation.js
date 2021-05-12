@@ -16,8 +16,8 @@ export default function Navigation() {
   return (
     <nav className="sticky-nav bg-black bg-opacity-80 text-gray-50 flex justify-end w-full">
       <ul className="flex space-x-4 items-center justify-end max-w-7xl w-full py-4 px-4 md:px-12">
-        <Link href="/">Home</Link>
-        <Link href="/feed">Feed</Link>
+        <Link href="/"><a className="mr-2">Home</a></Link>
+        <Link href="/feed"><a className="mx-2">Feed</a></Link>
         {loggedIn && (
           <div className="flex items-center space-x-4">
             <Link href="/profile">Profile</Link>
@@ -26,7 +26,7 @@ export default function Navigation() {
                 cookie.remove("token");
                 revalidate();
               }}
-              className="bg-gray-200 text-black py-1 px-3 rounded-md"
+              className="mx-2"
             >
               Logout
             </button>
@@ -35,8 +35,8 @@ export default function Navigation() {
 
         {!loggedIn && (
           <div className="flex items-center space-x-4">
-            <Link href="/login">Login</Link>
-            <Link href="/signup">Sign Up</Link>
+            <Link href="/login"><a className="mx-2">Login</a></Link>
+            <Link href="/signup"><a className="ml-2">Sign Up</a></Link>
           </div>
         )}
       </ul>
