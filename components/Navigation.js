@@ -19,7 +19,7 @@ export default function Navigation() {
         <Link href="/">Home</Link>
         <Link href="/feed">Feed</Link>
         {loggedIn && (
-          <div className="space-x-4">
+          <div className="flex items-center space-x-4">
             <Link href="/profile">Profile</Link>
             <button
               onClick={() => {
@@ -34,16 +34,16 @@ export default function Navigation() {
         )}
 
         {!loggedIn && (
-          <div className="flex space-x-4">
+          <div className="flex items-center space-x-4 pr-4">
             <Link href="/login">
               <a className="bg-gray-200 text-black py-1 px-3 rounded-md">
                 Login
               </a>
             </Link>
             <Link href="/signup">
-              <button className="bg-black text-white py-1 px-3 rounded-md">
+              <a className="bg-black text-white py-1 px-3 rounded-md">
                 Sign Up
-              </button>
+              </a>
             </Link>
           </div>
         )}
