@@ -1,6 +1,7 @@
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
+import cookie from "js-cookie";
 
 export default function Navigation() {
   const { data, revalidate } = useSWR("/api/me", async function (args) {
@@ -16,12 +17,26 @@ export default function Navigation() {
     <nav className="sticky-nav bg-black bg-opacity-80 text-gray-50 flex justify-end py-4 px-4 md:px-12 w-full">
       <ul className="flex space-x-4 items-center">
         <Link href="/">Home</Link>
-        {loggedIn && <Link href="/profile">Profile</Link>}
         <Link href="/feed">Feed</Link>
+        {loggedIn && (
+          <div className="space-x-4">
+            <Link href="/profile">Profile</Link>
+            <button
+              onClick={() => {
+                cookie.remove("token");
+                revalidate();
+              }}
+              className="bg-gray-200 text-black py-1 px-3 rounded-md"
+            >
+              Logout
+            </button>
+          </div>
+        )}
+
         {!loggedIn && (
-          <>
+          <div className="flex space-y-4">
             <Link href="/login">
-              <button className="bg-gray-100 text-black py-1 px-3 rounded-md">
+              <button className="bg-gray-200 text-black py-1 px-3 rounded-md">
                 Login
               </button>
             </Link>
@@ -30,7 +45,7 @@ export default function Navigation() {
                 Sign Up
               </button>
             </Link>
-          </>
+          </div>
         )}
       </ul>
     </nav>

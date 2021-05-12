@@ -41,7 +41,7 @@ export default function Home() {
         {!loggedIn && (
           <div className="flex space-x-4 max-w-sm min-w-full justify-center">
             <Link href="/login">
-              <button className="bg-gray-100 py-1 px-3 rounded-md">
+              <button className="bg-gray-200 py-1 px-3 rounded-md">
                 Login
               </button>
             </Link>
