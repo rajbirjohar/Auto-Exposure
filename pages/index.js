@@ -10,7 +10,7 @@ export default function Home() {
     const res = await fetch(args);
     return res.json();
   });
-  if (!data) return <h1>Loading...</h1>;
+  if (!data) return;
   let loggedIn = false;
   if (data.email) {
     loggedIn = true;
@@ -32,7 +32,6 @@ export default function Home() {
                 cookie.remove("token");
                 revalidate();
               }}
-              className="bg-gray-100 py-1 px-3 rounded-md"
             >
               Logout
             </button>
@@ -40,16 +39,8 @@ export default function Home() {
         )}
         {!loggedIn && (
           <div className="flex space-x-4 max-w-sm min-w-full justify-center">
-            <Link href="/login">
-              <button className="bg-gray-200 py-1 px-3 rounded-md">
-                Login
-              </button>
-            </Link>
-            <Link href="/signup">
-              <button className="bg-black text-white py-1 px-3 rounded-md">
-                Sign Up
-              </button>
-            </Link>
+            <Link href="/login">Login</Link>
+            <Link href="/signup">Sign Up</Link>
           </div>
         )}
       </section>

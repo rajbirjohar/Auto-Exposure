@@ -69,7 +69,7 @@ const Login = () => {
           </div>
 
           <button
-            className="bg-gray-200 py-1 px-3 rounded-md"
+            className="bg-black rounded-md py-1 px-3 text-white font-medium"
             type="submit"
             value="Submit"
           >
