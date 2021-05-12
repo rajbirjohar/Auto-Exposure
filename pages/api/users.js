@@ -14,12 +14,12 @@ const client = new MongoClient(url, {
   useUnifiedTopology: true,
 });
 
-function findUser(db, email, callback) {
+function findUser(db, email, username, callback) {
   const collection = db.collection("user");
   collection.findOne({ email }, callback);
 }
 
-function createUser(db, email, password, callback) {
+function createUser(db, email, password, username, callback) {
   const collection = db.collection("user");
   bcrypt.hash(password, saltRounds, function (err, hash) {
     // Store hash in your password DB.
@@ -28,6 +28,7 @@ function createUser(db, email, password, callback) {
         userId: v4(),
         email,
         password: hash,
+        username,
       },
       function (err, userCreated) {
         assert.equal(err, null);
@@ -43,6 +44,7 @@ export default (req, res) => {
     try {
       assert.notEqual(null, req.body.email, "Email required");
       assert.notEqual(null, req.body.password, "Password required");
+      assert.notEqual(null, req.body.username, "Username required");
     } catch (bodyError) {
       res.status(403).json({ error: true, message: bodyError.message });
     }
@@ -54,19 +56,20 @@ export default (req, res) => {
       const db = client.db(dbName);
       const email = req.body.email;
       const password = req.body.password;
+      const username = req.body.username;
 
-      findUser(db, email, function (err, user) {
+      findUser(db, email, username, function (err, user) {
         if (err) {
           res.status(500).json({ error: true, message: "Error finding User" });
           return;
         }
         if (!user) {
           // proceed to Create
-          createUser(db, email, password, function (creationResult) {
+          createUser(db, email, password, username, function (creationResult) {
             if (creationResult.ops.length === 1) {
               const user = creationResult.ops[0];
               const token = jwt.sign(
-                { userId: user.userId, email: user.email },
+                { userId: user.userId, email: user.email, username: user.username },
                 jwtSecret,
                 {
                   expiresIn: 3000, //50 minutes

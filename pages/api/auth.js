@@ -1,6 +1,6 @@
 const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
 
