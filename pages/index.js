@@ -32,32 +32,25 @@ export default function Home() {
                 cookie.remove("token");
                 revalidate();
               }}
+              className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium"
             >
               Logout
             </button>
           </>
         )}
         {!loggedIn && (
-          <Link href="/login">
-            <button
-              className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium mr-2"
-              type="submit"
-              value="Submit"
-            >
-              Login
-            </button>
-          </Link>
-        )}
-        {!loggedIn && (
-          <Link href="/signup">
-            <button
-              className="bg-black rounded-md py-1 px-3 text-white font-medium ml-2"
-              type="submit"
-              value="Submit"
-            >
-              Sign Up
-            </button>
-          </Link>
+          <div className="space-x-4">
+            <Link href="/login">
+              <button className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium">
+                Login
+              </button>
+            </Link>
+            <Link href="/signup">
+              <button className="bg-black rounded-md py-1 px-3 text-white font-medium">
+                Sign Up
+              </button>
+            </Link>
+          </div>
         )}
       </section>
     </Layout>
