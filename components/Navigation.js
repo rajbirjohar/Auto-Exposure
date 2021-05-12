@@ -36,7 +36,7 @@ export default function Navigation() {
         {!loggedIn && (
           <div className="space-x-4">
             <Link href="/login">
-              <button className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium">
+              <button className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium mx-4">
                 Login
               </button>
             </Link>
