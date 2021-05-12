@@ -39,7 +39,7 @@ export default function Home() {
           </>
         )}
         {!loggedIn && (
-          <div className="space-x-4">
+          <div className="flex justify-center space-x-4">
             <Link href="/login">
               <button className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium">
                 Login
