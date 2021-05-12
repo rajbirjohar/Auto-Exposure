@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Router from "next/router";
-import cookie from "js-cookie";
 import Layout from "../components/Layout";
 import useForm from "../util/useForm";
 import validate from "../util/validateInfo";
 import Link from "next/link";
 
 const Signup = ({ submitForm }) => {
+  const [signupError, setSignupError] = useState("");
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
@@ -14,17 +13,20 @@ const Signup = ({ submitForm }) => {
 
   return (
     <Layout>
-      <div>
+      <div className="max-w-7xl mx-auto">
         <form
           onSubmit={handleSubmit}
-          className="space-y-2 max-w-sm mx-auto"
+          className="space-y-2 max-w-sm"
           noValidate
         >
-          <h1>Sign up to enjoy and share your cars on Auto Exposure.</h1>
+          <h1 className="font-bold text-6xl my-10 tracking-loose">Sign Up</h1>
+          <h2>
+            Sign up to enjoy and share your cars on Auto Exposure.
+          </h2>
           <div className="flex flex-col">
             <label className="font-medium">Username:</label>
             <input
-              className="ring-2 ring-gray-200 py-1 px-3 rounded-md"
+              className="border-2 border-gray-200 py-1 px-3 rounded-md"
               type="text"
               name="username"
               placeholder="Enter your username"
@@ -38,7 +40,7 @@ const Signup = ({ submitForm }) => {
           <div className="flex flex-col">
             <label className="font-medium">Email: </label>
             <input
-              className="ring-2 ring-gray-200 py-1 px-3 rounded-md"
+              className="border-2 border-gray-200 py-1 px-3 rounded-md"
               type="email"
               name="email"
               placeholder="Enter your email"
@@ -46,11 +48,12 @@ const Signup = ({ submitForm }) => {
               onChange={handleChange}
             />
             {errors.email && <p className="text-red-500">{errors.email}</p>}
+            {signupError && <p className="text-red-500">{signupError}</p>}
           </div>
           <div className="flex flex-col">
             <label className="font-medium">Password: </label>
             <input
-              className="ring-2 ring-gray-200 py-1 px-3 rounded-md"
+              className="border-2 border-gray-200 py-1 px-3 rounded-md"
               type="password"
               name="password"
               placeholder="Enter your password"
@@ -64,7 +67,7 @@ const Signup = ({ submitForm }) => {
           <div className="flex flex-col pb-4">
             <label className="font-medium">Confirm Password: </label>
             <input
-              className="ring-2 ring-gray-200 py-1 px-3 rounded-md"
+              className="border-2 border-gray-200 py-1 px-3 rounded-md"
               type="password"
               name="password2"
               placeholder="Confirm your password"
@@ -76,7 +79,7 @@ const Signup = ({ submitForm }) => {
             )}
           </div>
           <button
-            className="bg-black rounded-md py-1 px-3 text-white"
+            className="bg-black rounded-md py-1 px-3 text-white font-medium"
             type="submit"
             value="Submit"
           >
@@ -96,76 +99,3 @@ const Signup = ({ submitForm }) => {
 };
 
 export default Signup;
-
-
-// const Signup = () => {
-// const [signupError, setSignupError] = useState("");
-// const [email, setEmail] = useState("");
-// const [password, setPassword] = useState("");
-// const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
-// function handleSubmit(e) {
-//   e.preventDefault();
-  // fetch("/api/users", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     email,
-  //     password,
-  //   }),
-  // })
-  //   .then((r) => r.json())
-  //   .then((data) => {
-  //     if (data && data.error) {
-  //       setSignupError(data.message);
-  //     }
-  //     if (data && data.token) {
-  //       //set cookie
-  //       cookie.set("token", data.token, { expires: 2 });
-  //       Router.push("/");
-  //     }
-  //   });
-// }
-//   return (
-//     <Layout>
-//       <form onSubmit={handleSubmit}>
-//         <p>Sign Up</p>
-//         <label htmlFor="email">
-//           email
-//           <input
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             name="email"
-//             type="email"
-//             className="ring-2"
-//           />
-//         </label>
-
-//         <br />
-
-//         <label for="password">
-//           password
-//           <input
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             name="password"
-//             type="password"
-//             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-//             title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-//             required
-//             className="ring-2"
-//           />
-//         </label>
-
-//         <br />
-
-//         <input type="submit" value="Submit" />
-//         {signupError && <p style={{ color: "red" }}>{signupError}</p>}
-//       </form>
-//     </Layout>
-//   );
-// };
-
-// export default Signup;
