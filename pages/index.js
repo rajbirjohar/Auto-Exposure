@@ -10,44 +10,49 @@ export default function Home() {
     const res = await fetch(args);
     return res.json();
   });
-  if (!data) return <h1>Loading...</h1>;
+  if (!data) return <h1></h1>;
   let loggedIn = false;
   if (data.email) {
     loggedIn = true;
   }
   return (
-    <div>
+    <Layout>
       <Head>
-        <title>Welcome to landing page</title>
+        <title>Auto Exposure</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <h1>Simplest login</h1>
-
-      <h2>Proudly using Next.js, Mongodb and deployed with Now</h2>
-      {loggedIn && (
-        <>
-          <p>Welcome {data.username}!</p>
-          <button
-            onClick={() => {
-              cookie.remove("token");
-              revalidate();
-            }}
-          >
-            Logout
-          </button>
-        </>
-      )}
-      {!loggedIn && (
-        <>
-          <Link href="/login">
-            <a className="underline">Login</a>
-          </Link>
-          <p>or</p>
-          <Link href="/signup">
-            <a className="underline">Sign Up</a>
-          </Link>
-        </>
-      )}
-    </div>
+      <section className="max-w-7xl mx-auto text-center">
+        <h1 className="font-bold text-3xl">Auto Exposure</h1>
+        <h2 className="mb-10">Instagram but for cars.</h2>
+        {loggedIn && (
+          <>
+            <p className="mb-2">Welcome {data.email}!</p>
+            <button
+              onClick={() => {
+                cookie.remove("token");
+                revalidate();
+              }}
+              className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium"
+            >
+              Logout
+            </button>
+          </>
+        )}
+        {!loggedIn && (
+          <div className="flex justify-center flex-col space-y-3">
+            <Link href="/login">
+              <button className="bg-gray-200 text-black rounded-sm py-1 px-3 font-medium">
+                Login
+              </button>
+            </Link>
+            <Link href="/signup">
+              <button className="bg-black rounded-sm py-1 px-3 text-white font-medium">
+                Sign Up
+              </button>
+            </Link>
+          </div>
+        )}
+      </section>
+    </Layout>
   );
 }

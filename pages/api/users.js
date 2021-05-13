@@ -19,13 +19,14 @@ function findUser(db, email, username, callback) {
   collection.findOne({ username }, callback);
 }
 
-function createUser(db, email, password, username, callback) {
+function createUser(db, username, email, password, callback) {
   const collection = db.collection("user");
   bcrypt.hash(password, saltRounds, function (err, hash) {
     // Store hash in your password DB.
     collection.insertOne(
       {
         userId: v4(),
+        username,
         email,
         password: hash,
         username,
@@ -54,6 +55,7 @@ export default (req, res) => {
       assert.equal(null, err);
       console.log("Connected to MongoDB server =>");
       const db = client.db(dbName);
+      const username = req.body.username;
       const email = req.body.email;
       const password = req.body.password;
       const username = req.body.username;
@@ -65,11 +67,15 @@ export default (req, res) => {
         }
         if (!user) {
           // proceed to Create
-          createUser(db, email, password, username, function (creationResult) {
+          createUser(db, username, email, password, function (creationResult) {
             if (creationResult.ops.length === 1) {
               const user = creationResult.ops[0];
               const token = jwt.sign(
-                { userId: user.userId, email: user.email, username: user.username },
+                {
+                  userId: user.userId,
+                  username: user.username,
+                  email: user.email,
+                },
                 jwtSecret,
                 {
                   expiresIn: 3000, //50 minutes
@@ -81,6 +87,7 @@ export default (req, res) => {
           });
         } else {
           // User exists
+          console.log("User exists");
           res.status(403).json({ error: true, message: "Email exists" });
           return;
         }
