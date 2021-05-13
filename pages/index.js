@@ -22,7 +22,7 @@ export default function Home() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <section className="max-w-7xl mx-auto text-center">
-        <h1 className="font-bold text-6xl my-10">Auto Exposure</h1>
+        <h1 className="font-bold text-3xl">Auto Exposure</h1>
         <h2 className="mb-10">Instagram but for cars.</h2>
         {loggedIn && (
           <>
@@ -39,14 +39,14 @@ export default function Home() {
           </>
         )}
         {!loggedIn && (
-          <div className="space-x-4">
+          <div className="flex justify-center flex-col space-y-3">
             <Link href="/login">
-              <button className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium mr-2">
+              <button className="bg-gray-200 text-black rounded-sm py-1 px-3 font-medium">
                 Login
               </button>
             </Link>
             <Link href="/signup">
-              <button className="bg-black rounded-md py-1 px-3 text-white font-medium ml-2">
+              <button className="bg-black rounded-sm py-1 px-3 text-white font-medium">
                 Sign Up
               </button>
             </Link>
