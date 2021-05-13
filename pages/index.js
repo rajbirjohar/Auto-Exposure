@@ -1,16 +1,57 @@
 import Layout from "../components/Layout";
-import Image from "next/image";
+import Head from "next/head";
+import fetch from "isomorphic-unfetch";
+import useSWR from "swr";
+import Link from "next/link";
+import cookie from "js-cookie";
 
 export default function Home() {
+  const { data, revalidate } = useSWR("/api/me", async function (args) {
+    const res = await fetch(args);
+    return res.json();
+  });
+  if (!data) return <h1></h1>;
+  let loggedIn = false;
+  if (data.email) {
+    loggedIn = true;
+  }
   return (
-    <Layout main>
-      <section className="mx-auto">
-        <div className="h-screen flex content-center items-center justify-center">
-          <div className="absolute top-0 h-full w-full bg-hero-image bg-center bg-cover"></div>
-          <div className="mx-auto">
-            <h1>Auto Exposure</h1>
+    <Layout>
+      <Head>
+        <title>Auto Exposure</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <section className="max-w-7xl mx-auto text-center">
+        <h1 className="font-bold text-3xl">Auto Exposure</h1>
+        <h2 className="mb-10">Instagram but for cars.</h2>
+        {loggedIn && (
+          <>
+            <p className="mb-2">Welcome {data.email}!</p>
+            <button
+              onClick={() => {
+                cookie.remove("token");
+                revalidate();
+              }}
+              className="bg-gray-200 text-black rounded-md py-1 px-3 font-medium"
+            >
+              Logout
+            </button>
+          </>
+        )}
+        {!loggedIn && (
+          <div className="flex justify-center flex-col space-y-3">
+            <Link href="/login">
+              <button className="bg-gray-200 text-black rounded-sm py-1 px-3 font-medium">
+                Login
+              </button>
+            </Link>
+            <Link href="/signup">
+              <button className="bg-black rounded-sm py-1 px-3 text-white font-medium">
+                Sign Up
+              </button>
+            </Link>
           </div>
-        </div>
+        )}
       </section>
     </Layout>
   );

@@ -10,7 +10,7 @@ export default function Layout({ children }) {
         <meta name="description" content="Instagram but for cars." />
       </Head>
       <body>
-        <main className="flex flex-col w-full mx-auto md:mt-12 mt-4 p-6 text-md leading-7">
+        <main className="flex flex-col w-full mx-auto md:mt-12 mt-4 p-6 leading-7">
           {children}
         </main>
       </body>

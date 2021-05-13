@@ -9,14 +9,17 @@ import Link from "next/link";
 
 export default function Post({ image, href, name, caption }) {
   return (
-    <figure className="flex flex-col flex-1 p-6 shadow-lg hover:shadow-xl transition duration-300 ease-in-out rounded-lg">
-      <div className="relative flex flex-col items-center w-80 h-80">
-        <Image src="/dummy.jpg" alt="Dummy Image" layout="fill" />
-      </div>
-      <div className="text-left">
-        <p className="font-bold text-xl">Lightning McQueen</p>
-        <p>I am speed.</p>
-      </div>
+    <figure
+      className="bg-white flex flex-col flex-1 p-6 shadow-lg hover:shadow-xl
+      transition duration-300 ease-in-out rounded-lg w-full"
+    >
+      <img
+        className="w-full h-80 object-contain ring-2 mb-4"
+        src="/dummy.jpg"
+        alt="dummy image"
+      />
+      <p className="font-bold text-xl">Lightning McQueen</p>
+      <p>I am speed.</p>
     </figure>
   );
 }

@@ -8,11 +8,22 @@
     "start": "next start"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.3.2",
     "autoprefixer": "^10.2.5",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "fs": "^0.0.1-security",
+    "isomorphic-unfetch": "^3.1.0",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.6",
     "next": "10.2.0",
     "postcss": "^8.2.13",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "tailwindcss": "^2.1.2"
+    "react-hot-toast": "^1.0.2",
+    "swr": "^0.5.6",
+    "tailwindcss": "^2.1.2",
+    "uuid": "^8.3.2"
   }
 }
