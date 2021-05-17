@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function Post({ image, href, name, caption }) {
   return (
     <figure
-      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
+      className="bg-white flex flex-col flex-1 p-6 shadow-lg hover:shadow-xl
       transition duration-300 ease-in-out rounded-lg w-full"
     >
       <img
