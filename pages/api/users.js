@@ -14,9 +14,9 @@ const client = new MongoClient(url, {
   useUnifiedTopology: true,
 });
 
-function findUser(db, email, callback) {
+function findUser(db, email, username, callback) {
   const collection = db.collection("user");
-  collection.findOne({ email }, callback);
+  collection.findOne({ username }, callback);
 }
 
 function createUser(db, username, email, password, callback) {
@@ -29,6 +29,7 @@ function createUser(db, username, email, password, callback) {
         username,
         email,
         password: hash,
+        username,
       },
       function (err, userCreated) {
         assert.equal(err, null);
@@ -44,6 +45,7 @@ export default (req, res) => {
     try {
       assert.notEqual(null, req.body.email, "Email required");
       assert.notEqual(null, req.body.password, "Password required");
+      assert.notEqual(null, req.body.username, "Username required");
     } catch (bodyError) {
       res.status(403).json({ error: true, message: bodyError.message });
     }
@@ -56,8 +58,9 @@ export default (req, res) => {
       const username = req.body.username;
       const email = req.body.email;
       const password = req.body.password;
+      const username = req.body.username;
 
-      findUser(db, email, function (err, user) {
+      findUser(db, email, username, function (err, user) {
         if (err) {
           res.status(500).json({ error: true, message: "Error finding User" });
           return;

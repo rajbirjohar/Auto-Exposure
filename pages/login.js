@@ -8,6 +8,7 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,6 +21,7 @@ const Login = () => {
       body: JSON.stringify({
         email,
         password,
+        username,
       }),
     })
       .then((r) => {
