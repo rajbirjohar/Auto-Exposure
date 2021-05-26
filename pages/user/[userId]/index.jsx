@@ -28,9 +28,16 @@ export default function UserPage({ user }) {
           />
           <div>
             <div className="flex flex-col space-y-3">
+            {!isCurrentUser && (
+              <h1 className="font-bold text-3xl tracking-loose">
+                Welcome to {firstname}'s garage.
+              </h1>
+              )}
+            {isCurrentUser && (
               <h1 className="font-bold text-3xl tracking-loose">
                 Welcome to your garage, {firstname}.
               </h1>
+              )}
               <h2 className="font-medium text-xl text-gray-600">@{username}</h2>
               <h2 className="font-medium text-xl text-gray-600">About</h2>
               <p>{bio}</p>
