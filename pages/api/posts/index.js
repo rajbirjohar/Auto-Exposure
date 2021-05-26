@@ -52,7 +52,7 @@ handler.post(async (req, res) => {
   // }
   if (!req.body.caption)
     return res.status(400).send("You must write something");
-    if (!req.body.postPicture)
+  if (!req.body.postPicture)
     return res.status(400).send("You must upload a url");
   const post = await insertPost(req.db, {
     caption: req.body.caption,

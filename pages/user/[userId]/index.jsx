@@ -50,7 +50,9 @@ export default function UserPage({ user }) {
         </div>
 
         <div>
-          <h3 className="text-2xl text-gray-600 font-semibold my-4">My Posts</h3>
+          <h3 className="text-2xl text-gray-600 font-semibold my-4">
+            My Posts
+          </h3>
           <Posts creatorId={user._id} />
         </div>
       </section>
