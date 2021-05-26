@@ -33,7 +33,7 @@ export default function UserPage({ user }) {
                 Welcome to {firstname}'s garage.
               </h1>
               )}
-              {isCurrentUser && (
+            {isCurrentUser && (
               <h1 className="font-bold text-3xl tracking-loose">
                 Welcome to your garage, {firstname}.
               </h1>
