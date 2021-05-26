@@ -9,9 +9,7 @@ export default function PostEditor() {
   const postPictureRef = useRef();
 
   if (!user) {
-    return (
-      <div></div>
-    );
+    return <div></div>;
   }
 
   async function handleSubmit(e) {
@@ -37,7 +35,7 @@ export default function PostEditor() {
     if (res.ok) {
       // setMsg("Posted!");
       // setTimeout(() => setMsg(null), 5000);
-      toast.success("Posted!")
+      toast.success("Posted!");
     }
   }
 

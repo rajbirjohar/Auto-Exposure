@@ -16,7 +16,11 @@ function Post({ post }) {
         <Link href={`/user/${user._id}`}>
           <div>
             <div className="">
-              <img src={post.postPicture} className="pb-6 fill h-full" alt="post image" />
+              <img
+                src={post.postPicture}
+                className="pb-6 fill h-full"
+                alt="post image"
+              />
             </div>
             <a className="flex text-blue-600 items-center">
               <img
