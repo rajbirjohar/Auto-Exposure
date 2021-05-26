@@ -1,8 +1,8 @@
-import { nanoid } from 'nanoid';
+import { nanoid } from "nanoid";
 
 export async function getPosts(db, from = new Date(), by, limit) {
   return db
-    .collection('posts')
+    .collection("posts")
     .find({
       // Pagination: Fetch posts from before the input date or fetch from newest
       ...(from && {
@@ -18,11 +18,14 @@ export async function getPosts(db, from = new Date(), by, limit) {
 }
 
 export async function insertPost(db, { caption, postPicture, creatorId }) {
-  return db.collection('posts').insertOne({
-    _id: nanoid(12),
-    caption,
-    creatorId,
-    postPicture,
-    createdAt: new Date(),
-  }).then(({ ops }) => ops[0]);
+  return db
+    .collection("posts")
+    .insertOne({
+      _id: nanoid(12),
+      caption,
+      creatorId,
+      postPicture,
+      createdAt: new Date(),
+    })
+    .then(({ ops }) => ops[0]);
 }
