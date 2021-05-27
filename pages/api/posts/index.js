@@ -57,6 +57,7 @@ handler.post(async (req, res) => {
   const post = await insertPost(req.db, {
     caption: req.body.caption,
     creatorId: req.user._id,
+    count: 0,
     postPicture: req.body.postPicture,
   });
 

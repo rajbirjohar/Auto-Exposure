@@ -41,9 +41,15 @@ function Post({ post }) {
       <p className="text-sm text-gray-400">
         {new Date(post.createdAt).toLocaleString()}
       </p>
+      <button onClick={addCount({ post })}> Likes: {post.count} </button>
     </div>
   );
 }
+
+function addCount({ post }) {
+  //post.count = 0;
+  post.count = post.count + 1;
+};
 
 const PAGE_SIZE = 9;
 
@@ -55,9 +61,8 @@ export function usePostPages({ creatorId } = {}) {
 
       // first page, previousPageData is null
       if (index === 0) {
-        return `/api/posts?limit=${PAGE_SIZE}${
-          creatorId ? `&by=${creatorId}` : ""
-        }`;
+        return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
+          }`;
       }
 
       // using oldest posts createdAt date as cursor
@@ -69,9 +74,8 @@ export function usePostPages({ creatorId } = {}) {
         ).getTime() - 1
       ).toJSON();
 
-      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
-        creatorId ? `&by=${creatorId}` : ""
-      }`;
+      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
+        }`;
     },
     fetcher,
     {

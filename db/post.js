@@ -25,7 +25,15 @@ export async function insertPost(db, { caption, postPicture, creatorId }) {
       caption,
       creatorId,
       postPicture,
+      count: 0,
       createdAt: new Date(),
     })
     .then(({ ops }) => ops[0]);
+}
+
+export async function updatePost(db, { id, countold, countnew }) {
+  return db.collection('posts').find({ _id: id }).update({
+    count: countold
+  },
+    { $set: { count: countnew } }).then(({ ops }) => ops[0]);
 }
