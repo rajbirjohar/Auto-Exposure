@@ -10,7 +10,8 @@ function Post({ post }) {
   return (
     <div
       className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
-                  transition duration-200 ease-in-out rounded-lg w-full border-2 border-gray-50"
+                  transition duration-200 ease-in-out rounded-lg w-full border-2 border-gray-50 transform hover:scale-102
+                  dark:bg-gray-700 dark:border-gray-800 dark:hover:border-gray-50"
     >
       {user && (
         <Link href={`/user/${user._id}`}>
@@ -105,7 +106,7 @@ export default function Posts({ creatorId }) {
           <button
             type="button"
             className="bg-gray-200 text-black rounded-sm py-2 px-6 font-medium
-             hover:bg-gray-100 transition duration-200 ease-in-out"
+             hover:bg-gray-100 transition duration-200 ease-in-out dark:bg-gray-900 dark:text-white"
             onClick={() => setSize(size + 1)}
             disabled={isReachingEnd || isLoadingMore}
           >

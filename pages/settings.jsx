@@ -111,42 +111,52 @@ const ProfileSection = () => {
           <h3 className="text-xl font-medium my-4">Profile Infomation</h3>
           <div className="flex flex-col space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-600">First Name</label>
+              <label className="font-medium text-gray-600 dark:text-gray-300">
+                First Name
+              </label>
               <input
                 id="firstname"
                 name="firstname"
                 type="text"
                 placeholder=""
                 ref={firstnameRef}
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-600">Biography</label>
+              <label className="font-medium text-gray-600 dark:text-gray-300">
+                Biography
+              </label>
               <textarea
                 id="bio"
                 name="bio"
                 type="text"
                 placeholder=""
                 ref={bioRef}
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-600">Avatar</label>
+              <label className="font-medium text-gray-600 dark:text-gray-300">
+                Avatar
+              </label>
               <input
                 type="file"
                 id="avatar"
                 name="avatar"
                 accept="Upload your own profile picture"
                 ref={profilePictureRef}
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
               />
             </div>
             <button
               disabled={isUpdating}
               type="submit"
-              className="bg-black text-white rounded-sm py-2 px-3 font-medium hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out"
+              className="bg-black text-white rounded-sm py-2 px-3 font-medium border-2 border-gray-200 hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
+                         dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
             >
               Save Profile
             </button>
@@ -159,28 +169,35 @@ const ProfileSection = () => {
           <h3 className="text-xl font-medium my-4">Password Reset</h3>
           <div className="flex flex-col space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-600">Old password</label>
+              <label className="font-medium text-gray-600 dark:text-gray-300">
+                Old password
+              </label>
               <input
                 type="password"
                 name="oldPassword"
                 id="oldpassword"
                 required
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full"
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-600">New password</label>
+              <label className="font-medium text-gray-600 dark:text-gray-300">
+                New password
+              </label>
               <input
                 type="password"
                 name="newPassword"
                 id="newpassword"
                 required
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full"
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
               />
             </div>
             <button
               type="submit"
-              className="bg-gray-200 text-black rounded-sm py-2 px-3 font-medium hover:bg-gray-300 hover:shadow-lg transition duration-200 ease-in-out"
+              className="bg-gray-200 text-black rounded-sm py-2 px-3 font-medium border-2 border-gray-200 hover:bg-gray-300 hover:border-gray-300 hover:shadow-lg transition duration-200 ease-in-out
+                         dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
             >
               Change Password
             </button>

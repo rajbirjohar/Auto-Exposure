@@ -31,16 +31,21 @@ export default function UserPage({ user }) {
               <h1 className="font-bold text-3xl tracking-loose">
                 Welcome to your garage, {firstname}.
               </h1>
-              <h2 className="font-medium text-xl text-gray-600">@{username}</h2>
-              <h2 className="font-medium text-xl text-gray-600">About</h2>
+              <h2 className="font-medium text-xl text-gray-600 dark:text-gray-300">
+                @{username}
+              </h2>
+              <h2 className="font-medium text-xl text-gray-600 dark:text-gray-300">
+                About
+              </h2>
               <p>{bio}</p>
             </div>
             {isCurrentUser && (
               <Link href="/settings">
                 <button
                   type="button"
-                  className="bg-gray-200 rounded-sm py-2 px-6 text-black font-medium flex-intial hover:bg-gray-300
-                  hover:shadow-md transition duration-200 ease-in-out mt-4"
+                  className="bg-gray-200 rounded-sm py-2 px-6 text-black font-medium flex-intial border-2 border-gray-200 hover:bg-gray-300 
+                               hover:border-gray-300 hover:shadow-md transition duration-200 ease-in-out mt-4
+                             dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
                 >
                   Edit Profile
                 </button>
@@ -50,7 +55,7 @@ export default function UserPage({ user }) {
         </div>
 
         <div>
-          <h3 className="text-2xl text-gray-600 font-semibold my-4">
+          <h3 className="text-2xl text-gray-600 font-semibold my-4 dark:text-gray-300">
             My Posts
           </h3>
           <Posts creatorId={user._id} />
