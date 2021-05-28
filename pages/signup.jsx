@@ -63,59 +63,74 @@ const SignupPage = () => {
           {errorMsg ? <p className="text-red-500">{errorMsg}</p> : null}
           <div className="flex md:flex-row flex-col md:space-x-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-600">First Name</label>
+              <label className="font-medium text-gray-600 dark:text-gray-300">
+                First Name
+              </label>
               <input
                 id="firstname"
                 name="firstname"
                 type="text"
                 placeholder=""
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-600">Last Name</label>
+              <label className="font-medium text-gray-600 dark:text-gray-300">
+                Last Name
+              </label>
               <input
                 id="lastname"
                 name="lastname"
                 type="text"
                 placeholder=""
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
           </div>
           <h3 className="text-xl font-medium my-4">Account Infomation</h3>
           <div className="flex flex-col">
-            <label className="font-medium text-gray-600">Username</label>
+            <label className="font-medium text-gray-600 dark:text-gray-300">
+              Username
+            </label>
             <input
               id="username"
               name="username"
               type="text"
               placeholder=""
-              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col">
-            <label className="font-medium text-gray-600">Email</label>
+            <label className="font-medium text-gray-600 dark:text-gray-300">
+              Email
+            </label>
             <input
               id="email"
               name="email"
               type="email"
               placeholder=""
-              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col">
-            <label className="font-medium text-gray-600">Password</label>
+            <label className="font-medium text-gray-600 dark:text-gray-300">
+              Password
+            </label>
             <input
               id="password"
               name="password"
               type="password"
               placeholder=""
-              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-600 py-2 px-3 rounded-sm
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col pb-4">
-            <label className="font-medium text-gray-600">
+            <label className="font-medium text-gray-600 dark:text-gray-300">
               Confirm Password
             </label>
             <input
@@ -123,17 +138,20 @@ const SignupPage = () => {
               name="password2"
               type="password"
               placeholder=""
-              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col space-y-3">
             <button
-              className="bg-black text-white rounded-sm py-2 px-3 font-medium hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out"
+              className="bg-black text-white rounded-sm py-2 px-3 font-medium
+              hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
+                        dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
               type="submit"
             >
               Sign up
             </button>
-            <p className="text-gray-500">
+            <p className="text-gray-500 dark:text-gray-300">
               Already have an account? Sign in{" "}
               <Link href="/login">
                 <a className="underline">here</a>

@@ -40,7 +40,7 @@ export default function PostEditor() {
   }
 
   return (
-    <section className="bg-white flex flex-col w-full md:max-w-md pr-0 md:pr-8 md:my-0 my-4">
+    <section className="flex flex-col w-full md:max-w-md pr-0 md:pr-8 md:my-0 my-4">
       <Toaster />
       <p>{msg}</p>
       <form
@@ -56,14 +56,15 @@ export default function PostEditor() {
             id="postPicture"
             name="postPicture"
             placeholder="Upload your car URL"
-            className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full"
+            className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
+                       dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
           />
         </div>
         <div className="flex flex-col pb-4">
           <label className="font-medium">Caption</label>
           <input
-            className="form-input border-none ring-2 ring-gray-300
-               focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+            className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                       dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             type="text"
             id="caption"
             name="caption"
@@ -73,8 +74,8 @@ export default function PostEditor() {
         <button
           id="buttonid"
           type="submit"
-          className="w-full bg-black rounded-sm py-2 px-6 text-white font-medium 
-          hover:bg-gray-800 hover:shadow-md transition duration-200 ease-in-out"
+          className="w-full bg-black rounded-sm py-2 px-6 text-white font-medium border-2 border-gray-50 hover:bg-gray-800 hover:shadow-md transition duration-200 ease-in-out
+                     dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
         >
           Post
         </button>
