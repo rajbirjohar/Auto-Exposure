@@ -10,7 +10,7 @@ function Post({ post }) {
   return (
     <div
       className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
-                  transition duration-200 ease-in-out rounded-lg
+                  transition duration-200 ease-in-out rounded-md
                    w-full transform hover:scale-102
                   dark:bg-gray-900 dark:hover:bg-gray-800"
     >
@@ -104,7 +104,7 @@ export default function Posts({ creatorId }) {
         <div className="flex w-full mx-auto mt-8 items-center justify-center">
           <button
             type="button"
-            className="bg-gray-200 text-black rounded-sm py-2 px-6 font-medium
+            className="bg-gray-200 text-black rounded-sm py-3 px-6
              hover:bg-gray-300 transition duration-200 ease-in-out
               dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white"
             onClick={() => setSize(size + 1)}
