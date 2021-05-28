@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
+import { addCount } from "@/components/post/posts"
 
 function Post({ post }) {
   const user = useUser(post.creatorId);
@@ -41,15 +42,13 @@ function Post({ post }) {
       <p className="text-sm text-gray-400">
         {new Date(post.createdAt).toLocaleString()}
       </p>
-      <button onClick={addCount({ post })}> Likes: {post.count} </button>
+      <Link href={`/user/${user._id}`}>
+        <span className="text-medium cursor-pointer">Comments</span>
+      </Link>
+      {/* <button onClick={addCount({ post }, post.count)}> Likes: {post.count} </button> */}
     </div>
   );
 }
-
-function addCount({ post }) {
-  //post.count = 0;
-  post.count = post.count + 1;
-};
 
 const PAGE_SIZE = 9;
 

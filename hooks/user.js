@@ -13,3 +13,11 @@ export function useUser(id) {
   });
   return data?.user;
 }
+
+export function usePost(id) {
+  const { data } = useSWR(`/api/comments/${id}`, fetcher, {
+    revalidateOnFocus: false,
+  });
+  return data?.post;
+}
+
