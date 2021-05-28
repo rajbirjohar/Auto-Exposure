@@ -16,7 +16,7 @@ const IndexPage = () => {
           Here is your current feed. Enjoy the drive.{" "}
           {user ? "" : "Sign in to post."}
         </h2>
-        <div className="flex md:flex-row flex-col">
+        <div className="flex flex-col">
           <PostEditor />
           <div>
             <Posts />

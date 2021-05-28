@@ -36,13 +36,13 @@ export default function Header({ children }) {
                 <a className="cursor-pointer">Sign in</a>
               </Link>
               <Link href="/signup">
-                <a
-                  className="bg-black text-white rounded-sm py-3 px-6
+                <button
+                  className="bg-black text-white rounded-sm py-2 px-3
                   hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
                             dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
                 >
                   Sign up
-                </a>
+                </button>
               </Link>
             </li>
           ) : (

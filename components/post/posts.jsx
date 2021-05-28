@@ -29,7 +29,7 @@ function Post({ post }) {
                   src={user.profilePicture || defaultProfilePicture(user._id)}
                   alt={user.firstname}
                 />
-                <span className="text-medium cursor-pointer">
+                <span className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
                   @{user.username}
                 </span>
               </a>
@@ -75,7 +75,7 @@ export function usePostPages({ creatorId } = {}) {
     },
     fetcher,
     {
-      refreshInterval: 10000, // Refresh every 10 seconds
+      refreshInterval: 5000, // Refresh every 5 seconds
     }
   );
 }
@@ -95,7 +95,7 @@ export default function Posts({ creatorId }) {
 
   return (
     <div>
-      <div className="w-full mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
+      <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}
