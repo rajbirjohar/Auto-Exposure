@@ -60,7 +60,7 @@ const LoginPage = () => {
               name="email"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-blue-500"
             />
           </div>
           <div className="flex flex-col pb-4">
@@ -69,7 +69,7 @@ const LoginPage = () => {
             </label>
             <input
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-blue-500"
               id="password"
               type="password"
               name="password"
@@ -78,20 +78,21 @@ const LoginPage = () => {
           </div>
           <div className="flex flex-col space-y-3">
             <button
-              className="bg-gray-200 text-black rounded-sm py-2 px-3 font-medium border-2 border-gray-200 hover:bg-gray-300 hover:border-gray-300 transition hover:shadow-lg duration-200 ease-in-out
-                         dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
+              className="bg-gray-200 text-black rounded-sm py-2 px-3 font-medium
+               hover:bg-gray-300 transition hover:shadow-lg duration-200 ease-in-out
+                        dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800"
               type="submit"
             >
               Login
             </button>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-gray-500 dark:text-gray-300">
               Don't have an account? Sign up{" "}
               <Link href="/signup">
                 <a className="underline">here</a>
               </Link>
               .
             </p>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-gray-500 dark:text-gray-300">
               Did you{" "}
               <Link href="/forget-password">
                 <a className="underline">forget your password?</a>

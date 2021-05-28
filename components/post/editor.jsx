@@ -40,7 +40,7 @@ export default function PostEditor() {
   }
 
   return (
-    <section className="bg-gray-100 flex flex-col w-full md:max-w-md pr-0 md:pr-8 md:my-0 my-4 dark:bg-black">
+    <section className="flex flex-col w-full md:max-w-md pr-0 md:pr-8 md:my-0 my-4">
       <Toaster />
       <p>{msg}</p>
       <form
@@ -57,14 +57,14 @@ export default function PostEditor() {
             name="postPicture"
             placeholder="Upload your car URL"
             className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
-                       dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                       dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
           />
         </div>
         <div className="flex flex-col pb-4">
           <label className="font-medium">Caption</label>
           <input
             className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                       dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                       dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             type="text"
             id="caption"
             name="caption"

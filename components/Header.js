@@ -3,8 +3,6 @@ import router from "next/router";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/index";
 
-import { useTheme } from "next-themes";
-
 export default function Header({ children }) {
   const [user, { mutate }] = useCurrentUser();
   const handleLogout = async () => {
@@ -15,31 +13,15 @@ export default function Header({ children }) {
     mutate(null);
   };
 
-  const { theme, setTheme } = useTheme();
-  const [isMounted, setIsMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const switchTheme = () => {
-    if (isMounted) {
-      setTheme(theme === "light" ? "dark" : "light");
-    }
-  };
-
   return (
-    <nav className="sticky-nav bg-black bg-opacity-80 text-gray-50 flex w-full p-6 dark:bg-white dark:text-black dark:bg-opacity-80">
-      <div className="button">
-        <button onClick={switchTheme}>Change theme</button>
-      </div>
-      <ul className="flex flex-row w-full max-w-7xl mx-auto justify-between items-center">
+    <nav
+      className="sticky-nav bg-gray-50 text-black dark:bg-black dark:text-white
+     bg-opacity-80 flex w-full p-6"
+    >
+      <ul className="flex flex-row mx-auto w-full max-w-screen-2xl mx-auto justify-between items-center">
         <Link href="/">
           <a>
-            <h1 className="cursor-pointer">
-              <span className="font-extrabold text-2x1">A</span>uto{" "}
-              <span className="font-extrabold">E</span>xposure
-            </h1>
+            <h1 className="cursor-pointer text-lg font-medium">Æ</h1>
           </a>
         </Link>
         <div>
@@ -54,7 +36,13 @@ export default function Header({ children }) {
                 <a className="cursor-pointer">Sign in</a>
               </Link>
               <Link href="/signup">
-                <a className="cursor-pointer">Sign up</a>
+                <a
+                  className="bg-black text-white rounded-sm py-3 px-6
+                  hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
+                            dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
+                >
+                  Sign up
+                </a>
               </Link>
             </li>
           ) : (

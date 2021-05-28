@@ -121,7 +121,7 @@ const ProfileSection = () => {
                 placeholder=""
                 ref={firstnameRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -135,7 +135,7 @@ const ProfileSection = () => {
                 placeholder=""
                 ref={bioRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -149,14 +149,15 @@ const ProfileSection = () => {
                 accept="Upload your own profile picture"
                 ref={profilePictureRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <button
               disabled={isUpdating}
               type="submit"
-              className="bg-black text-white rounded-sm py-2 px-3 font-medium border-2 border-gray-200 hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
-                         dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
+              className="bg-black text-white rounded-sm py-2 px-3 font-medium
+               hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
+                         dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
             >
               Save Profile
             </button>
@@ -178,7 +179,7 @@ const ProfileSection = () => {
                 id="oldpassword"
                 required
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -191,13 +192,14 @@ const ProfileSection = () => {
                 id="newpassword"
                 required
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <button
               type="submit"
-              className="bg-gray-200 text-black rounded-sm py-2 px-3 font-medium border-2 border-gray-200 hover:bg-gray-300 hover:border-gray-300 hover:shadow-lg transition duration-200 ease-in-out
-                         dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
+              className="bg-gray-200 text-black rounded-sm py-2 px-3 font-medium 
+              hover:bg-gray-300 hover:border-gray-300 hover:shadow-lg transition duration-200 ease-in-out
+                         dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white"
             >
               Change Password
             </button>

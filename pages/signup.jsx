@@ -72,7 +72,7 @@ const SignupPage = () => {
                 type="text"
                 placeholder=""
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -85,7 +85,7 @@ const SignupPage = () => {
                 type="text"
                 placeholder=""
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
           </div>
@@ -100,7 +100,7 @@ const SignupPage = () => {
               type="text"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col">
@@ -113,7 +113,7 @@ const SignupPage = () => {
               type="email"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col">
@@ -125,8 +125,8 @@ const SignupPage = () => {
               name="password"
               type="password"
               placeholder=""
-              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-red-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-600 py-2 px-3 rounded-sm
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col pb-4">
@@ -139,18 +139,19 @@ const SignupPage = () => {
               type="password"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-red-400"
+                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col space-y-3">
             <button
-              className="bg-black text-white rounded-sm py-2 px-3 font-medium border-2 border-gray-50 hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
-                         dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
+              className="bg-black text-white rounded-sm py-2 px-3 font-medium
+              hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
+                        dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
               type="submit"
             >
               Sign up
             </button>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-gray-500 dark:text-gray-300">
               Already have an account? Sign in{" "}
               <Link href="/login">
                 <a className="underline">here</a>
