@@ -14,23 +14,20 @@ export default function PostEditor() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // const formData = new FormData();
-    // if (postPictureRef.current.files[0]) {
-    //   formData.append("postPicture", postPictureRef.current.files[0]);
-    // }
-    // formData.append("caption", captionRef.current.value);
-    const body = {
-      caption: e.currentTarget.caption.value,
-      postPicture: e.currentTarget.postPicture.value,
-    };
+    const formData = new FormData();
+    if (postPictureRef.current.files[0]) {
+      formData.append("postPicture", postPictureRef.current.files[0]);
+    }
+    formData.append("caption", captionRef.current.value);
+
     if (!e.currentTarget.caption.value) return;
     if (!e.currentTarget.postPicture.value) return;
     e.currentTarget.caption.value = "";
     e.currentTarget.postPicture.value = "";
+    
     const res = await fetch("/api/posts", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: formData,
     });
     if (res.ok) {
       // setMsg("Posted!");
@@ -51,13 +48,21 @@ export default function PostEditor() {
         {/* Need to hook this up to db */}
         <div className="flex flex-col">
           <label className="font-medium">Post Picture</label>
-          <input
+          {/* <input
             type="text"
             id="postPicture"
             name="postPicture"
             placeholder="Upload your car URL"
             className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full"
-          />
+          /> */}
+          <input
+                type="file"
+                id="postPicture"
+                name="postPicture"
+                accept="Upload your post picture"
+                ref={postPictureRef}
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm"
+              />
         </div>
         <div className="flex flex-col pb-4">
           <label className="font-medium">Caption</label>
@@ -68,6 +73,7 @@ export default function PostEditor() {
             id="caption"
             name="caption"
             placeholder=""
+            ref ={captionRef}
           />
         </div>
         <button
