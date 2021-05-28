@@ -37,7 +37,7 @@ export default function PostEditor() {
   }
 
   return (
-    <section className="flex flex-col w-full md:max-w-md pr-0 md:pr-8 md:my-0 my-4">
+    <section className="flex flex-col w-full md:max-w-lg md:pr-2 mb-6">
       <Toaster />
       <p>{msg}</p>
       <form
@@ -73,8 +73,9 @@ export default function PostEditor() {
         <button
           id="buttonid"
           type="submit"
-          className="w-full bg-black rounded-sm py-2 px-6 text-white font-medium border-2 border-gray-50 hover:bg-gray-800 hover:shadow-md transition duration-200 ease-in-out
-                     dark:bg-gray-900 dark:text-white dark:border-gray-900 dark:hover:border-gray-50"
+          className="w-full bg-black rounded-sm py-2 px-6 text-white font-medium 
+           hover:bg-gray-800 hover:shadow-md transition duration-200 ease-in-out
+                     dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
         >
           Post
         </button>
