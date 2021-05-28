@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/index";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Layout({ children }) {
   return (
@@ -26,12 +27,10 @@ export default function Layout({ children }) {
         <meta property="og:image" content="/favicon.ico" />
       </Head>
       <Header />
-      <main className="flex flex-col w-full mx-auto md:mt-12 mt-4 p-6 leading-7">
+      <main className="flex flex-col w-full mx-auto md:mt-12 mb-12 mt-4 p-6 leading-7">
         {children}
       </main>
-      <footer className="w-full max-w-7xl mx-auto text-center">
-        <p>Auto Exposure Footer. We can put our names here.</p>
-      </footer>
+      <Footer />
     </>
   );
 }

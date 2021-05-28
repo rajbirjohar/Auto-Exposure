@@ -35,7 +35,7 @@ Features included or will be included:
 - [ ] Commenting
 - [ ] Liking
 - [x] Minimal and clean UI/UX
-- [ ] Footer
+- [x] Footer
 
 ## Instructions
 
