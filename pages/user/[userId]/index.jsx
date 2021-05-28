@@ -30,13 +30,18 @@ export default function UserPage({ user }) {
             <div className="flex flex-col space-y-3">
               <h2 className="font-medium text-xl text-gray-600 dark:text-gray-300">
                 @{username}
-              </h2>
+              </h2>         
+            {!isCurrentUser && (
+              <h1 className="font-bold text-3xl tracking-loose">
+                Welcome to {firstname}'s garage.
+              </h1>
+              )}
+            {isCurrentUser && (
               <h1 className="font-bold text-3xl tracking-loose">
                 Welcome to your garage, {firstname}.
               </h1>
-              <h2 className="font-medium text-xl text-gray-600 dark:text-gray-300">
-                About
-              </h2>
+              )}
+              <h2 className="font-medium text-xl text-gray-600">About</h2>
               <p>{bio}</p>
             </div>
             {isCurrentUser && (
