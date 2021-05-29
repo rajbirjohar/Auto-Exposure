@@ -61,30 +61,30 @@ function Post({ post }) {
   return (
     <div
       className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
-                  transition duration-200 ease-in-out rounded-lg w-full border-2 border-gray-50"
+                  transition duration-200 ease-in-out rounded-md
+                   w-full transform hover:scale-102
+                  dark:bg-gray-900 dark:hover:bg-gray-800"
     >
       {user && (
         <Link href={`/user/${user._id}`}>
-          <div>
-            <div className="">
-              <img
-                src={post.postPicture}
-                className="pb-6 fill h-full"
-                alt="post image"
-              />
+          <div className="flex flex-col justify-between h-full">
+            <div className="flex flex-col justify-center h-full">
+              <img src={post.postPicture} className="pb-6" alt="post image" />
             </div>
-            <a className="flex text-blue-600 items-center">
-              <img
-                width="27"
-                height="27"
-                className="rounded-full mr-2"
-                src={user.profilePicture || defaultProfilePicture(user._id)}
-                alt={user.firstname}
-              />
-              <span className="text-medium cursor-pointer">
-                @{user.username}
-              </span>
-            </a>
+            <div>
+              <a className="flex text-blue-600 items-center">
+                <img
+                  width="27"
+                  height="27"
+                  className="rounded-full mr-2"
+                  src={user.profilePicture || defaultProfilePicture(user._id)}
+                  alt={user.firstname}
+                />
+                <span className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
+                  @{user.username}
+                </span>
+              </a>
+            </div>
           </div>
         </Link>
       )}
@@ -161,7 +161,7 @@ export function usePostPages({ creatorId } = {}) {
     },
     fetcher,
     {
-      refreshInterval: 10000, // Refresh every 10 seconds
+      refreshInterval: 5000, // Refresh every 5 seconds
     }
   );
 }
@@ -181,7 +181,7 @@ export default function Posts({ creatorId }) {
 
   return (
     <div>
-      <div className="w-full mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
+      <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}
@@ -190,8 +190,9 @@ export default function Posts({ creatorId }) {
         <div className="flex w-full mx-auto mt-8 items-center justify-center">
           <button
             type="button"
-            className="bg-gray-200 text-black rounded-sm py-2 px-6 font-medium
-             hover:bg-gray-100 transition duration-200 ease-in-out"
+            className="bg-gray-200 text-black rounded-sm py-3 px-6
+             hover:bg-gray-300 transition duration-200 ease-in-out
+              dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white"
             onClick={() => setSize(size + 1)}
             disabled={isReachingEnd || isLoadingMore}
           >

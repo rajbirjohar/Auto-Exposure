@@ -4,22 +4,22 @@ import multer from "multer";
 import { getPosts, insertPost, updatePost } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
-// import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 
 const upload = multer({ dest: "/tmp" });
 const handler = nc();
 
-// const {
-//   hostname: cloud_name,
-//   username: api_key,
-//   password: api_secret,
-// } = new URL(process.env.CLOUDINARY_URL);
+const {
+  hostname: cloud_name,
+  username: api_key,
+  password: api_secret,
+} = new URL(process.env.CLOUDINARY_URL);
 
-// cloudinary.config({
-//   cloud_name,
-//   api_key,
-//   api_secret,
-// });
+cloudinary.config({
+  cloud_name,
+  api_key,
+  api_secret,
+});
 
 handler.use(all);
 
@@ -40,20 +40,17 @@ handler.get(async (req, res) => {
   res.send({ posts });
 });
 
-// handler.post(upload.single("postPicture"), async (req, res) => {
-handler.post(async (req, res) => {
-  // let postPicture;
-  // if (req.file) {
-  //   const image = await cloudinary.uploader.upload(req.file.path, {
-  //     width: 512,
-  //     height: 512,
-  //     crop: "fill",
-  //   });
-  //   postPicture = image.secure_url;
-  // }
-  if (!req.body.caption)
+handler.post(upload.single("postPicture"), async (req, res) => {
+  // handler.post(async (req, res) => {
+  console.log("In post upload...");
+  let postPicture;
+  if (req.file) {
+    const image = await cloudinary.uploader.upload(req.file.path);
+    postPicture = image.secure_url;
+  }
+  if (!req.body.caption) {
     return res.status(400).send("You must write something");
-  if (!req.body.postPicture)
+  } if (!req.body.postPicture)
     return res.status(400).send("You must upload a url");
 
   const post = await insertPost(req.db, {
@@ -86,10 +83,10 @@ handler.patch(async (req, res) => {
   //console.log(req.post.count);
 });
 
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default handler;

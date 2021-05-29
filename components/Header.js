@@ -12,12 +12,16 @@ export default function Header({ children }) {
     router.push("/");
     mutate(null);
   };
+
   return (
-    <nav className="sticky-nav bg-black bg-opacity-80 text-gray-50 flex w-full p-6">
-      <ul className="flex flex-row w-full max-w-7xl mx-auto justify-between items-center">
+    <nav
+      className="sticky-nav bg-gray-50 text-black dark:bg-black dark:text-white
+     bg-opacity-80 flex w-full p-6"
+    >
+      <ul className="flex flex-row mx-auto w-full max-w-screen-2xl mx-auto justify-between items-center">
         <Link href="/">
           <a>
-            <h1 className="cursor-pointer">Auto Exposure</h1>
+            <h1 className="cursor-pointer text-lg font-medium">Æ</h1>
           </a>
         </Link>
         <div>
@@ -32,7 +36,13 @@ export default function Header({ children }) {
                 <a className="cursor-pointer">Sign in</a>
               </Link>
               <Link href="/signup">
-                <a className="cursor-pointer">Sign up</a>
+                <button
+                  className="bg-black text-white rounded-sm py-2 px-3
+                  hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
+                            dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
+                >
+                  Sign up
+                </button>
               </Link>
             </li>
           ) : (

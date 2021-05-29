@@ -25,6 +25,7 @@
     "nanoid": "^3.1.18",
     "next": "^10.2.3",
     "next-connect": "^0.9.1",
+    "next-themes": "^0.0.14",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "postcss": "^8.2.15",

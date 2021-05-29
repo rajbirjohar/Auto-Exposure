@@ -12,11 +12,11 @@ const IndexPage = () => {
         Strap in, {user ? user.firstname : "Racer"}.
       </h1>
       <div>
-        <h2 className="font-medium text-xl text-gray-400 my-4 ">
+        <h2 className="font-medium text-xl text-gray-400 my-4 dark:text-gray-500">
           Here is your current feed. Enjoy the drive.{" "}
           {user ? "" : "Sign in to post."}
         </h2>
-        <div className="flex md:flex-row flex-col">
+        <div className="flex flex-col">
           <PostEditor />
           <div>
             <Posts />

@@ -19,7 +19,7 @@ export default function UserPage({ user }) {
       <Head>
         <title>Auto Exposure | {firstname}</title>
       </Head>
-      <section className="mx-auto w-full max-w-7xl">
+      <section className="mx-auto w-full max-w-screen-2xl">
         <div className="flex md:flex-row flex-col items-center md:space-x-6">
           <img
             src={profilePicture || defaultProfilePicture(_id)}
@@ -28,26 +28,31 @@ export default function UserPage({ user }) {
           />
           <div>
             <div className="flex flex-col space-y-3">
-            {!isCurrentUser && (
-              <h1 className="font-bold text-3xl tracking-loose">
-                Welcome to {firstname}'s garage.
-              </h1>
+              <h2 className="font-medium text-xl text-gray-600 dark:text-gray-400">
+                @{username}
+              </h2>
+              {!isCurrentUser && (
+                <h1 className="font-bold text-3xl tracking-loose">
+                  Welcome to {firstname}'s garage.
+                </h1>
               )}
-            {isCurrentUser && (
-              <h1 className="font-bold text-3xl tracking-loose">
-                Welcome to your garage, {firstname}.
-              </h1>
+              {isCurrentUser && (
+                <h1 className="font-bold text-3xl tracking-loose">
+                  Welcome to your garage, {firstname}.
+                </h1>
               )}
-              <h2 className="font-medium text-xl text-gray-600">@{username}</h2>
-              <h2 className="font-medium text-xl text-gray-600">About</h2>
+              <h2 className="font-medium text-xl text-gray-600 dark:text-gray-400">
+                About
+              </h2>
               <p>{bio}</p>
             </div>
             {isCurrentUser && (
               <Link href="/settings">
                 <button
                   type="button"
-                  className="bg-gray-200 rounded-sm py-2 px-6 text-black font-medium flex-intial hover:bg-gray-300
-                  hover:shadow-md transition duration-200 ease-in-out mt-4"
+                  className="bg-gray-200 text-black rounded-sm py-2 px-3 mt-4
+                  hover:bg-gray-300 hover:border-gray-300 hover:shadow-lg transition duration-200 ease-in-out
+                             dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white"
                 >
                   Edit Profile
                 </button>
@@ -57,9 +62,17 @@ export default function UserPage({ user }) {
         </div>
 
         <div>
-          <h3 className="text-2xl text-gray-600 font-semibold my-4">
-            My Posts
-          </h3>
+          {!isCurrentUser && (
+            <h3 className="text-2xl text-gray-600 font-semibold my-4 dark:text-gray-400">
+              {firstname}'s Posts
+            </h3>
+          )}
+          {isCurrentUser && (
+            <h3 className="text-2xl text-gray-600 font-semibold my-4 dark:text-gray-400">
+              My Posts
+            </h3>
+          )}
+
           <Posts creatorId={user._id} />
         </div>
       </section>
