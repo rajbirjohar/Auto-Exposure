@@ -1,7 +1,7 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-import { getPosts, insertPost } from "@/db/index";
+import { deletePost, getPosts, insertPost } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -59,6 +59,14 @@ handler.post(upload.single("postPicture"), async (req, res) => {
   });
 
   return res.json({ post });
+});
+
+handler.delete(async (req, res) => {
+  console.log("reached handler delete function");
+  await deletePost(req.db, {
+    postId: req.post._id,
+  });
+  return res.status(200);
 });
 
 export const config = {

@@ -29,3 +29,14 @@ export async function insertPost(db, { caption, postPicture, creatorId }) {
     })
     .then(({ ops }) => ops[0]);
 }
+
+export async function deletePost(db, { postId }) {
+  console.log("reached db delete function");
+  const query = { _id: postId };
+  return db
+    .collection("posts")
+    .deleteOne({
+      query,
+    })
+    .then(({ ops }) => ops[0]);
+}
