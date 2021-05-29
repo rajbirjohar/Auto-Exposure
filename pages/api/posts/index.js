@@ -3,6 +3,7 @@ import { all } from "@/middlewares/index";
 import multer from "multer";
 import { getPosts, insertPost } from "@/db/index";
 import { ReplSet } from "mongodb";
+import { extractPost } from "@/lib/api-helpers";
 // import { v2 as cloudinary } from "cloudinary";
 
 const upload = multer({ dest: "/tmp" });
@@ -54,14 +55,32 @@ handler.post(async (req, res) => {
     return res.status(400).send("You must write something");
   if (!req.body.postPicture)
     return res.status(400).send("You must upload a url");
+
   const post = await insertPost(req.db, {
     caption: req.body.caption,
     creatorId: req.user._id,
     count: 0,
     postPicture: req.body.postPicture,
   });
+  //console.log(req.post._id)
 
   return res.json({ post });
+});
+
+handler.patch(async (req, res) => {
+  if (!req.post) {
+    req.status(401).end();
+    return;
+  }
+  const { id, count } = req.body;
+
+  const like = await updateUserById(req.db, {
+    ...(id && { id }),
+    ...(count && { count }),
+  });
+
+  res.json({ like: extractPost(like) });
+  //console.log(req.post.count);
 });
 
 export default handler;

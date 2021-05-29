@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
 import { useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
 import { addCount } from "@/components/post/posts"
+import toast, { Toaster } from "react-hot-toast";
 
 function Post({ post }) {
   const user = useUser(post.creatorId);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const handleClick = async (event) => {
+    event.preventDefault();
+    if (isUpdating) return;
+    setIsUpdating(true);
+    const formData = new FormData();
+    formData.append("id", post._id);
+    formData.append("count", post.count);
+    const res = await fetch("/api/posts", {
+      method: "PATCH",
+      body: formData,
+    });
+    if (res.status === 200) {
+      const postData = await res.json();
+      // mutate({
+      //   posts: {
+      //     ...post,
+      //     ...postData.post,
+      //   },
+      // });
+      // setMsg({ message: "Your profile has been updated." });
+      toast.success("Likes Updated!");
+    } else {
+      // setMsg({ message: await res.text(), isError: true });
+      toast.error("Likes failed to update!");
+    }
+    setIsUpdating(false);
+  };
+  //const comment = 
   return (
     <div
       className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
@@ -42,13 +73,46 @@ function Post({ post }) {
       <p className="text-sm text-gray-400">
         {new Date(post.createdAt).toLocaleString()}
       </p>
-      <Link href={`/user/${user._id}`}>
-        <span className="text-medium cursor-pointer">Comments</span>
-      </Link>
-      {/* <button onClick={addCount({ post }, post.count)}> Likes: {post.count} </button> */}
+      {user && (
+        <Link href={`/user/${user._id}`}>
+          <span className="text-medium cursor-pointer">Comments</span>
+        </Link>
+      )}
+      <button onClick={handleClick}> Likes: {post.count} </button>
     </div>
   );
 }
+
+// const Likes = () => {
+//   const [isUpdating, setIsUpdating] = useState(false);
+
+//   const handleClick = async (event) => {
+//     event.preventDefault();
+//     if (isUpdating) return;
+//     setIsUpdating(true);
+//     const formData = new FormData();
+//     formData.append("count", post.count);
+//     const res = await fetch("/api/post", {
+//       method: "PATCH",
+//       body: formData,
+//     });
+//     if (res.status === 200) {
+//       const postData = await res.json();
+//       mutate({
+//         posts: {
+//           ...post,
+//           ...postData.post,
+//         },
+//       });
+//       // setMsg({ message: "Your profile has been updated." });
+//       toast.success("Likes Updated!");
+//     } else {
+//       // setMsg({ message: await res.text(), isError: true });
+//       toast.error("Likes failed to update!");
+//     }
+//     setIsUpdating(false);
+//   };
+// }
 
 const PAGE_SIZE = 9;
 
