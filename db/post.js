@@ -25,16 +25,16 @@ export async function insertPost(db, { caption, postPicture, creatorId }) {
       caption,
       creatorId,
       postPicture,
-      count: 0,
+      likes: [],
       createdAt: new Date(),
     })
     .then(({ ops }) => ops[0]);
 }
 
-export async function updatePost(db, { id, count }) {
+export async function updatePost(db, { postId, id }) {
   return db
     .collection('posts').updateOne(
-      { "_id": id },
-      { $set: { "count": count } },
-      { upsert: true }).then(({ value }) => value);
+      { "_id": postId },
+      { $push: { "likes": id } })
+    .then(({ value }) => value);
 }

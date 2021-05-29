@@ -59,7 +59,7 @@ handler.post(async (req, res) => {
   const post = await insertPost(req.db, {
     caption: req.body.caption,
     creatorId: req.user._id,
-    count: 0,
+    likes: [],
     postPicture: req.body.postPicture,
   });
   //console.log(req.post._id)
@@ -68,27 +68,28 @@ handler.post(async (req, res) => {
 });
 
 handler.patch(async (req, res) => {
-  // if (!req.post) {
-  //   req.status(401).end();
-  //   return;
-  // }
+  if (!req.user) {
+    req.status(401).end();
+    return;
+  }
 
   console.log(req.body);
-  const { id, count } = req.body;
+  const postId = req.body;
+  const { _id } = req.user;
 
   const like = await updatePost(req.db, {
-    id: id,
-    count: count,
+    postId: postId,
+    id: _id
   });
 
-  res.json({ post: extractPost(like) });
+  //res.json({ post: extractPost(like) });
   //console.log(req.post.count);
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
 export default handler;

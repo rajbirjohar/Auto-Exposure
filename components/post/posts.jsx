@@ -1,43 +1,59 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
-import { useCurrentPost, useUser } from "@/hooks/index";
+import { useCurrentPost, useCurrentUser, useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
 import { addCount } from "@/components/post/posts"
 import toast, { Toaster } from "react-hot-toast";
 
 function Post({ post }) {
-  const [postGet, { mutate }] = useCurrentPost();
+  const [userInfo, { mutate }] = useCurrentUser();
   const user = useUser(post.creatorId);
   const [isUpdating, setIsUpdating] = useState(false);
-  const idRef = useRef();
-  const countRef = useRef();
 
   const handleClick = async (event) => {
+    var dupCheck = false;
     event.preventDefault();
     if (isUpdating) return;
     setIsUpdating(true);
     const formData = new FormData();
     formData.append("id", post._id);
-    formData.append("count", post.count);
-    const res = await fetch("/api/posts", {
-      method: "PATCH",
-      body: formData,
-    });
-    if (res.status === 200) {
-      // const postData = await res.json();
-      // mutate({
-      //   posts: {
-      //     ...post,
-      //     ...postData.post,
-      //   },
-      // });
-      // setMsg({ message: "Your profile has been updated." });
-      toast.success("Likes Updated!");
-    } else {
-      // setMsg({ message: await res.text(), isError: true });
-      toast.error("Likes failed to update!");
+    formData.append("count", post.count + 1);
+    //console.log(formData.get("count"));
+
+    for (var i = 0; i < post.likes.length; i++) {
+      console.log(post.likes[i]);
+      console.log(userInfo._id);
+      if (post.likes[i] === userInfo._id) {
+        dupCheck = true;
+
+      }
+    }
+
+    if (!dupCheck) {
+      const res = await fetch("/api/posts", {
+        method: "PATCH",
+        body: post._id,
+      });
+
+      if (res.status === 200) {
+        const postData = await res.json();
+        mutate({
+          posts: {
+            ...post,
+            ...postData.post,
+          },
+        });
+        // setMsg({ message: "Your profile has been updated." });
+        toast.success("Likes Updated!");
+      } else {
+        // setMsg({ message: await res.text(), isError: true });
+        toast.error("Likes failed to update!");
+      }
+    }
+    else {
+      toast.error("You've already liked this post!");
     }
     setIsUpdating(false);
   };
@@ -81,7 +97,7 @@ function Post({ post }) {
           <span className="text-medium cursor-pointer">Comments</span>
         </Link>
       )}
-      <button onClick={handleClick}> Likes: {post.count} </button>
+      <button onClick={handleClick}> Likes: {post.likes.length} </button>
     </div>
   );
 }
