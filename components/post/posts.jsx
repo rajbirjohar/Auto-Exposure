@@ -8,16 +8,16 @@ import { addCount } from "@/components/post/posts"
 import toast, { Toaster } from "react-hot-toast";
 
 function Post({ post }) {
-  const [p, { mutate }] = useCurrentPost();
+  const [postGet, { mutate }] = useCurrentPost();
   const user = useUser(post.creatorId);
   const [isUpdating, setIsUpdating] = useState(false);
   const idRef = useRef();
   const countRef = useRef();
 
   useEffect(() => {
-    idRef.current.value = post._id;
+    idRef.current.value = postGet._id;
     countRef.current.value = post.count;
-  });
+  }, [postGet]);
 
   const handleClick = async (event) => {
     event.preventDefault();
@@ -33,12 +33,12 @@ function Post({ post }) {
     });
     if (res.status === 200) {
       //const postData = await res.json();
-      // mutate({
-      //   posts: {
-      //     ...post,
-      //     ...postData.post,
-      //   },
-      // });
+      mutate({
+        posts: {
+          ...post,
+          ...postData.post,
+        },
+      });
       // setMsg({ message: "Your profile has been updated." });
       toast.success("Likes Updated!");
     } else {

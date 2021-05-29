@@ -8,7 +8,7 @@ export function useCurrentUser() {
 }
 
 export function useCurrentPost() {
-  const { data, mutate } = useSWR("/api/post", fetcher);
+  const { data, mutate } = useSWR("/api/posts", fetcher);
   const post = data?.post;
   return [post, { mutate }];
 }
