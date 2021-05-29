@@ -14,11 +14,6 @@ function Post({ post }) {
   const idRef = useRef();
   const countRef = useRef();
 
-  useEffect(() => {
-    idRef.current.value = postGet._id;
-    countRef.current.value = post.count;
-  }, [postGet]);
-
   const handleClick = async (event) => {
     event.preventDefault();
     if (isUpdating) return;
@@ -26,19 +21,18 @@ function Post({ post }) {
     const formData = new FormData();
     formData.append("id", post._id);
     formData.append("count", post.count);
-    console.log(formData.count);
     const res = await fetch("/api/posts", {
       method: "PATCH",
       body: formData,
     });
     if (res.status === 200) {
-      //const postData = await res.json();
-      mutate({
-        posts: {
-          ...post,
-          ...postData.post,
-        },
-      });
+      // const postData = await res.json();
+      // mutate({
+      //   posts: {
+      //     ...post,
+      //     ...postData.post,
+      //   },
+      // });
       // setMsg({ message: "Your profile has been updated." });
       toast.success("Likes Updated!");
     } else {

@@ -72,16 +72,23 @@ handler.patch(async (req, res) => {
   //   req.status(401).end();
   //   return;
   // }
+
+  console.log(req.body);
   const { id, count } = req.body;
-  console.log(req.body.count);
 
   const like = await updatePost(req.db, {
     id: id,
     count: count,
   });
 
-  res.json({ like: extractPost(like) });
+  res.json({ post: extractPost(like) });
   //console.log(req.post.count);
 });
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default handler;
