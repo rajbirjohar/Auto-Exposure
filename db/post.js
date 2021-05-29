@@ -33,7 +33,8 @@ export async function insertPost(db, { caption, postPicture, creatorId }) {
 
 export async function updatePost(db, { id, count }) {
   return db
-    .collection('posts').find({ _id: id }).update({
-      count: count
-    }).then(({ ops }) => ops[0]);
+    .collection('posts').updateOne(
+      { "_id": id },
+      { $set: { "count": count } },
+      { upsert: true }).then(({ value }) => value);
 }

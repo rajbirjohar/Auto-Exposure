@@ -1,7 +1,7 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-import { getPosts, insertPost } from "@/db/index";
+import { getPosts, insertPost, updatePost } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
 // import { v2 as cloudinary } from "cloudinary";
@@ -68,15 +68,16 @@ handler.post(async (req, res) => {
 });
 
 handler.patch(async (req, res) => {
-  if (!req.post) {
-    req.status(401).end();
-    return;
-  }
+  // if (!req.post) {
+  //   req.status(401).end();
+  //   return;
+  // }
   const { id, count } = req.body;
+  console.log(req.body.count);
 
-  const like = await updateUserById(req.db, {
-    ...(id && { id }),
-    ...(count && { count }),
+  const like = await updatePost(req.db, {
+    id: id,
+    count: count,
   });
 
   res.json({ like: extractPost(like) });

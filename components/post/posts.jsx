@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
-import { useUser } from "@/hooks/index";
+import { useCurrentPost, useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
 import { addCount } from "@/components/post/posts"
 import toast, { Toaster } from "react-hot-toast";
 
 function Post({ post }) {
+  const [p, { mutate }] = useCurrentPost();
   const user = useUser(post.creatorId);
   const [isUpdating, setIsUpdating] = useState(false);
+  const idRef = useRef();
+  const countRef = useRef();
+
+  useEffect(() => {
+    idRef.current.value = post._id;
+    countRef.current.value = post.count;
+  });
 
   const handleClick = async (event) => {
     event.preventDefault();
@@ -18,12 +26,13 @@ function Post({ post }) {
     const formData = new FormData();
     formData.append("id", post._id);
     formData.append("count", post.count);
+    console.log(formData.count);
     const res = await fetch("/api/posts", {
       method: "PATCH",
       body: formData,
     });
     if (res.status === 200) {
-      const postData = await res.json();
+      //const postData = await res.json();
       // mutate({
       //   posts: {
       //     ...post,
