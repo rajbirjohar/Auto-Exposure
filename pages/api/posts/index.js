@@ -41,9 +41,17 @@ handler.get(async (req, res) => {
 
 handler.post(upload.single("postPicture"), async (req, res) => {
   // handler.post(async (req, res) => {
-  console.log("In post upload...");
   let postPicture;
   if (req.file) {
+    if (
+      !(
+        req.file.mimetype === "image/png" ||
+        req.file.mimetype === "image/jpeg" ||
+        req.file.mimetype === "image/jpg"
+      )
+    ) {
+      return res.status(415).send("Your image must be a png or jpg/jpeg");
+    }
     const image = await cloudinary.uploader.upload(req.file.path);
     postPicture = image.secure_url;
   }
