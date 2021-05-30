@@ -38,3 +38,11 @@ export async function updatePost(db, { postId, id }) {
       { $push: { "likes": id } })
     .then(({ value }) => value);
 }
+
+export async function deleteElement(db, { postId, id }) {
+  return db
+    .collection('posts').updateOne(
+      { "_id": postId },
+      { $pull: { "likes": id } })
+    .then(({ value }) => value);
+}

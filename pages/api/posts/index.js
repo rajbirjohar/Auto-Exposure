@@ -1,7 +1,7 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-import { getPosts, insertPost, updatePost } from "@/db/index";
+import { getPosts, insertPost, updatePost, deleteElement } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
 import { v2 as cloudinary } from "cloudinary";
@@ -62,25 +62,6 @@ handler.post(upload.single("postPicture"), async (req, res) => {
   //console.log(req.post._id)
 
   return res.json({ post });
-});
-
-handler.patch(async (req, res) => {
-  if (!req.user) {
-    req.status(401).end();
-    return;
-  }
-
-  console.log(req.body);
-  const postId = req.body;
-  const { _id } = req.user;
-
-  const like = await updatePost(req.db, {
-    postId: postId,
-    id: _id
-  });
-
-  //res.json({ post: extractPost(like) });
-  //console.log(req.post.count);
 });
 
 export const config = {

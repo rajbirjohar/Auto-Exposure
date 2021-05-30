@@ -14,46 +14,71 @@ function Post({ post }) {
 
   const handleClick = async (event) => {
     var dupCheck = false;
+    var choose;
     event.preventDefault();
     if (isUpdating) return;
     setIsUpdating(true);
     const formData = new FormData();
     formData.append("id", post._id);
-    formData.append("count", post.count + 1);
     //console.log(formData.get("count"));
 
     for (var i = 0; i < post.likes.length; i++) {
-      console.log(post.likes[i]);
-      console.log(userInfo._id);
+      // console.log(post.likes[i]);
+      // console.log(userInfo._id);
       if (post.likes[i] === userInfo._id) {
         dupCheck = true;
-
       }
     }
 
     if (!dupCheck) {
-      const res = await fetch("/api/posts", {
-        method: "PATCH",
-        body: post._id,
-      });
+      choose = "Add";
+      // const res = await fetch("/api/posts", {
+      //   method: "PATCH",
+      //   body: post._id,
+      // });
 
-      if (res.status === 200) {
-        const postData = await res.json();
-        mutate({
-          posts: {
-            ...post,
-            ...postData.post,
-          },
-        });
-        // setMsg({ message: "Your profile has been updated." });
-        toast.success("Likes Updated!");
-      } else {
-        // setMsg({ message: await res.text(), isError: true });
-        toast.error("Likes failed to update!");
-      }
+      // if (res.status === 200) {
+      //   const postData = await res.json();
+      //   mutate({
+      //     posts: {
+      //       ...post,
+      //       ...postData.post,
+      //     },
+      //   });
+      //   // setMsg({ message: "Your profile has been updated." });
+      //   toast.success("Likes Updated!");
+      // } else {
+      //   // setMsg({ message: await res.text(), isError: true });
+      //   toast.error("Likes failed to update!");
+      // }
     }
     else {
-      toast.error("You've already liked this post!");
+      //toast.error("You've already liked this post!");
+      choose = "Remove";
+    }
+    //console.log(c);
+    const body = {
+      postId: post._id,
+      choice: choose,
+    };
+    const res = await fetch("/api/posts/patch", {
+      method: "PATCH",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (res.status === 200) {
+      const postData = await res.json();
+      mutate({
+        posts: {
+          ...post,
+          ...postData.post,
+        },
+      });
+      // setMsg({ message: "Your profile has been updated." });
+      toast.success("Likes Updated!");
+    } else {
+      // setMsg({ message: await res.text(), isError: true });
+      toast.error("Likes failed to update!");
     }
     setIsUpdating(false);
   };
@@ -97,41 +122,11 @@ function Post({ post }) {
           <span className="text-medium cursor-pointer">Comments</span>
         </Link>
       )}
+      {/* {console.log(post.caption)} */}
       <button onClick={handleClick}> Likes: {post.likes.length} </button>
     </div>
   );
 }
-
-// const Likes = () => {
-//   const [isUpdating, setIsUpdating] = useState(false);
-
-//   const handleClick = async (event) => {
-//     event.preventDefault();
-//     if (isUpdating) return;
-//     setIsUpdating(true);
-//     const formData = new FormData();
-//     formData.append("count", post.count);
-//     const res = await fetch("/api/post", {
-//       method: "PATCH",
-//       body: formData,
-//     });
-//     if (res.status === 200) {
-//       const postData = await res.json();
-//       mutate({
-//         posts: {
-//           ...post,
-//           ...postData.post,
-//         },
-//       });
-//       // setMsg({ message: "Your profile has been updated." });
-//       toast.success("Likes Updated!");
-//     } else {
-//       // setMsg({ message: await res.text(), isError: true });
-//       toast.error("Likes failed to update!");
-//     }
-//     setIsUpdating(false);
-//   };
-// }
 
 const PAGE_SIZE = 9;
 
@@ -150,6 +145,7 @@ export function usePostPages({ creatorId } = {}) {
       // using oldest posts createdAt date as cursor
       // We want to fetch posts which has a datethat is
       // before (hence the .getTime() - 1) the last post's createdAt
+      console.log(index.posts);
       const from = new Date(
         new Date(
           previousPageData.posts[previousPageData.posts.length - 1].createdAt
@@ -161,7 +157,7 @@ export function usePostPages({ creatorId } = {}) {
     },
     fetcher,
     {
-      refreshInterval: 5000, // Refresh every 5 seconds
+      refreshInterval: 3000, // Refresh every 3 seconds
     }
   );
 }
