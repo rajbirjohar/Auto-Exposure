@@ -64,10 +64,37 @@ handler.post(upload.single("postPicture"), async (req, res) => {
   return res.json({ post });
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+handler.patch(async (req, res) => {
+  if (!req.user) {
+    req.status(401).end();
+    return;
+  }
+
+  console.log(req.body.postId);
+  const { _id } = req.user;
+  const { postId, choice } = req.body;
+
+  if (choice === 'Add') {
+    const like = await updatePost(req.db, {
+      postId: postId,
+      id: _id
+    });
+  }
+  else if (choice === 'Remove') {
+    const like = await deleteElement(req.db, {
+      postId: postId,
+      id: _id
+    });
+  }
+
+  //res.json({ post: extractPost(like) });
+  //console.log(req.post.count);
+});
+
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
 export default handler;

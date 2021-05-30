@@ -32,28 +32,8 @@ function Post({ post }) {
 
     if (!dupCheck) {
       choose = "Add";
-      // const res = await fetch("/api/posts", {
-      //   method: "PATCH",
-      //   body: post._id,
-      // });
-
-      // if (res.status === 200) {
-      //   const postData = await res.json();
-      //   mutate({
-      //     posts: {
-      //       ...post,
-      //       ...postData.post,
-      //     },
-      //   });
-      //   // setMsg({ message: "Your profile has been updated." });
-      //   toast.success("Likes Updated!");
-      // } else {
-      //   // setMsg({ message: await res.text(), isError: true });
-      //   toast.error("Likes failed to update!");
-      // }
     }
     else {
-      //toast.error("You've already liked this post!");
       choose = "Remove";
     }
     //console.log(c);
@@ -61,7 +41,7 @@ function Post({ post }) {
       postId: post._id,
       choice: choose,
     };
-    const res = await fetch("/api/posts/patch", {
+    const res = await fetch("/api/posts", {
       method: "PATCH",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
