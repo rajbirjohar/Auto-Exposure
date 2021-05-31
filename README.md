@@ -31,9 +31,9 @@ Features included or will be included:
 - [x] Account verification
 - [x] Sessions
 - [ ] Deleting posts
-- [ ] Uploading direct images
+- [x] Uploading direct images
 - [ ] Commenting
-- [ ] Liking
+- [x] Liking
 - [x] Minimal and clean UI/UX
 - [x] Footer
 
