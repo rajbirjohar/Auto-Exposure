@@ -11,13 +11,13 @@ import { defaultProfilePicture } from "@/lib/default";
 
 export default function PostPage({ post }) {
     if (!post) return <Error statusCode={404} />;
-    const { caption, creatorId, postPicture, likes, createdAt } = post || {};
+    const { caption, creatorId, postPicture, likes } = post || {};
     const [currentPost] = useCurrentPost();
     const isCurrentPost = currentPost?._id === post._id;
     return (
         <>
             <Head>
-                <title>Auto Exposure | {createdAt}</title>
+                <title>Auto Exposure | {caption}</title>
             </Head>
             <section className="mx-auto w-full max-w-screen-2xl">
                 <div className="flex md:flex-row flex-col items-center md:space-x-6">
@@ -64,16 +64,17 @@ export default function PostPage({ post }) {
                 <div>
                     {!isCurrentPost && (
                         <h3 className="text-2xl text-gray-600 font-semibold my-4 dark:text-gray-400">
-                            {firstname}'s Posts
+                            {creatorId}'s Comments
                         </h3>
                     )}
                     {isCurrentPost && (
                         <h3 className="text-2xl text-gray-600 font-semibold my-4 dark:text-gray-400">
-                            My Posts
+                            My Comments
                         </h3>
                     )}
 
-                    <Posts _id={post._id} />
+                    {console.log(post)}
+                    {/* <Posts _id={post._id} /> */}
                 </div>
             </section>
         </>
@@ -82,7 +83,13 @@ export default function PostPage({ post }) {
 
 export async function getServerSideProps(context) {
     await all.run(context.req, context.res);
-    const post = await findPostById(context.req.db, context.params.userId);
+    console.log(context.params);
+    const post = await findPostById(context.req.db, context.params.postId);
     if (!post) context.res.statusCode = 404;
-    return { props: { post } };
+    console.log(post);
+    return {
+        props: {
+            post
+        }
+    };
 }
