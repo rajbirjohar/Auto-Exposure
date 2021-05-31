@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Error from "next/error";
@@ -14,6 +14,33 @@ export default function PostPage({ post }) {
     const { caption, creatorId, postPicture, likes } = post || {};
     const [currentPost] = useCurrentPost();
     const isCurrentPost = currentPost?._id === post._id;
+    const messageRef = useRef();
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("message", messageRef.current.value);
+
+        const body = {
+            message: messageRef.current.value
+        };
+        console.log(messageRef.current.value);
+
+        if (!e.currentTarget.message.value) return;
+        e.currentTarget.message.value = "";
+
+        const res = await fetch("/api/posts/patch", {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (res.ok) {
+            // setMsg("Posted!");
+            // setTimeout(() => setMsg(null), 5000);
+            toast.success("Posted!");
+        }
+    }
+
     return (
         <>
             <Head>
@@ -75,6 +102,33 @@ export default function PostPage({ post }) {
 
                     {console.log(post)}
                     {/* <Posts _id={post._id} /> */}
+                    <form
+                        onSubmit={handleSubmit}
+                        autoComplete="off"
+                        className="space-y-2 min-w-full max-w-sm"
+                    >
+                        <div className="flex flex-col">
+                            <label className="font-medium">Message</label>
+                            <input
+                                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                                        dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                                type="text"
+                                id="message"
+                                name="message"
+                                placeholder=""
+                                ref={messageRef}
+                            />
+                        </div>
+                        <button
+                            id="buttonid"
+                            type="submit"
+                            className="w-full bg-black rounded-sm py-2 px-6 text-white font-medium 
+                            hover:bg-gray-800 hover:shadow-md transition duration-200 ease-in-out
+                                        dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
+                        >
+                            Post
+                        </button>
+                    </form>
                 </div>
             </section>
         </>

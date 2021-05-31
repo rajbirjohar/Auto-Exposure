@@ -40,28 +40,22 @@ handler.get(async (req, res) => {
     res.send({ posts });
 });
 
-handler.post(upload.single("postPicture"), async (req, res) => {
+handler.post(async (req, res) => {
     // handler.post(async (req, res) => {
-    console.log("In post upload...");
-    let postPicture;
-    if (req.file) {
-        const image = await cloudinary.uploader.upload(req.file.path);
-        postPicture = image.secure_url;
-    }
-    if (!req.body.caption) {
-        return res.status(400).send("You must write something");
-    } if (!req.body.postPicture)
-        return res.status(400).send("You must upload a url");
+    console.log("In message upload...");
+    console.log(req.body);
+    if (!req.body.message)
+        return res.status(400).send("You must type a message");
 
-    const post = await insertPost(req.db, {
-        caption: req.body.caption,
-        creatorId: req.user._id,
-        likes: [],
-        postPicture: req.body.postPicture,
-    });
+    // const post = await insertPost(req.db, {
+    //     caption: req.body.caption,
+    //     creatorId: req.user._id,
+    //     likes: [],
+    //     postPicture: req.body.postPicture,
+    // });
     //console.log(req.post._id)
 
-    return res.json({ post });
+    //return res.json({ post });
 });
 
 handler.patch(async (req, res) => {
