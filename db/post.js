@@ -48,6 +48,14 @@ export async function updatePost(db, { postId, id }) {
     .then(({ value }) => value);
 }
 
+export async function insertComment(db, { postId, message }) {
+  return db
+    .collection('posts').updateOne(
+      { "_id": postId },
+      { $push: { "comments": message } })
+    .then(({ value }) => value);
+}
+
 export async function deleteElement(db, { postId, id }) {
   return db
     .collection('posts').updateOne(

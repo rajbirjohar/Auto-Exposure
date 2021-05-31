@@ -1,7 +1,7 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-import { getPosts, insertPost, updatePost, deleteElement, deletePost } from "@/db/index";
+import { getPosts, insertComment, updatePost, deleteElement, deletePost } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
 import { v2 as cloudinary } from "cloudinary";
@@ -46,16 +46,15 @@ handler.post(async (req, res) => {
     console.log(req.body);
     if (!req.body.message)
         return res.status(400).send("You must type a message");
+    const { postId, message } = req.body;
 
-    // const post = await insertPost(req.db, {
-    //     caption: req.body.caption,
-    //     creatorId: req.user._id,
-    //     likes: [],
-    //     postPicture: req.body.postPicture,
-    // });
+    const msg = await insertComment(req.db, {
+        postId: postId,
+        message: message
+    });
     //console.log(req.post._id)
 
-    //return res.json({ post });
+    return res.json({ post });
 });
 
 handler.patch(async (req, res) => {

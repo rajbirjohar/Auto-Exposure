@@ -22,7 +22,8 @@ export default function PostPage({ post }) {
         formData.append("message", messageRef.current.value);
 
         const body = {
-            message: messageRef.current.value
+            postId: post._id,
+            message: messageRef.current.value,
         };
         console.log(messageRef.current.value);
 
