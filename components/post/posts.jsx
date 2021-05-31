@@ -15,69 +15,79 @@ function Post({ post }) {
   var isUpdating = false;
 
   const handleClick = async (event) => {
-    console.log('I am clicked');
-    var dupCheck = false;
-    var choose;
-    event.preventDefault();
-    console.log(isUpdating);
-    if (isUpdating) return;
-    isUpdating = true;
-    const formData = new FormData();
+    if (userInfo) {
+      console.log('I am clicked');
+      var dupCheck = false;
+      var choose;
+      event.preventDefault();
+      console.log(isUpdating);
+      if (isUpdating) return;
+      isUpdating = true;
+      const formData = new FormData();
 
-    //console.log(dupCheck);
-    for (var i = 0; i < post.likes.length; i++) {
-      if (post.likes[i] === userInfo._id) {
-        dupCheck = true;
+      //console.log(dupCheck);
+      for (var i = 0; i < post.likes.length; i++) {
+        if (post.likes[i] === userInfo._id) {
+          dupCheck = true;
+        }
       }
-    }
 
-    if (!dupCheck) {
-      choose = "Add";
+      if (!dupCheck) {
+        choose = "Add";
+      }
+      else {
+        choose = "Remove";
+      }
+      //console.log(choose);
+      const body = {
+        postId: post._id,
+        choice: choose,
+      };
+      console.log(body);
+      const res = await fetch("/api/posts/patch", {
+        method: "PATCH",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json" },
+      });
+      isUpdating = false;
+      if (res.status === 200) {
+        const postData = await res.json();
+        mutate({
+          posts: {
+            ...post,
+            ...postData.post,
+          },
+        });
+        // setMsg({ message: "Your profile has been updated." });
+        toast.success("Likes Updated!");
+      } else {
+        // setMsg({ message: await res.text(), isError: true });
+        toast.error("Likes failed to update!");
+        setIsUpdating(false);
+        console.log('Hello');
+      }
+      isUpdating = false;
     }
     else {
-      choose = "Remove";
+      toast.error("Please sign-in!");
     }
-    //console.log(choose);
-    const body = {
-      postId: post._id,
-      choice: choose,
-    };
-    console.log(body);
-    const res = await fetch("/api/posts/patch", {
-      method: "PATCH",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json" },
-    });
-    isUpdating = false;
-    if (res.status === 200) {
-      const postData = await res.json();
-      mutate({
-        posts: {
-          ...post,
-          ...postData.post,
-        },
-      });
-      // setMsg({ message: "Your profile has been updated." });
-      toast.success("Likes Updated!");
-    } else {
-      // setMsg({ message: await res.text(), isError: true });
-      toast.error("Likes failed to update!");
-      setIsUpdating(false);
-      console.log('Hello');
-    }
-    isUpdating = false;
   };
   //const comment = 
 
   const postDelete = async (event) => {
-    const body = {
-      postId: post._id,
-    };
-    fetch("/api/posts/patch", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    if (userInfo) {
+      const body = {
+        postId: post._id,
+      };
+      fetch("/api/posts/patch", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+    }
+    else {
+      toast.error("Please sign-in!");
+    }
   };
 
   return (
