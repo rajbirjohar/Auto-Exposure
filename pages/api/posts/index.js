@@ -42,7 +42,7 @@ handler.get(async (req, res) => {
 
 handler.post(upload.single("postPicture"), async (req, res) => {
   // handler.post(async (req, res) => {
-  console.log("In post upload...");
+  console.log(req.body);
   let postPicture;
   if (req.file) {
     const image = await cloudinary.uploader.upload(req.file.path);
@@ -50,51 +50,49 @@ handler.post(upload.single("postPicture"), async (req, res) => {
   }
   if (!req.body.caption) {
     return res.status(400).send("You must write something");
-  } if (!req.body.postPicture)
-    return res.status(400).send("You must upload a url");
-
+  }
+  // if (!req.body.postPicture)
+  //   return res.status(400).send("You must upload a url");
   const post = await insertPost(req.db, {
     caption: req.body.caption,
     creatorId: req.user._id,
-    likes: [],
-    postPicture: req.body.postPicture,
+    postPicture: postPicture,
   });
-  //console.log(req.post._id)
 
   return res.json({ post });
 });
 
-handler.patch(async (req, res) => {
-  if (!req.user) {
-    req.status(401).end();
-    return;
-  }
+// handler.patch(async (req, res) => {
+//   if (!req.user) {
+//     req.status(401).end();
+//     return;
+//   }
 
-  console.log(req.body.postId);
-  const { _id } = req.user;
-  const { postId, choice } = req.body;
+//   console.log(req);
+//   const { _id } = req.user;
+//   const { postId, choice } = req.body;
 
-  if (choice === 'Add') {
-    const like = await updatePost(req.db, {
-      postId: postId,
-      id: _id
-    });
-  }
-  else if (choice === 'Remove') {
-    const like = await deleteElement(req.db, {
-      postId: postId,
-      id: _id
-    });
-  }
+//   if (choice === 'Add') {
+//     const like = await updatePost(req.db, {
+//       postId: postId,
+//       id: _id
+//     });
+//   }
+//   else if (choice === 'Remove') {
+//     const like = await deleteElement(req.db, {
+//       postId: postId,
+//       id: _id
+//     });
+//   }
 
-  //res.json({ post: extractPost(like) });
-  //console.log(req.post.count);
-});
+//   //res.json({ post: extractPost(like) });
+//   //console.log(req.post.count);
+// });
 
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default handler;

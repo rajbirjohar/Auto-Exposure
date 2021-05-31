@@ -41,7 +41,7 @@ function Post({ post }) {
       postId: post._id,
       choice: choose,
     };
-    const res = await fetch("/api/posts", {
+    const res = await fetch("/api/posts/patch", {
       method: "PATCH",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
@@ -125,7 +125,6 @@ export function usePostPages({ creatorId } = {}) {
       // using oldest posts createdAt date as cursor
       // We want to fetch posts which has a datethat is
       // before (hence the .getTime() - 1) the last post's createdAt
-      console.log(index.posts);
       const from = new Date(
         new Date(
           previousPageData.posts[previousPageData.posts.length - 1].createdAt

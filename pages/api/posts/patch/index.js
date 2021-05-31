@@ -90,3 +90,5 @@ handler.patch(async (req, res) => {
     //res.json({ post: extractPost(like) });
     //console.log(req.post.count);
 });
+
+export default handler;
