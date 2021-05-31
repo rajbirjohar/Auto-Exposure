@@ -1,8 +1,9 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-import { getPosts, insertPost } from "@/db/index";
+import { deletePost, getPosts, insertPost } from "@/db/index";
 import { ReplSet } from "mongodb";
+import { extractPost } from "@/lib/api-helpers";
 import { v2 as cloudinary } from "cloudinary";
 
 const upload = multer({ dest: "/tmp" });
@@ -41,7 +42,7 @@ handler.get(async (req, res) => {
 
 handler.post(upload.single("postPicture"), async (req, res) => {
   // handler.post(async (req, res) => {
-  console.log("In post upload...");
+  console.log(req.body);
   let postPicture;
   if (req.file) {
     const image = await cloudinary.uploader.upload(req.file.path);

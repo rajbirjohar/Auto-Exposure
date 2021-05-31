@@ -26,6 +26,7 @@ const ProfileSection = () => {
     }
     formData.append("firstname", firstnameRef.current.value);
     formData.append("bio", bioRef.current.value);
+
     const res = await fetch("/api/user", {
       method: "PATCH",
       body: formData,
