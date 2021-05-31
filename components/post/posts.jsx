@@ -125,7 +125,7 @@ function Post({ post }) {
         {new Date(post.createdAt).toLocaleString()}
       </p>
       {user && (
-        <Link href={`/user/${user._id}`}>
+        <Link href={`/comments/${post._id}`}>
           <span className="text-medium cursor-pointer">Comments</span>
         </Link>
       )}

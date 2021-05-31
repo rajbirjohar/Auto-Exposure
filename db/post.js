@@ -31,6 +31,15 @@ export async function insertPost(db, { caption, postPicture, creatorId }) {
     .then(({ ops }) => ops[0]);
 }
 
+export async function findPostById(db, userId) {
+  return db
+    .collection("posts")
+    .findOne({
+      _id: userId,
+    })
+    .then((post) => post || null);
+}
+
 export async function updatePost(db, { postId, id }) {
   return db
     .collection('posts').updateOne(
