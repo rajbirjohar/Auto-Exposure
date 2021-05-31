@@ -10,21 +10,21 @@ import toast, { Toaster } from "react-hot-toast";
 function Post({ post }) {
   const [userInfo, { mutate }] = useCurrentUser();
   const user = useUser(post.creatorId);
-  const [isUpdating, setIsUpdating] = useState(false);
+  // const [isUpdating, setIsUpdating] = useState(false);
+  var isUpdating = false;
 
   const handleClick = async (event) => {
+    console.log('I am clicked');
     var dupCheck = false;
     var choose;
     event.preventDefault();
+    console.log(isUpdating);
     if (isUpdating) return;
-    setIsUpdating(true);
+    isUpdating = true;
     const formData = new FormData();
-    formData.append("id", post._id);
-    //console.log(formData.get("count"));
 
+    //console.log(dupCheck);
     for (var i = 0; i < post.likes.length; i++) {
-      // console.log(post.likes[i]);
-      // console.log(userInfo._id);
       if (post.likes[i] === userInfo._id) {
         dupCheck = true;
       }
@@ -36,16 +36,18 @@ function Post({ post }) {
     else {
       choose = "Remove";
     }
-    //console.log(c);
+    //console.log(choose);
     const body = {
       postId: post._id,
       choice: choose,
     };
+    console.log(body);
     const res = await fetch("/api/posts/patch", {
       method: "PATCH",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
     });
+    isUpdating = false;
     if (res.status === 200) {
       const postData = await res.json();
       mutate({
@@ -59,8 +61,10 @@ function Post({ post }) {
     } else {
       // setMsg({ message: await res.text(), isError: true });
       toast.error("Likes failed to update!");
+      setIsUpdating(false);
+      console.log('Hello');
     }
-    setIsUpdating(false);
+    isUpdating = false;
   };
   //const comment = 
   return (
