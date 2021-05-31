@@ -15,7 +15,7 @@ function Post({ post }) {
   var isUpdating = false;
   const [currentUser] = useCurrentUser();
   const [currentPost] = useCurrentPost();
-  const isCurrentUser = currentUser?._id === user._id;
+  const isCurrentUser = currentUser?._id === post.creatorId;
   // const isCurrentlyLiked = currentPost?.creatorId === user._id;
 
   const handleClick = async (event) => {
@@ -69,6 +69,9 @@ function Post({ post }) {
         console.log("Hello");
       }
       isUpdating = false;
+      if (res.ok) {
+        toast.success("Post Deleted!");
+      }
     } else {
       toast.error("Please sign-in!");
     }
@@ -202,6 +205,7 @@ export default function Posts({ creatorId }) {
 
   return (
     <div>
+      <Toaster />
       <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
         {posts.map((post) => (
           <Post key={post._id} post={post} />
