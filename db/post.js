@@ -46,3 +46,12 @@ export async function deleteElement(db, { postId, id }) {
       { $pull: { "likes": id } })
     .then(({ value }) => value);
 }
+
+export async function deletePost(db, { postId }) {
+  return db
+    .collection("posts")
+    .deleteOne({
+      "_id": postId,
+    })
+    .then(({ value }) => value);
+}

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
-import { useCurrentPost, useCurrentUser, useUser } from "@/hooks/index";
+import { usePost, useCurrentUser, useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
 import { addCount } from "@/components/post/posts"
 import toast, { Toaster } from "react-hot-toast";
+import { JsonWebTokenError } from "jsonwebtoken";
 
 function Post({ post }) {
   const [userInfo, { mutate }] = useCurrentUser();
@@ -67,6 +68,18 @@ function Post({ post }) {
     isUpdating = false;
   };
   //const comment = 
+
+  const postDelete = (id) => {
+    const body = {
+      postId: id,
+    };
+    fetch("/api/posts/patch", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+  };
+
   return (
     <div
       className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
@@ -90,7 +103,7 @@ function Post({ post }) {
                   alt={user.firstname}
                 />
                 <span className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-                  @{user.username}
+                  @{user.username} {post._id}
                 </span>
               </a>
             </div>
@@ -108,6 +121,7 @@ function Post({ post }) {
       )}
       {/* {console.log(post.caption)} */}
       <button onClick={handleClick}> Likes: {post.likes.length} </button>
+      <button onClick={() => postDelete(post._id)}>Delete</button>
     </div>
   );
 }
