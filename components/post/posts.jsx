@@ -16,7 +16,7 @@ function Post({ post }) {
   const [currentUser] = useCurrentUser();
   const [currentPost] = useCurrentPost();
   const isCurrentUser = currentUser?._id === user._id;
-  const isCurrentlyLiked = currentPost?.creatorId === user._id;
+  // const isCurrentlyLiked = currentPost?.creatorId === user._id;
 
   const handleClick = async (event) => {
     if (userInfo) {
@@ -113,10 +113,10 @@ function Post({ post }) {
               </button>
               {isCurrentUser && (
                 <button
-                  className="ring-2 ring-gray-400 rounded-sm"
+                  className="ring-2 ring-gray-400 dark:ring-gray-600 rounded-sm"
                   onClick={postDelete}
                 >
-                  <svg className="text-red-500 w-5 h-5">
+                  <svg className="text-red-500 dark:text-red-400 w-5 h-5">
                     <DeleteIcon />
                   </svg>
                 </button>
@@ -143,11 +143,11 @@ function Post({ post }) {
       <p className="text-sm text-gray-400">
         {new Date(post.createdAt).toLocaleString()}
       </p>
-      {user && (
+      {/* {user && (
         <Link href={`/user/${user._id}`}>
           <span className="text-medium cursor-pointer">Comments</span>
         </Link>
-      )}
+      )} */}
     </div>
   );
 }
