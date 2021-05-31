@@ -69,9 +69,9 @@ function Post({ post }) {
   };
   //const comment = 
 
-  const postDelete = (id) => {
+  const postDelete = async (event) => {
     const body = {
-      postId: id,
+      postId: post._id,
     };
     fetch("/api/posts/patch", {
       method: "DELETE",
@@ -103,7 +103,7 @@ function Post({ post }) {
                   alt={user.firstname}
                 />
                 <span className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-                  @{user.username} {post._id}
+                  @{user.username}
                 </span>
               </a>
             </div>
@@ -121,7 +121,7 @@ function Post({ post }) {
       )}
       {/* {console.log(post.caption)} */}
       <button onClick={handleClick}> Likes: {post.likes.length} </button>
-      <button onClick={() => postDelete(post._id)}>Delete</button>
+      <button onClick={postDelete}>Delete</button>
     </div>
   );
 }

@@ -1,14 +1,9 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-<<<<<<< HEAD
-import { getPosts, insertPost, updatePost, deleteElement } from "@/db/index";
+import { getPosts, insertPost, updatePost, deleteElement, deletePost } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
-=======
-import { deletePost, getPosts, insertPost } from "@/db/index";
-import { ReplSet } from "mongodb";
->>>>>>> 4db7e2c4ea4d167c443cd050c8552a6f69db4af2
 import { v2 as cloudinary } from "cloudinary";
 
 const upload = multer({ dest: "/tmp" });
