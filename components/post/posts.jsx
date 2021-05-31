@@ -5,6 +5,9 @@ import { useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
 
+// import styles from '@/styles/posts.module.css'
+import { SearchIcon } from '@/components/icons'
+
 function Post({ post }) {
   const user = useUser(post.creatorId);
   return (
@@ -93,9 +96,39 @@ export default function Posts({ creatorId }) {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.posts.length < PAGE_SIZE);
 
+
+    
+  const [searchValue, setSearchValue] = React.useState('')
+  //console.log(data)
+  // const filteredPosts = Object(data)
+  //   // .filter(
+  //   //   (post) =>{
+  //   //     console.log(post.posts)
+  //   //     post.posts[0].caption.toLowerCase().includes(searchValue.toLowerCase()) || searchValue==""
+  //   //     console.log(searchValue)
+  //   //   }//  ||
+  //   //     // post.description
+  //   //     //   ?.toLowerCase()
+  //   //     //   .includes(searchValue.toLowerCase()) 
+  //   // )
+  // console.log(filteredPosts)
+  console.log(searchValue)
   return (
     <div>
-      <div className="w-full mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
+      <div className="">
+        <input
+          aria-label="Enabled Searchbar"
+          type="text"
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder="Search Posts"
+          className=""
+        />
+        {/* <svg className="">
+          <SearchIcon />
+        </svg> */}
+      </div>
+
+      <div className="w-full mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 border-2 border-red-200">
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}
