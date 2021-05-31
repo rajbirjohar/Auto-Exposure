@@ -13,7 +13,7 @@ function Post({ post }) {
     const body = {
       postId: id,
     };
-    fetch("/api/posts", {
+    fetch("/api/posts/patch", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -69,9 +69,8 @@ export function usePostPages({ creatorId } = {}) {
 
       // first page, previousPageData is null
       if (index === 0) {
-        return `/api/posts?limit=${PAGE_SIZE}${
-          creatorId ? `&by=${creatorId}` : ""
-        }`;
+        return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
+          }`;
       }
 
       // using oldest posts createdAt date as cursor
@@ -83,9 +82,8 @@ export function usePostPages({ creatorId } = {}) {
         ).getTime() - 1
       ).toJSON();
 
-      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
-        creatorId ? `&by=${creatorId}` : ""
-      }`;
+      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
+        }`;
     },
     fetcher,
     {

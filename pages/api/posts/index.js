@@ -61,13 +61,13 @@ handler.post(upload.single("postPicture"), async (req, res) => {
   return res.json({ post });
 });
 
-handler.delete(async (req, res) => {
-  console.log("reached handler delete function");
-  await deletePost(req.db, {
-    postId: req.post._id,
-  });
-  return res.status(200);
-});
+// handler.delete(async (req, res) => {
+//   console.log(req.body);
+//   await deletePost(req.db, {
+//     postId: req.post._id,
+//   });
+//   return res.status(200);
+// });
 
 export const config = {
   api: {

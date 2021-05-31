@@ -31,12 +31,12 @@ export async function insertPost(db, { caption, postPicture, creatorId }) {
 }
 
 export async function deletePost(db, { postId }) {
-  console.log("reached db delete function");
-  const query = { _id: postId };
+  //console.log("reached db delete function");
+  //const query = { _id: postId };
   return db
     .collection("posts")
     .deleteOne({
-      query,
+      "_id": postId,
     })
-    .then(({ ops }) => ops[0]);
+    .then(({ value }) => value);
 }
