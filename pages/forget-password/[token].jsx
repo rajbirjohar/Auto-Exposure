@@ -11,7 +11,6 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
     event.preventDefault();
     const body = {
       password: event.currentTarget.password.value,
-      password2: event.currentTarget.password2.value,
       token,
     };
 
@@ -23,9 +22,6 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
     if (res.status === 400) {
       toast.error("Password not provided!");
     }
-    if (res.status === 401) {
-      toast.error("Passwords do not match!");
-    }
     if (res.ok) {
       toast.success("Password has been reset!");
       Router.replace("/");
@@ -33,7 +29,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
   }
 
   return (
-    <section className="mx-auto max-w-lg">
+    <section className="mx-auto w-lg">
       <Head>
         <title>Auto Exposure | Reset</title>
       </Head>
@@ -41,10 +37,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       {valid ? (
         <>
           <p>Enter your new password.</p>
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-2 min-w-full max-w-lg"
-          >
+          <form onSubmit={handleSubmit} className="space-y-2 min-w-full w-lg">
             <div className="flex flex-col">
               <label className="font-medium">New password:</label>
               <input
@@ -53,17 +46,6 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
                 type="password"
                 placeholder=""
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
-              />
-            </div>
-            <div className="flex flex-col pb-4">
-              <label className="font-medium">Confirm password:</label>
-              <input
-                id="password2"
-                name="password2"
-                type="password"
-                placeholder=""
-                className="orm-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
                 dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
