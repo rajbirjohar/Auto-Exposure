@@ -1,7 +1,7 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-import { getPosts, insertComment, updatePost, deleteElement, deletePost } from "@/db/index";
+import { getPosts, insertComment, updatePost, deleteElement, deletePost, getComments } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
 import { v2 as cloudinary } from "cloudinary";
@@ -26,11 +26,9 @@ handler.use(all);
 const maxAge = 1 * 24 * 60 * 60;
 
 handler.get(async (req, res) => {
-    const posts = await getPosts(
+    const posts = await getComments(
         req.db,
-        req.query.from ? new Date(req.query.from) : undefined,
-        req.query.by,
-        req.query.limit ? parseInt(req.query.limit, 10) : undefined
+        req.query.id
     );
     if (req.query.from && posts.length > 0) {
         // This is safe to cache because from defines
@@ -38,12 +36,25 @@ handler.get(async (req, res) => {
         res.setHeader("cache-control", `public, max-age=${maxAge}`);
     }
     res.send({ posts });
+
+    // const posts = await getPosts(
+    //     req.db,
+    //     req.query.from ? new Date(req.query.from) : undefined,
+    //     req.query.by,
+    //     req.query.limit ? parseInt(req.query.limit, 10) : undefined
+    // );
+    // if (req.query.from && posts.length > 0) {
+    //     // This is safe to cache because from defines
+    //     //  a concrete range of posts
+    //     res.setHeader("cache-control", `public, max-age=${maxAge}`);
+    // }
+    // res.send({ posts })
 });
 
 handler.post(async (req, res) => {
     // handler.post(async (req, res) => {
     console.log("In message upload...");
-    console.log(req.body);
+    //console.log(req.body);
     if (!req.body.message)
         return res.status(400).send("You must type a message");
     const { postId, message } = req.body;
@@ -54,7 +65,7 @@ handler.post(async (req, res) => {
     });
     //console.log(req.post._id)
 
-    return res.json({ post });
+    return res.json({ msg });
 });
 
 handler.patch(async (req, res) => {

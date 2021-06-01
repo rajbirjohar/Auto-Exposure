@@ -11,7 +11,10 @@ const maxAge = 4 * 60 * 60; // 4 hours
 
 handler.get(async (req, res) => {
     // const post = extractPost(await findPostById(req.db, req.query.userId));
+    //console.log(req.query);
     const post = await findPostById(req.db, req.query.userId);
+    //console.log("In API post");
+    //console.log(post);
     if (post) res.setHeader("cache-control", `public, max-age=${maxAge}`);
     res.send({ post });
 });

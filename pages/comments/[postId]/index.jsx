@@ -8,6 +8,8 @@ import Posts from "@/components/post/posts";
 import { extractPost } from "@/lib/api-helpers";
 import { findPostById } from "@/db/index";
 import { defaultProfilePicture } from "@/lib/default";
+import toast, { Toaster } from "react-hot-toast";
+import Comment from "@/components/comment/comments"
 
 export default function PostPage({ post }) {
     if (!post) return <Error statusCode={404} />;
@@ -101,8 +103,7 @@ export default function PostPage({ post }) {
                         </h3>
                     )}
 
-                    {console.log(post)}
-                    {/* <Posts _id={post._id} /> */}
+                    {/* {console.log(post)} */}
                     <form
                         onSubmit={handleSubmit}
                         autoComplete="off"
@@ -130,6 +131,7 @@ export default function PostPage({ post }) {
                             Post
                         </button>
                     </form>
+                    <Comment postId={post._id} />
                 </div>
             </section>
         </>
