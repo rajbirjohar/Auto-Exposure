@@ -108,11 +108,10 @@ function Post({ post }) {
           <div>
             <div className="flex items-center justify-between mb-2">
               <button className="flex items-center" onClick={handleClick}>
-                {" "}
                 <svg className="text-gray-400 w-5 h-5 mr-1">
                   <HeartIcon />
                 </svg>
-                {post.likes.length}{" "}
+                {post.likes.length}
               </button>
               {isCurrentUser && (
                 <button
