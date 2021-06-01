@@ -30,7 +30,7 @@ Features included or will be included:
 - [x] Authentication
 - [x] Account verification
 - [x] Sessions
-- [ ] Deleting posts
+- [x] Deleting posts
 - [x] Uploading direct images
 - [ ] Commenting
 - [x] Liking
