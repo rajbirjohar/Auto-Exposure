@@ -4,6 +4,7 @@ import nc from "next-connect";
 import Router from "next/router";
 import { database } from "@/middlewares/index";
 import { findTokenByIdAndType } from "@/db/index";
+import toast, { Toaster } from "react-hot-toast";
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
   async function handleSubmit(event) {
@@ -19,8 +20,16 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-
-    if (res.status === 200) Router.replace("/");
+    if (res.status === 400) {
+      toast.error("Password not provided!");
+    }
+    if (res.status === 401) {
+      toast.error("Passwords do not match!");
+    }
+    if (res.ok) {
+      toast.success("Password has been reset!");
+      Router.replace("/");
+    }
   }
 
   return (
