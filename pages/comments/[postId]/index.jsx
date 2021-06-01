@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Error from "next/error";
 import { all } from "@/middlewares/index";
-import { useCurrentPost } from "@/hooks/index";
+import { useCurrentPost, useCurrentUser } from "@/hooks/index";
 import Posts from "@/components/post/posts";
 import { extractPost } from "@/lib/api-helpers";
 import { findPostById } from "@/db/index";
@@ -14,6 +14,7 @@ import Comment from "@/components/comment/comments"
 export default function PostPage({ post }) {
     if (!post) return <Error statusCode={404} />;
     const { caption, creatorId, postPicture, likes } = post || {};
+    // const [currentUser] = useCurrentUser();
     const [currentPost] = useCurrentPost();
     const isCurrentPost = currentPost?._id === post._id;
     const messageRef = useRef();
@@ -26,6 +27,7 @@ export default function PostPage({ post }) {
         const body = {
             postId: post._id,
             message: messageRef.current.value,
+            //userId: currentUser._id,
         };
         console.log(messageRef.current.value);
 

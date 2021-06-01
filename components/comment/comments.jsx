@@ -10,10 +10,12 @@ import { JsonWebTokenError } from "jsonwebtoken";
 
 function Comment({ post }) {
     const [userInfo, { mutate }] = useCurrentUser();
-    const user = useUser(post.creatorId);
+    //const user = useUser(post.creatorId);
     //console.log('In comments what up');
     // const [isUpdating, setIsUpdating] = useState(false);
     var isUpdating = false;
+    console.log('Check message');
+    console.log(post);
     return (
         <div
             className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
@@ -21,16 +23,34 @@ function Comment({ post }) {
                    w-full transform hover:scale-102
                   dark:bg-gray-900 dark:hover:bg-gray-800"
         >
-            {user && (
-                <Link href={`/user/${user._id}`}>
-                    <div className="flex flex-col justify-between h-full">
-                        <span>{post.comments[1]}</span>
-                    </div>
-                </Link>
+            {(
+                // <Link href={`/user/${user._id}`}>
+                //     <div className="flex flex-col justify-between h-full">
+                //         <span>{post.user._id}</span>
+                //         <span>{post.comments[ind]}</span>
+                //     </div>
+                // </Link>
+                <div className="flex flex-col justify-between h-full">
+                    {/* <span>{post.user._id}</span> */}
+                    <span>{post.message}</span>
+                </div>
             )}
         </div>
     );
 }
+
+// function displayComments(post, ind) {
+//     return (
+//         <Comment key={post._id} post={post} ind={ind} />
+//     )
+// }
+
+// function postComments(post) {
+//     console.log(post);
+//     for (var i = 0; i < post.comments.length; i++) {
+//         displayComments(post, i);
+//     }
+// }
 
 const PAGE_SIZE = 9;
 
@@ -71,6 +91,8 @@ export default function Comments({ postId }) {
     const posts = data
         ? data.reduce((acc, val) => [...acc, ...val.posts], [])
         : [];
+
+    console.log(posts);
     // useEffect(() => {
     //     const id = setInterval(() => {
     //         //Function call
@@ -83,6 +105,7 @@ export default function Comments({ postId }) {
             <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
                 {posts.map((post) => (
                     <Comment key={post._id} post={post} />
+                    // postComments(post)
                 ))}
                 {/* <Comments key={post._id} post={post} /> */}
             </div>

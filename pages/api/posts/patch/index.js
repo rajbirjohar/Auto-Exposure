@@ -58,10 +58,12 @@ handler.post(async (req, res) => {
     if (!req.body.message)
         return res.status(400).send("You must type a message");
     const { postId, message } = req.body;
+    //const { _id } = req.user;
 
     const msg = await insertComment(req.db, {
+        message: message,
+        //creatorId: _id,
         postId: postId,
-        message: message
     });
     //console.log(req.post._id)
 
