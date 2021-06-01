@@ -122,7 +122,7 @@ const ProfileSection = () => {
                 placeholder=""
                 ref={firstnameRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                           dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -136,7 +136,7 @@ const ProfileSection = () => {
                 placeholder=""
                 ref={bioRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                           dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -150,7 +150,7 @@ const ProfileSection = () => {
                 accept="Upload your own profile picture"
                 ref={profilePictureRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <button
@@ -180,7 +180,7 @@ const ProfileSection = () => {
                 id="oldpassword"
                 required
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                           dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -193,7 +193,7 @@ const ProfileSection = () => {
                 id="newpassword"
                 required
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                           dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <button

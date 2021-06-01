@@ -24,7 +24,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
   }
 
   return (
-    <section className="mx-auto max-w-sm">
+    <section className="mx-auto max-w-lg">
       <Head>
         <title>Auto Exposure | Reset</title>
       </Head>
@@ -34,7 +34,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
           <p>Enter your new password.</p>
           <form
             onSubmit={handleSubmit}
-            className="space-y-2 min-w-full max-w-sm"
+            className="space-y-2 min-w-full max-w-lg"
           >
             <div className="flex flex-col">
               <label className="font-medium">New password:</label>
@@ -42,25 +42,27 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Enter your new password"
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2
-                 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full"
+                placeholder=""
+                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col pb-4">
-              <label className="font-medium">New password:</label>
+              <label className="font-medium">Confirm password:</label>
               <input
                 id="password2"
                 name="password2"
                 type="password"
-                placeholder="Enter your new password"
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2
-                 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full"
+                placeholder=""
+                className="orm-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <button
               type="submit"
-              className="bg-black text-white rounded-sm py-1 px-3 font-medium"
+              className="bg-gray-200 text-black rounded-sm py-2 px-3 font-medium 
+              hover:bg-gray-300 hover:border-gray-300 hover:shadow-lg transition duration-200 ease-in-out
+                         dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white"
             >
               Set Password
             </button>

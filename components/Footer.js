@@ -20,7 +20,7 @@ export default function Footer() {
           <button
             aria-label="Toggle Dark Mode"
             type="button"
-            className="flex items-center hover:shadow-lg
+            className="flex flex-row items-center hover:shadow-lg
                  transition duration-200 ease-in-out rounded-sm
                  bg-gray-200 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-800 px-6 py-3"
             onClick={() =>
@@ -30,7 +30,7 @@ export default function Footer() {
             {mounted && (
               <span>
                 {resolvedTheme === "dark" ? (
-                  <>
+                  <span className="flex">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -41,9 +41,9 @@ export default function Footer() {
                       <SunIcon />
                     </svg>
                     Light
-                  </>
+                  </span>
                 ) : (
-                  <>
+                  <span className="flex">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -54,7 +54,7 @@ export default function Footer() {
                       <MoonIcon />
                     </svg>
                     Dark
-                  </>
+                  </span>
                 )}
               </span>
             )}

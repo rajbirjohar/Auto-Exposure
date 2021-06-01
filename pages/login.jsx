@@ -60,7 +60,7 @@ const LoginPage = () => {
               name="email"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-blue-500"
+                         dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-blue-500"
             />
           </div>
           <div className="flex flex-col pb-4">
@@ -69,7 +69,7 @@ const LoginPage = () => {
             </label>
             <input
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-blue-500"
+                        dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-blue-500"
               id="password"
               type="password"
               name="password"

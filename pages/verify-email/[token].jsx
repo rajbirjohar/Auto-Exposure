@@ -6,23 +6,19 @@ import { updateUserById, findAndDeleteTokenByIdAndType } from "@/db/index";
 
 export default function EmailVerifyPage({ success }) {
   return (
-    <>
+    <section className="mx-auto max-w-lg">
       <Head>
-        <title>Sign up</title>
+        <title>Auto Exposure | Verify</title>
       </Head>
-      <style jsx>
-        {`
-          p {
-            text-align: center;
-          }
-        `}
-      </style>
+      <h1 className="font-bold text-3xl tracking-loose mb-4">
+        Email Verification
+      </h1>
       <p>
         {success
           ? "Thank you for verifying your email address. You may close this page."
           : "This link may have been expired."}
       </p>
-    </>
+    </section>
   );
 }
 
