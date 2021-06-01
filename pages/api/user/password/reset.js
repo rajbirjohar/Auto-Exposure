@@ -32,7 +32,7 @@ handler.post(async (req, res) => {
     subject: "[nextjs-mongodb-app] Reset your password.",
     html: `
       <div>
-        <p>Hello, ${user.name}</p>
+        <p>Hello, ${user.username}</p>
         <p>Please follow <a href="${process.env.WEB_URI}/forget-password/${token._id}">this link</a> to reset your password.</p>
       </div>
       `,
@@ -48,7 +48,8 @@ handler.put(async (req, res) => {
     return;
   }
   if (password != password2) {
-    res.status(400).send("Passwords do not match.");
+    res.status(401).send("Passwords do not match.");
+    return;
   }
 
   const deletedToken = await findAndDeleteTokenByIdAndType(
@@ -63,6 +64,7 @@ handler.put(async (req, res) => {
   }
   const password = await bcrypt.hash(req.body.password, 10);
   await updateUserById(req.db, deletedToken.creatorId, { password });
+  res.status(200).send("Password has been reset.");
   res.end("ok");
 });
 
