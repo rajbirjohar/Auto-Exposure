@@ -34,12 +34,6 @@ export default function PostEditor() {
       // setTimeout(() => setMsg(null), 5000);
       toast.success("Posted!");
     }
-    else if (res.status === 400) {
-      toast.error("You must have a caption");
-    }
-    else if (res.status === 415) {
-      toast.error("Accepted file types: png or jpg/jpeg")
-    }
   }
 
   return (
