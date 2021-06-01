@@ -30,8 +30,6 @@ export default function PostEditor() {
       body: formData,
     });
     if (res.ok) {
-      // setMsg("Posted!");
-      // setTimeout(() => setMsg(null), 5000);
       toast.success("Posted!");
     } else if (res.status === 400) {
       toast.error("You must have a caption");

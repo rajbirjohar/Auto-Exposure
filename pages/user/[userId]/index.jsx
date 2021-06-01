@@ -72,7 +72,6 @@ export default function UserPage({ user }) {
               My Posts
             </h3>
           )}
-
           <Posts creatorId={user._id} />
         </div>
       </section>
