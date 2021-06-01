@@ -102,7 +102,7 @@ const ProfileSection = () => {
               {/* eslint-disable-next-line */}
               <a
                 role="button"
-                className="text-blue-600 underline"
+                className="text-blue-600 dark:text-blue-500 underline"
                 onClick={sendVerificationEmail}
               >
                 Send verification email
