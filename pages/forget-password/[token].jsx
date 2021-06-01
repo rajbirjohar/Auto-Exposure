@@ -30,6 +30,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 
   return (
     <section className="mx-auto w-lg">
+      <Toaster />
       <Head>
         <title>Auto Exposure | Reset</title>
       </Head>
@@ -46,7 +47,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
                 type="password"
                 placeholder=""
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
+                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600 mb-4"
               />
             </div>
             <button
