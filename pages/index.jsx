@@ -5,11 +5,20 @@ import Posts from "@/components/post/posts";
 
 const IndexPage = () => {
   const [user] = useCurrentUser();
+  var intros = [
+    "Strap in,",
+    "Get ready to shift gears,",
+    "Hop in the front,",
+    "Let's ride,",
+    "Floor it,",
+    "Burn some rubber,",
+  ];
+  let myintros = intros[Math.floor(Math.random() * intros.length)];
 
   return (
     <section className="mx-auto w-full max-w-screen-2xl">
       <h1 className="font-bold text-3xl tracking-loose">
-        Strap in, {user ? user.firstname : "Racer"}.
+        {myintros} {user ? user.firstname : "Racer"}.
       </h1>
       <div>
         <h2 className="font-medium text-xl text-gray-400 my-4 dark:text-gray-500">

@@ -63,12 +63,12 @@ export default function UserPage({ user }) {
 
         <div>
           {!isCurrentUser && (
-            <h3 className="md:text-2xl text-gray-600 font-medium my-4 dark:text-gray-400">
+            <h3 className="md:text-xl text-gray-600 font-medium my-4 dark:text-gray-400">
               {firstname}'s Posts
             </h3>
           )}
           {isCurrentUser && (
-            <h3 className="md:text-2xl text-gray-600 font-medium my-4 dark:text-gray-400">
+            <h3 className="md:text-xl text-gray-600 font-medium my-4 dark:text-gray-400">
               My Posts
             </h3>
           )}
