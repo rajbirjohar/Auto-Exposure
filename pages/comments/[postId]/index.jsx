@@ -8,6 +8,7 @@ import { findPostById } from "@/db/index";
 import { defaultProfilePicture } from "@/lib/default";
 import toast, { Toaster } from "react-hot-toast";
 import Comment from "@/components/comment/comments";
+import TimeAgo from "react-timeago";
 
 export default function PostPage({ post }) {
   if (!post) return <Error statusCode={404} />;
@@ -15,8 +16,8 @@ export default function PostPage({ post }) {
   const user = useUser(post.creatorId);
   const [userLoggedIn] = useCurrentUser();
   const [currentPost] = useCurrentPost();
-  const isCurrentPost = currentPost?._id === post._id;
   const messageRef = useRef();
+  const age = new Date(post.createdAt).toLocaleString();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +27,6 @@ export default function PostPage({ post }) {
     const body = {
       postId: post._id,
       message: messageRef.current.value,
-      //userId: currentUser._id,
     };
     console.log(messageRef.current.value);
 
@@ -39,8 +39,6 @@ export default function PostPage({ post }) {
       headers: { "Content-Type": "application/json" },
     });
     if (res.ok) {
-      // setMsg("Posted!");
-      // setTimeout(() => setMsg(null), 5000);
       toast.success("Posted!");
     }
   }
@@ -61,20 +59,31 @@ export default function PostPage({ post }) {
             />
             <div className="w-full">
               <div className="flex flex-col">
-                <div className="flex md:flex-row flex-col md:mb-3">
+                <div className="flex items-center space-x-2">
                   <Link href={`/user/${user._id}`}>
-                    <h2
-                      className="text-medium mr-2 md:text-xl font-semibold cursor-pointer
-                   text-blue-500 dark:text-blue-400 hover:underline"
-                    >
-                      @{user.username}{" "}
-                    </h2>
+                    <a className="flex text-blue-600 items-center">
+                      <img
+                        width="45"
+                        height="45"
+                        className="rounded-full mr-2"
+                        src={
+                          user.profilePicture || defaultProfilePicture(user._id)
+                        }
+                        alt={user.firstname}
+                      />
+                      <p
+                        className="md:text-xl font-semibold cursor-pointer 
+                      text-blue-500 dark:text-blue-400 hover:underline"
+                      >
+                        @{user.username}{" "}
+                      </p>
+                    </a>
                   </Link>
-                  <span className="text-medium w-full md:text-xl font-normal text-gray-400">
-                    {new Date(post.createdAt).toLocaleString()}
+                  <span className=" md:text-xl font-normal text-gray-400">
+                    <TimeAgo date={age} />
                   </span>
                 </div>
-                <h1 className="md:text-xl tracking-loose">{caption}</h1>
+                <h1 className="md:text-xl mt-3 tracking-loose">{caption}</h1>
               </div>
             </div>
           </div>

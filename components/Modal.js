@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useCurrentUser, useUser } from "@/hooks/index";
-import fetcher from "@/lib/fetch";
 
 const Modal = ({ isShowing, hide, confirmDelete }) =>
   isShowing

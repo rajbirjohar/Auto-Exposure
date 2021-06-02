@@ -24,24 +24,24 @@ export default function UserPage({ user }) {
           <img
             src={profilePicture || defaultProfilePicture(_id)}
             alt={firstname}
-            className="rounded-full md:h-52 md:w-52 h-36 w-36 m-6"
+            className="rounded-full md:h-52 md:w-52 h-40 w-40 mb-6"
           />
           <div>
-            <div className="flex flex-col space-y-3">
-              <h2 className="font-medium text-xl text-gray-600 dark:text-gray-400">
+            <div className="flex flex-col md:space-y-3">
+              <h2 className="font-medium md:text-xl text-gray-600 dark:text-gray-400">
                 @{username}
               </h2>
               {!isCurrentUser && (
-                <h1 className="font-bold text-3xl tracking-loose">
+                <h1 className="font-semibold text-lg md:text-3xl tracking-loose">
                   Welcome to {firstname}'s garage.
                 </h1>
               )}
               {isCurrentUser && (
-                <h1 className="font-bold text-3xl tracking-loose">
+                <h1 className="font-semibold text-lg md:text-3xl tracking-loose">
                   Welcome to your garage, {firstname}.
                 </h1>
               )}
-              <h2 className="font-medium text-xl text-gray-600 dark:text-gray-400">
+              <h2 className="font-medium md:text-xl text-gray-600 dark:text-gray-400">
                 About
               </h2>
               <p>{bio}</p>
@@ -63,12 +63,12 @@ export default function UserPage({ user }) {
 
         <div>
           {!isCurrentUser && (
-            <h3 className="text-2xl text-gray-600 font-semibold my-4 dark:text-gray-400">
+            <h3 className="md:text-2xl text-gray-600 font-medium my-4 dark:text-gray-400">
               {firstname}'s Posts
             </h3>
           )}
           {isCurrentUser && (
-            <h3 className="text-2xl text-gray-600 font-semibold my-4 dark:text-gray-400">
+            <h3 className="md:text-2xl text-gray-600 font-medium my-4 dark:text-gray-400">
               My Posts
             </h3>
           )}
