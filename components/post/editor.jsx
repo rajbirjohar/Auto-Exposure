@@ -9,7 +9,7 @@ export default function PostEditor() {
   const [image, setImage] = useState();
   const captionRef = useRef();
   const postPictureRef = useRef();
-  const formRef = useRef()
+  const formRef = useRef();
 
   if (!user) {
     return <div></div>;
@@ -19,12 +19,12 @@ export default function PostEditor() {
     console.log("Inside updateImage");
     console.log(image);
     setImage(image);
-  }
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
-    
+
     // From Github issue
     // if (this.state.filesWereDropped) {
     //   console.log("Inside filesWereDropped...");
@@ -37,11 +37,10 @@ export default function PostEditor() {
     console.log(formRef); // REMOVE ME
     const postPicture = formRef.current[0].files[0];
     if (postPicture) {
-      console.log("Post picture exists...");  // REMOVE ME
+      console.log("Post picture exists..."); // REMOVE ME
       console.log(postPicture); // REMOVE ME
       formData.append("postPicture", postPicture);
-    }
-    else if (image) {
+    } else if (image) {
       formData.append("postPicture", image[0]);
     }
 
@@ -78,25 +77,15 @@ export default function PostEditor() {
         autoComplete="off"
         className="space-y-2 min-w-full max-w-sm"
       >
-        {/* Need to hook this up to db */}
         <div className="flex flex-col">
           <label className="font-medium">Post Picture</label>
-            {/* <input
-              type="file"
-              id="postPicture"
-              name="postPicture"
-              accept="Upload your post picture"
-              ref={postPictureRef}
-              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
-              dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
-            /> */}
-            <CustomDropzone onImageUpload={updateImage}/>
+          <CustomDropzone onImageUpload={updateImage} />
         </div>
         <div className="flex flex-col pb-4">
           <label className="font-medium">Caption</label>
           <input
             className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                       dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                       dark:bg-gray-800 dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             type="text"
             id="caption"
             name="caption"

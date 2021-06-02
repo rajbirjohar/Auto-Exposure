@@ -13,7 +13,7 @@ export async function getPosts(db, from = new Date(), by, limit) {
       ...(by && { creatorId: by }),
     })
     .sort({ createdAt: -1 })
-    .limit(limit || 10)
+    .limit(limit || 9)
     .toArray();
 }
 
@@ -26,7 +26,6 @@ export async function getPosts(db, from = new Date(), by, limit) {
 //     .sort({ createdAt: -1 })
 //     .toArray();
 // }
-
 
 export async function insertPost(db, { caption, postPicture, creatorId }) {
   return db
@@ -53,17 +52,15 @@ export async function findPostById(db, userId) {
 
 export async function updatePost(db, { postId, id }) {
   return db
-    .collection('posts').updateOne(
-      { "_id": postId },
-      { $push: { "likes": id } })
+    .collection("posts")
+    .updateOne({ _id: postId }, { $push: { likes: id } })
     .then(({ value }) => value);
 }
 
 export async function deleteElement(db, { postId, id }) {
   return db
-    .collection('posts').updateOne(
-      { "_id": postId },
-      { $pull: { "likes": id } })
+    .collection("posts")
+    .updateOne({ _id: postId }, { $pull: { likes: id } })
     .then(({ value }) => value);
 }
 
@@ -71,7 +68,7 @@ export async function deletePost(db, { postId }) {
   return db
     .collection("posts")
     .deleteOne({
-      "_id": postId,
+      _id: postId,
     })
     .then(({ value }) => value);
 }
