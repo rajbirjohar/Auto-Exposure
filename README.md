@@ -33,6 +33,7 @@ Features included or will be included:
 - [x] Deleting posts
 - [x] Uploading direct images
 - [x] Commenting
+- [x] Deleting comments
 - [x] Liking
 - [x] Minimal and clean UI/UX
 - [x] Footer
