@@ -12,6 +12,9 @@ const IndexPage = () => {
     "Let's ride,",
     "Floor it,",
     "Burn some rubber,",
+    "Start your engine,",
+    "Buckle up,",
+    "All gas no brakes,",
   ];
   let myintros = intros[Math.floor(Math.random() * intros.length)];
 
