@@ -4,8 +4,6 @@ import Link from "next/link";
 import Error from "next/error";
 import { all } from "@/middlewares/index";
 import { useCurrentPost, useCurrentUser, useUser } from "@/hooks/index";
-import Posts from "@/components/post/posts";
-import { extractPost } from "@/lib/api-helpers";
 import { findPostById } from "@/db/index";
 import { defaultProfilePicture } from "@/lib/default";
 import toast, { Toaster } from "react-hot-toast";
@@ -52,6 +50,7 @@ export default function PostPage({ post }) {
       <Head>
         <title>Auto Exposure | {caption}</title>
       </Head>
+      <Toaster />
       <section className="mx-auto w-full max-w-screen-lg">
         {user && (
           <div className="flex flex-col">
@@ -63,9 +62,14 @@ export default function PostPage({ post }) {
             <div className="w-full">
               <div className="flex flex-col">
                 <div className="flex md:flex-row flex-col md:mb-3">
-                  <h2 className="text-medium mr-2 md:text-xl font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-                    @{user.username}{" "}
-                  </h2>
+                  <Link href={`/user/${user._id}`}>
+                    <h2
+                      className="text-medium mr-2 md:text-xl font-semibold cursor-pointer
+                   text-blue-500 dark:text-blue-400 hover:underline"
+                    >
+                      @{user.username}{" "}
+                    </h2>
+                  </Link>
                   <span className="text-medium w-full md:text-xl font-normal text-gray-400">
                     {new Date(post.createdAt).toLocaleString()}
                   </span>
@@ -107,7 +111,7 @@ export default function PostPage({ post }) {
               </button>
             </form>
           ) : (
-            <h2 className="font-medium text-xl text-gray-400 my-4 dark:text-gray-500">
+            <h2 className="font-medium md:text-xl text-gray-400 mb-4 dark:text-gray-500">
               Sign in to comment.
             </h2>
           )}

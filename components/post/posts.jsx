@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
 import { useCurrentUser, useUser } from "@/hooks/index";
@@ -6,8 +6,11 @@ import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
 import toast, { Toaster } from "react-hot-toast";
 import { HeartIcon, DeleteIcon } from "@/icons/icons";
+import Modal from "@/components/Modal";
+import useModal from "@/components/useModal";
 
 function Post({ post }) {
+  const { isShowing, toggle } = useModal();
   const [userInfo, { mutate }] = useCurrentUser();
   const user = useUser(post.creatorId);
   var isUpdating = false;
@@ -82,9 +85,9 @@ function Post({ post }) {
 
   return (
     <div
-      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
+      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
                   transition duration-200 ease-in-out rounded-md
-                   w-full transform hover:scale-102
+                   w-full transform hover:scale-101
                   dark:bg-gray-900 dark:hover:bg-gray-800"
     >
       {user && (
@@ -101,14 +104,21 @@ function Post({ post }) {
                 {post.likes.length}
               </button>
               {isCurrentUser && (
-                <button
-                  className="ring-2 ring-gray-400 dark:ring-gray-600 rounded-sm"
-                  onClick={postDelete}
-                >
-                  <svg className="text-red-500 dark:text-red-400 w-5 h-5">
-                    <DeleteIcon />
-                  </svg>
-                </button>
+                <>
+                  <button
+                    className="ring-2 ring-gray-400 dark:ring-gray-600 rounded-sm"
+                    onClick={toggle}
+                  >
+                    <svg className="text-red-500 dark:text-red-400 w-5 h-5">
+                      <DeleteIcon />
+                    </svg>
+                  </button>
+                  <Modal
+                    isShowing={isShowing}
+                    hide={toggle}
+                    confirmDelete={postDelete}
+                  />
+                </>
               )}
             </div>
             <Link href={`/user/${user._id}`}>
@@ -136,7 +146,7 @@ function Post({ post }) {
       {user && (
         <Link href={`/comments/${post._id}`}>
           <button
-            className="text-medium cursor-pointer p-1 bg-gray-200
+            className="text-medium cursor-pointer py-2 bg-gray-200
           hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 mt-4 rounded-sm"
           >
             Comments
