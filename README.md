@@ -18,7 +18,7 @@
 
 ## Purpose
 
-This is a social media web app with a focus on cars - uploading cars, sharing cars, liking cars.
+Auto Exposure is a social media site designed for car enthusiasts in mind. You can upload and share photos of your cars or admire photos of other people's cars and bond over the thing we all love so much.
 
 ### Features
 
@@ -105,3 +105,7 @@ There will be two separate branches for frontend and backend where we implement 
     - Default profile pictures come from [here](https://avatar.tobi.sh).
 - [SendGrid](https://sendgrid.com)
   - Used as our account verification and password reset medium by sending the users emails.
+
+## More Work and Contact
+
+[Rajbir Johar](https://rajbirjohar.com)
