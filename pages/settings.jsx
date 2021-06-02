@@ -12,8 +12,8 @@ const ProfileSection = () => {
   const [msg, setMsg] = useState({ message: "", isError: false });
 
   useEffect(() => {
-    firstnameRef.current.value = user.firstname;
-    bioRef.current.value = user.bio;
+    firstnameRef.current.value = user?.firstname;
+    bioRef.current.value = user?.bio;
   }, [user]);
 
   const handleSubmit = async (event) => {
@@ -96,7 +96,7 @@ const ProfileSection = () => {
           <p className="text-red-500 my-4">{msg.message}</p>
         ) : null}
         <form onSubmit={handleSubmit} className="space-y-2">
-          {!user.emailVerified ? (
+          {!user?.emailVerified ? (
             <p>
               Your email has not been verified. <br />{" "}
               {/* eslint-disable-next-line */}
