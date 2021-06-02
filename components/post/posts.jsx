@@ -135,7 +135,12 @@ function Post({ post }) {
 
       {user && (
         <Link href={`/comments/${post._id}`}>
-          <span className="text-medium cursor-pointer">Comments</span>
+          <button
+            className="text-medium cursor-pointer p-1 bg-gray-200
+          hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 mt-4 rounded-sm"
+          >
+            Comments
+          </button>
         </Link>
       )}
     </div>

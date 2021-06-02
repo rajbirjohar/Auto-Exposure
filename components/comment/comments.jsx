@@ -9,10 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { JsonWebTokenError } from "jsonwebtoken";
 
 function Comment({ post }) {
-  const [userInfo, { mutate }] = useCurrentUser();
   const user = useUser(post.creatorId);
-  const [currentUser] = useCurrentUser();
-  const isCurrentUser = currentUser?._id === post.creatorId;
   //const user = useUser(post.creatorId);
   //console.log('In comments what up');
   // const [isUpdating, setIsUpdating] = useState(false);
