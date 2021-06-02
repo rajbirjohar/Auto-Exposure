@@ -86,82 +86,78 @@ function Post({ post }) {
   };
 
   return (
-    <Link href={`/comments/${post._id}`}>
-      <div
-        className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
+    <div
+      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
                   transition duration-200 ease-in-out rounded-md
                    w-full transform hover:scale-101
                   dark:bg-gray-900 dark:hover:bg-gray-800"
-      >
-        {user && (
-          <div className="flex flex-col justify-between h-full">
-            <div className="flex flex-col justify-center h-full">
-              <img src={post.postPicture} className="pb-6" alt="post image" />
+    >
+      {user && (
+        <div className="flex flex-col justify-between h-full">
+          <div className="flex flex-col justify-center h-full">
+            <img src={post.postPicture} className="pb-6" alt="post image" />
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <button className="flex items-center" onClick={handleClick}>
+                <svg className="text-gray-400 w-5 h-5 mr-1">
+                  <HeartIcon />
+                </svg>
+                {post.likes.length}
+              </button>
+              {isCurrentUser && (
+                <>
+                  <button
+                    className="ring-2 ring-red-100 dark:ring-red-500 rounded-sm"
+                    onClick={toggle}
+                  >
+                    <svg className="text-red-500 dark:text-red-200 bg-red-100 dark:bg-red-500 w-5 h-5">
+                      <DeleteIcon />
+                    </svg>
+                  </button>
+                  <Modal
+                    isShowing={isShowing}
+                    hide={toggle}
+                    confirmDelete={postDelete}
+                  />
+                </>
+              )}
             </div>
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <button className="flex items-center" onClick={handleClick}>
-                  <svg className="text-gray-400 w-5 h-5 mr-1">
-                    <HeartIcon />
-                  </svg>
-                  {post.likes.length}
-                </button>
-                {isCurrentUser && (
-                  <>
-                    <button
-                      className="ring-2 ring-red-100 dark:ring-red-500 rounded-sm"
-                      onClick={toggle}
-                    >
-                      <svg className="text-red-500 dark:text-red-200 bg-red-100 dark:bg-red-500 w-5 h-5">
-                        <DeleteIcon />
-                      </svg>
-                    </button>
-                    <Modal
-                      isShowing={isShowing}
-                      hide={toggle}
-                      confirmDelete={postDelete}
-                    />
-                  </>
-                )}
-              </div>
-              <div className="flex space-x-1">
-                <Link href={`/user/${user._id}`}>
-                  <a className="flex text-blue-600 items-center">
-                    <img
-                      width="27"
-                      height="27"
-                      className="rounded-full mr-2"
-                      src={
-                        user.profilePicture || defaultProfilePicture(user._id)
-                      }
-                      alt={user.firstname}
-                    />
-                    <p className="font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-                      @{user.username}{" "}
-                    </p>
-                  </a>
-                </Link>
-                <span className="font-normal text-gray-400 hover:no-underline no-underline">
-                  <TimeAgo date={age} />
-                </span>
-              </div>
+            <div className="flex space-x-1">
+              <Link href={`/user/${user._id}`}>
+                <a className="flex text-blue-600 items-center">
+                  <img
+                    width="27"
+                    height="27"
+                    className="rounded-full mr-2"
+                    src={user.profilePicture || defaultProfilePicture(user._id)}
+                    alt={user.firstname}
+                  />
+                  <p className="font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
+                    @{user.username}{" "}
+                  </p>
+                </a>
+              </Link>
+              <span className="font-normal text-gray-400 hover:no-underline no-underline">
+                <TimeAgo date={age} />
+              </span>
             </div>
           </div>
-        )}
-        <p>{post.caption}</p>
+        </div>
+      )}
+      <p>{post.caption}</p>
 
-        {user && (
-          <Link href={`/comments/${post._id}`}>
-            <button
-              className="text-medium cursor-pointer py-2 bg-gray-200
+      {user && (
+        <Link href={`/comments/${post._id}`}>
+          <button
+            className="text-medium cursor-pointer py-2 bg-gray-200
           hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 mt-4 rounded-sm"
-            >
-              Comments
-            </button>
-          </Link>
-        )}
-      </div>
-    </Link>
+          >
+            Comments
+          </button>
+        </Link>
+      )}
+    </div>
   );
 }
 
