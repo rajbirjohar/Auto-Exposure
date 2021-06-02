@@ -15,51 +15,50 @@ export default function Footer() {
           Built with ❤️ by the Auto Exposure Team. <br /> By car enthusiasts,
           for car enthusiasts.
         </p>
-        <div className="mt-6">
-          <div className="cursor-pointer">
-            <button
-              aria-label="Toggle Dark Mode"
-              type="button"
-              className="flex items-center hover:shadow-lg
+
+        <div className="cursor-pointer mt-6 flex justify-center w-full mx-auto">
+          <button
+            aria-label="Toggle Dark Mode"
+            type="button"
+            className="flex items-center hover:shadow-lg
                  transition duration-200 ease-in-out rounded-sm
                  bg-gray-200 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-800 px-6 py-3"
-              onClick={() =>
-                setTheme(resolvedTheme === "dark" ? "light" : "dark")
-              }
-            >
-              {mounted && (
-                <span>
-                  {resolvedTheme === "dark" ? (
-                    <>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        className="h-5 w-5 flex items-center mr-1 mb-1"
-                      >
-                        <SunIcon />
-                      </svg>
-                      Light
-                    </>
-                  ) : (
-                    <>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        className="h-5 w-5 flex items-center mr-1 mb-1"
-                      >
-                        <MoonIcon />
-                      </svg>
-                      Dark
-                    </>
-                  )}
-                </span>
-              )}
-            </button>
-          </div>
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
+          >
+            {mounted && (
+              <span>
+                {resolvedTheme === "dark" ? (
+                  <>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      className="h-5 w-5 flex items-center mr-1 mb-1"
+                    >
+                      <SunIcon />
+                    </svg>
+                    Light
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      className="h-5 w-5 flex items-center mr-1 mb-1"
+                    >
+                      <MoonIcon />
+                    </svg>
+                    Dark
+                  </>
+                )}
+              </span>
+            )}
+          </button>
         </div>
       </div>
     </footer>

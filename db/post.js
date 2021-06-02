@@ -25,7 +25,33 @@ export async function insertPost(db, { caption, postPicture, creatorId }) {
       caption,
       creatorId,
       postPicture,
+      likes: [],
       createdAt: new Date(),
     })
     .then(({ ops }) => ops[0]);
+}
+
+export async function updatePost(db, { postId, id }) {
+  return db
+    .collection('posts').updateOne(
+      { "_id": postId },
+      { $push: { "likes": id } })
+    .then(({ value }) => value);
+}
+
+export async function deleteElement(db, { postId, id }) {
+  return db
+    .collection('posts').updateOne(
+      { "_id": postId },
+      { $pull: { "likes": id } })
+    .then(({ value }) => value);
+}
+
+export async function deletePost(db, { postId }) {
+  return db
+    .collection("posts")
+    .deleteOne({
+      "_id": postId,
+    })
+    .then(({ value }) => value);
 }

@@ -1,7 +1,13 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-import { deletePost, getPosts, insertPost } from "@/db/index";
+import {
+  getPosts,
+  insertPost,
+  updatePost,
+  deleteElement,
+  deletePost,
+} from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
 import { v2 as cloudinary } from "cloudinary";
@@ -42,38 +48,61 @@ handler.get(async (req, res) => {
 
 handler.post(upload.single("postPicture"), async (req, res) => {
   // handler.post(async (req, res) => {
+  console.log("In post upload...");
   let postPicture;
   if (req.file) {
-    if (
-      !(
-        req.file.mimetype === "image/png" ||
-        req.file.mimetype === "image/jpeg" ||
-        req.file.mimetype === "image/jpg"
-      )
-    ) {
-      return res.status(415).send("Your image must be a png or jpg/jpeg");
-    }
     const image = await cloudinary.uploader.upload(req.file.path);
     postPicture = image.secure_url;
   }
   if (!req.body.caption) {
     return res.status(400).send("You must write something");
   }
-  // if (!req.body.postPicture)
-  //   return res.status(400).send("You must upload a url");
+  if (!req.body.postPicture)
+    return res.status(400).send("You must upload a url");
+
   const post = await insertPost(req.db, {
     caption: req.body.caption,
     creatorId: req.user._id,
-    postPicture: postPicture,
+    likes: [],
+    postPicture: req.body.postPicture,
   });
+  //console.log(req.post._id)
 
   return res.json({ post });
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+handler.patch(async (req, res) => {
+  if (!req.user) {
+    req.status(401).end();
+    return;
+  }
+
+  console.log(req.body.postId);
+  const { _id } = req.user;
+  const { postId, choice } = req.body;
+
+  if (choice === "Add") {
+    const like = await updatePost(req.db, {
+      postId: postId,
+      id: _id,
+    });
+  } else if (choice === "Remove") {
+    const like = await deleteElement(req.db, {
+      postId: postId,
+      id: _id,
+    });
+  }
+
+  //res.json({ post: extractPost(like) });
+  //console.log(req.post.count);
+});
+
+handler.delete(async (req, res) => {
+  console.log(req.body);
+  const del = await deletePost(req.db, {
+    postId: req.body.postId,
+  });
+  return res.status(200);
+});
 
 export default handler;

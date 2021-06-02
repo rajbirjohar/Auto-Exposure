@@ -44,6 +44,8 @@ handler.patch(upload.single("profilePicture"), async (req, res) => {
     });
     profilePicture = image.secure_url;
   }
+
+  console.log(req.body);
   const { firstname, lastname, username, bio } = req.body;
 
   const user = await updateUserById(req.db, req.user._id, {
