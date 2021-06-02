@@ -1,13 +1,35 @@
 import React from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
-import { useUser } from "@/hooks/index";
+import { useCurrentUser, useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import TimeAgo from "react-timeago";
+import toast, { Toaster } from "react-hot-toast";
+import { DeleteIcon } from "@/icons/icons";
 
 function Comment({ post }) {
   const user = useUser(post.creatorId);
+  const [userInfo, { mutate }] = useCurrentUser();
+  const [currentUser] = useCurrentUser();
+  const isCurrentUser = currentUser?._id === post.creatorId;
   const age = new Date(post.createdAt).toLocaleString();
+  const commentDelete = async (event) => {
+    if (userInfo) {
+      const body = {
+        postId: post._id,
+      };
+      const res = await fetch("/api/comments/id=${postId}", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.status === 200) {
+        toast.success("Comment Deleted!");
+      }
+    } else {
+      toast.error("Please sign-in!");
+    }
+  };
   return (
     <div
       className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
@@ -16,8 +38,8 @@ function Comment({ post }) {
                   dark:bg-gray-900 dark:hover:bg-gray-800 mb-4"
     >
       {user && (
-        <div className="flex flex-col justify-between h-full">
-          <div className="flex space-x-1">
+        <div className="flex justify-between h-full">
+          <div className="flex flex-col space-x-1">
             <Link href={`/user/${user._id}`}>
               <h3 className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
                 @{user.username}{" "}
@@ -26,8 +48,18 @@ function Comment({ post }) {
             <span className="text-gray-400 font-normal hover:no-underline">
               <TimeAgo date={age} />
             </span>
+            <span>{post.message}</span>
           </div>
-          <span>{post.message}</span>
+          {isCurrentUser && (
+            <button
+              className="ring-2 ring-red-100 dark:ring-red-500 rounded-sm ml-4 my-auto"
+              onClick={commentDelete}
+            >
+              <svg className="text-red-500 dark:text-red-200 bg-red-100 dark:bg-red-500 w-6 h-6">
+                <DeleteIcon />
+              </svg>
+            </button>
+          )}
         </div>
       )}
     </div>
@@ -71,6 +103,7 @@ export default function Comments({ postId }) {
 
   return (
     <div>
+      <Toaster />
       <div className="w-full">
         {posts.map((post) => (
           <Comment key={post._id} post={post} />

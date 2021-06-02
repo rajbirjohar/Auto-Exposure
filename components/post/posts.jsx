@@ -97,13 +97,15 @@ function Post({ post }) {
     >
       {user && (
         <div className="flex flex-col justify-between h-full">
-          <div className="flex flex-col justify-center h-full">
-            <img src={post.postPicture} className="pb-6" alt="post image" />
+          <div className="flex flex-col justify-center h-full cursor-pointer">
+            <Link href={`/comments/${post._id}`}>
+              <img src={post.postPicture} className="pb-6 " alt="post image" />
+            </Link>
           </div>
           <div>
             <div className="flex items-center justify-between mb-2">
               <button className="flex items-center" onClick={handleClick}>
-                <svg className="text-gray-400 w-5 h-5 mr-1">
+                <svg className="text-gray-400 w-6 h-6 mr-1">
                   <HeartIcon />
                 </svg>
                 {post.likes.length}
@@ -114,7 +116,7 @@ function Post({ post }) {
                     className="ring-2 ring-red-100 dark:ring-red-500 rounded-sm"
                     onClick={toggle}
                   >
-                    <svg className="text-red-500 dark:text-red-200 bg-red-100 dark:bg-red-500 w-5 h-5">
+                    <svg className="text-red-500 dark:text-red-200 bg-red-100 dark:bg-red-500 w-6 h-6">
                       <DeleteIcon />
                     </svg>
                   </button>
