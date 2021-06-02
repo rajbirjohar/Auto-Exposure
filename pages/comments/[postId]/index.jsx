@@ -58,37 +58,36 @@ export default function PostPage({ post }) {
             <img
               src={postPicture || defaultProfilePicture(_id)}
               alt="Image"
-              className="w-full mb-16"
+              className="w-full mb-8 md:mb-16"
             />
             <div className="w-full">
-              <div className="flex flex-col space-y-3">
-                <div className="flex md:flex-row flex-col space-y-2 md:space-y-0 space-x-2">
-                  <h2 className="text-medium text-3xl font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
+              <div className="flex flex-col">
+                <div className="flex md:flex-row flex-col md:mb-3">
+                  <h2 className="text-medium mr-2 md:text-xl font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
                     @{user.username}{" "}
                   </h2>
-                  <span className="text-medium w-full text-3xl font-normal text-gray-400 dark:text-gray-500">
+                  <span className="text-medium w-full md:text-xl font-normal text-gray-400">
                     {new Date(post.createdAt).toLocaleString()}
                   </span>
                 </div>
-                <h1 className="font-medium text-3xl tracking-loose">
-                  {caption}
-                </h1>
+                <h1 className="md:text-xl tracking-loose">{caption}</h1>
               </div>
             </div>
           </div>
         )}
         <div>
-          <h3 className="text-2xl text-gray-600 font-medium my-4 dark:text-gray-400 dark:text-gray-500">
+          <h3 className="md:text-xl text-gray-600 font-medium md:my-4 dark:text-gray-400">
             Comments
           </h3>
           {userLoggedIn ? (
             <form
               onSubmit={handleSubmit}
               autoComplete="off"
-              className="space-x-2 flex items-center w-full my-4"
+              className="md:space-x-4 flex flex-col md:flex-row md:items-center w-full my-4"
             >
               <input
-                className="flex-1 form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+                className="flex-grow w-full md:mb-0 mb-4 form-input 
+                border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
                                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
                 type="text"
                 id="message"
@@ -100,7 +99,7 @@ export default function PostPage({ post }) {
               <button
                 id="buttonid"
                 type="submit"
-                className="bg-black rounded-sm py-2 px-6 text-white font-medium 
+                className=" md:flex-none flex-grow bg-black rounded-sm py-2 px-6 text-white font-medium 
                             hover:bg-gray-800 hover:shadow-md transition duration-200 ease-in-out
                                         dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
               >
