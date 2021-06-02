@@ -17,6 +17,17 @@ export async function getPosts(db, from = new Date(), by, limit) {
     .toArray();
 }
 
+// export async function getComments(db, id) {
+//   return db
+//     .collection("posts")
+//     .find({
+//       "_id": id,
+//     })
+//     .sort({ createdAt: -1 })
+//     .toArray();
+// }
+
+
 export async function insertPost(db, { caption, postPicture, creatorId }) {
   return db
     .collection("posts")
@@ -29,6 +40,15 @@ export async function insertPost(db, { caption, postPicture, creatorId }) {
       createdAt: new Date(),
     })
     .then(({ ops }) => ops[0]);
+}
+
+export async function findPostById(db, userId) {
+  return db
+    .collection("posts")
+    .findOne({
+      _id: userId,
+    })
+    .then((post) => post || null);
 }
 
 export async function updatePost(db, { postId, id }) {
