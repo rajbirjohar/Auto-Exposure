@@ -186,25 +186,10 @@ export default function Posts({ creatorId }) {
     isEmpty || (data && data[data.length - 1]?.posts.length < PAGE_SIZE);
 
 
-  const [searchValue, setSearchValue] = React.useState('')
-  //console.log("Search");
-  //console.log(data?.[0].posts[0].caption);
-  //console.log(typeof data?.[0].posts);
-  // const filteredPosts = Object(data?.[0].posts)
-  //   .filter(
-  //     (post) => {
-  //       console.log(post.caption)
-  //       post.caption.toLowerCase().includes(searchValue.toLowerCase()) || searchValue == ""
-  //       console.log(searchValue)
-  //     }//  ||
-  //     // post.description
-  //     //   ?.toLowerCase()
-  //     //   .includes(searchValue.toLowerCase()) 
-  //   )
-  // console.log(filteredPosts)
+  const [searchValue, setSearchValue] = React.useState('');
   var filteredPosts = [];
   for (var i = 0; i < data?.[0].posts?.length; i++) {
-    if (data?.[0].posts[i].caption.toLowerCase().includes(searchValue.toLowerCase()) || searchValue == "") {
+    if (data?.[0].posts[i].caption.toLowerCase().includes(searchValue.toLowerCase())) {
       filteredPosts.push(data?.[0].posts[i]);
     }
   }
