@@ -1,22 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
-import { useCurrentUser, useUser, useCurrentPost } from "@/hooks/index";
+import { useCurrentUser, useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
-import { addCount } from "@/components/post/posts";
 import toast, { Toaster } from "react-hot-toast";
 import { HeartIcon, DeleteIcon } from "@/icons/icons";
 
 function Post({ post }) {
   const [userInfo, { mutate }] = useCurrentUser();
   const user = useUser(post.creatorId);
-  // const [isUpdating, setIsUpdating] = useState(false);
   var isUpdating = false;
   const [currentUser] = useCurrentUser();
-  const [currentPost] = useCurrentPost();
   const isCurrentUser = currentUser?._id === post.creatorId;
-  // const isCurrentlyLiked = currentPost?.creatorId === user._id;
 
   const handleClick = async (event) => {
     if (userInfo) {
@@ -26,9 +22,7 @@ function Post({ post }) {
       console.log(isUpdating);
       if (isUpdating) return;
       isUpdating = true;
-      const formData = new FormData();
 
-      //console.log(dupCheck);
       for (var i = 0; i < post.likes.length; i++) {
         if (post.likes[i] === userInfo._id) {
           dupCheck = true;
@@ -40,7 +34,6 @@ function Post({ post }) {
       } else {
         choose = "Remove";
       }
-      // console.log(choose);
       const body = {
         postId: post._id,
         choice: choose,
@@ -60,34 +53,28 @@ function Post({ post }) {
             ...postData.post,
           },
         });
-        // setMsg({ message: "Your profile has been updated." });
-        toast.success("Likes Updated!");
       } else {
-        // setMsg({ message: await res.text(), isError: true });
-        toast.error("Likes failed to update!");
         setIsUpdating(false);
-        console.log("Hello");
       }
       isUpdating = false;
-      if (res.ok) {
-        toast.success("Post Deleted!");
-      }
     } else {
       toast.error("Please sign-in!");
     }
   };
-  //const comment =
 
   const postDelete = async (event) => {
     if (userInfo) {
       const body = {
         postId: post._id,
       };
-      fetch("/api/posts/patch", {
+      const res = await fetch("/api/posts/patch", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+      if (res.status === 200) {
+        toast.success("Post Deleted!");
+      }
     } else {
       toast.error("Please sign-in!");
     }
@@ -108,11 +95,10 @@ function Post({ post }) {
           <div>
             <div className="flex items-center justify-between mb-2">
               <button className="flex items-center" onClick={handleClick}>
-                {" "}
                 <svg className="text-gray-400 w-5 h-5 mr-1">
                   <HeartIcon />
                 </svg>
-                {post.likes.length}{" "}
+                {post.likes.length}
               </button>
               {isCurrentUser && (
                 <button
@@ -146,11 +132,17 @@ function Post({ post }) {
       <p className="text-sm text-gray-400">
         {new Date(post.createdAt).toLocaleString()}
       </p>
-      {/* {user && (
-        <Link href={`/user/${user._id}`}>
-          <span className="text-medium cursor-pointer">Comments</span>
+
+      {user && (
+        <Link href={`/comments/${post._id}`}>
+          <button
+            className="text-medium cursor-pointer p-1 bg-gray-200
+          hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 mt-4 rounded-sm"
+          >
+            Comments
+          </button>
         </Link>
-      )} */}
+      )}
     </div>
   );
 }

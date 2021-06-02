@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Head from "next/head";
 
 const ForgetPasswordPage = () => {
@@ -18,14 +19,16 @@ const ForgetPasswordPage = () => {
     });
 
     if (res.status === 200) {
-      setMsg({ message: "An email has been sent to your mailbox" });
+      // setMsg({ message: "An email has been sent to your mailbox" });
+      toast.success("Check your Email Inbox!");
     } else {
       setMsg({ message: await res.text(), isError: true });
     }
   }
 
   return (
-    <section className="mx-auto max-w-sm">
+    <section className="mx-auto max-w-lg">
+      <Toaster />
       <Head>
         <title>Auto Exposure | Forgot</title>
       </Head>
@@ -33,7 +36,7 @@ const ForgetPasswordPage = () => {
         Forgot Password
       </h1>
       {msg.message ? <p className="text-red-500">{msg.message}</p> : null}
-      <form onSubmit={handleSubmit} className="space-y-2 min-w-full max-w-sm">
+      <form onSubmit={handleSubmit} className="space-y-2">
         <p>
           Don't worry. Your cars will be here when you get back. We just want to
           make sure it's really you.
@@ -43,13 +46,16 @@ const ForgetPasswordPage = () => {
           <input
             id="email"
             type="email"
-            placeholder="Enter your email"
-            className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full"
+            placeholder=""
+            className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+            dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
           />
         </div>
         <button
           type="submit"
-          className="bg-black text-white rounded-sm py-1 px-3 font-medium"
+          className="bg-gray-200 text-black rounded-sm py-2 px-3 font-medium 
+          hover:bg-gray-300 hover:border-gray-300 hover:shadow-lg transition duration-200 ease-in-out
+                     dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white"
         >
           Submit
         </button>

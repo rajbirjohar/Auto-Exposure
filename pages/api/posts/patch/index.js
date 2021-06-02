@@ -3,10 +3,11 @@ import { all } from "@/middlewares/index";
 import multer from "multer";
 import {
   getPosts,
-  insertPost,
+  insertComment,
   updatePost,
   deleteElement,
   deletePost,
+  getComments,
 } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
@@ -32,43 +33,44 @@ handler.use(all);
 const maxAge = 1 * 24 * 60 * 60;
 
 handler.get(async (req, res) => {
-  const posts = await getPosts(
-    req.db,
-    req.query.from ? new Date(req.query.from) : undefined,
-    req.query.by,
-    req.query.limit ? parseInt(req.query.limit, 10) : undefined
-  );
+  const posts = await getComments(req.db, req.query.id);
   if (req.query.from && posts.length > 0) {
     // This is safe to cache because from defines
     //  a concrete range of posts
     res.setHeader("cache-control", `public, max-age=${maxAge}`);
   }
   res.send({ posts });
+
+  // const posts = await getPosts(
+  //     req.db,
+  //     req.query.from ? new Date(req.query.from) : undefined,
+  //     req.query.by,
+  //     req.query.limit ? parseInt(req.query.limit, 10) : undefined
+  // );
+  // if (req.query.from && posts.length > 0) {
+  //     // This is safe to cache because from defines
+  //     //  a concrete range of posts
+  //     res.setHeader("cache-control", `public, max-age=${maxAge}`);
+  // }
+  // res.send({ posts })
 });
 
-handler.post(upload.single("postPicture"), async (req, res) => {
+handler.post(async (req, res) => {
   // handler.post(async (req, res) => {
-  console.log("In post upload...");
-  let postPicture;
-  if (req.file) {
-    const image = await cloudinary.uploader.upload(req.file.path);
-    postPicture = image.secure_url;
-  }
-  if (!req.body.caption) {
-    return res.status(400).send("You must write something");
-  }
-  if (!req.body.postPicture)
-    return res.status(400).send("You must upload a url");
+  console.log("In message upload...");
+  //console.log(req.body);
+  if (!req.body.message) return res.status(400).send("You must type a message");
+  const { postId, message } = req.body;
+  //const { _id } = req.user;
 
-  const post = await insertPost(req.db, {
-    caption: req.body.caption,
+  const msg = await insertComment(req.db, {
+    message: message,
     creatorId: req.user._id,
-    likes: [],
-    postPicture: req.body.postPicture,
+    postId: postId,
   });
   //console.log(req.post._id)
 
-  return res.json({ post });
+  return res.json({ msg });
 });
 
 handler.patch(async (req, res) => {
@@ -92,9 +94,6 @@ handler.patch(async (req, res) => {
       id: _id,
     });
   }
-
-  //res.json({ post: extractPost(like) });
-  //console.log(req.post.count);
 });
 
 handler.delete(async (req, res) => {
@@ -102,7 +101,7 @@ handler.delete(async (req, res) => {
   const del = await deletePost(req.db, {
     postId: req.body.postId,
   });
-  return res.status(200);
+  return res.status(200).send("Uploaded");
 });
 
 export default handler;
