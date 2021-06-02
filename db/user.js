@@ -10,6 +10,15 @@ export async function findUserById(db, userId) {
     .then((user) => user || null);
 }
 
+export async function findUserByUsername(db, username) {
+  return db
+    .collection("users")
+    .findOne({
+      username,
+    })
+    .then((user) => user || null);
+}
+
 export async function findUserByEmail(db, email) {
   email = normalizeEmail(email);
   return db
@@ -29,7 +38,7 @@ export async function updateUserById(db, id, update) {
 
 export async function insertUser(
   db,
-  { email, password, bio = "", firstname, lastname, username, profilePicture }
+  { email, password, bio = "", firstname, username, profilePicture }
 ) {
   return db
     .collection("users")
@@ -41,7 +50,7 @@ export async function insertUser(
       password,
       username,
       firstname,
-      lastname,
+      // lastname,
       bio,
     })
     .then(({ ops }) => ops[0]);

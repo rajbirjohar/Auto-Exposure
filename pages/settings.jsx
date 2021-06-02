@@ -89,7 +89,7 @@ const ProfileSection = () => {
       <Head>
         <title>Auto Exposure | Settings</title>
       </Head>
-      <section className="mx-auto w-full max-w-xl">
+      <section className="mx-auto w-full max-w-lg">
         <Toaster />
         <h1 className="font-bold text-3xl tracking-loose mb-4">Edit Profile</h1>
         {msg.message ? (
@@ -109,11 +109,11 @@ const ProfileSection = () => {
               </a>
             </p>
           ) : null}
-          <h3 className="text-xl font-medium my-4">Profile Infomation</h3>
+          <h3 className="text-xl font-medium">Profile Infomation</h3>
           <div className="flex flex-col space-y-4">
             <div className="flex flex-col">
               <label className="font-medium text-gray-600 dark:text-gray-300">
-                First Name
+                Name
               </label>
               <input
                 id="firstname"
@@ -139,7 +139,7 @@ const ProfileSection = () => {
                            dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col pb-2">
               <label className="font-medium text-gray-600 dark:text-gray-300">
                 Avatar
               </label>
@@ -168,7 +168,7 @@ const ProfileSection = () => {
           onSubmit={handleSubmitPasswordChange}
           className="space-y-2 min-w-full max-w-sm mt-8"
         >
-          <h3 className="text-xl font-medium my-4">Password Reset</h3>
+          <h3 className="text-xl font-medium mt-4">Password Reset</h3>
           <div className="flex flex-col space-y-4">
             <div className="flex flex-col">
               <label className="font-medium text-gray-600 dark:text-gray-300">
@@ -183,7 +183,7 @@ const ProfileSection = () => {
                            dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col pb-2">
               <label className="font-medium text-gray-600 dark:text-gray-300">
                 New password
               </label>

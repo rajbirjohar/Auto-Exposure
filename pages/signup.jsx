@@ -19,7 +19,7 @@ const SignupPage = () => {
       email: e.currentTarget.email.value,
       username: e.currentTarget.username.value,
       firstname: e.currentTarget.firstname.value,
-      lastname: e.currentTarget.lastname.value,
+      // lastname: e.currentTarget.lastname.value,
       password: e.currentTarget.password.value,
       password2: e.currentTarget.password2.value,
     };
@@ -46,6 +46,9 @@ const SignupPage = () => {
       if (res.status === 403) {
         toast.error("Email already in use!");
       }
+      if (res.status === 405) {
+        toast.error("Username already in use!");
+      }
     }
   };
 
@@ -61,33 +64,18 @@ const SignupPage = () => {
         <h3 className="text-xl font-medium my-4">Personal Infomation</h3>
         <form onSubmit={handleSubmit} className="space-y-2">
           {errorMsg ? <p className="text-red-500">{errorMsg}</p> : null}
-          <div className="flex md:flex-row flex-col md:space-x-4">
-            <div className="flex flex-col">
-              <label className="font-medium text-gray-600 dark:text-gray-300">
-                First Name
-              </label>
-              <input
-                id="firstname"
-                name="firstname"
-                type="text"
-                placeholder=""
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+          <div className="flex flex-col">
+            <label className="font-medium text-gray-600 dark:text-gray-300">
+              Name
+            </label>
+            <input
+              id="firstname"
+              name="firstname"
+              type="text"
+              placeholder=""
+              className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
                 dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="font-medium text-gray-600 dark:text-gray-300">
-                Last Name
-              </label>
-              <input
-                id="lastname"
-                name="lastname"
-                type="text"
-                placeholder=""
-                className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
-              />
-            </div>
+            />
           </div>
           <h3 className="text-xl font-medium pt-4">Account Infomation</h3>
           <div className="flex flex-col">

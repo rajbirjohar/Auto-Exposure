@@ -3,9 +3,11 @@ import { useSWRInfinite } from "swr";
 import Link from "next/link";
 import { useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
+import TimeAgo from "react-timeago";
 
 function Comment({ post }) {
   const user = useUser(post.creatorId);
+  const age = new Date(post.createdAt).toLocaleString();
   return (
     <div
       className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
@@ -22,7 +24,7 @@ function Comment({ post }) {
               </h3>
             </Link>
             <span className="text-gray-400 font-normal hover:no-underline">
-              {new Date(post.createdAt).toLocaleString()}
+              <TimeAgo date={age} />
             </span>
           </div>
           <span>{post.message}</span>
