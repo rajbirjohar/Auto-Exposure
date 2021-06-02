@@ -94,9 +94,6 @@ handler.patch(async (req, res) => {
       id: _id,
     });
   }
-
-  //res.json({ post: extractPost(like) });
-  //console.log(req.post.count);
 });
 
 handler.delete(async (req, res) => {
@@ -104,7 +101,7 @@ handler.delete(async (req, res) => {
   const del = await deletePost(req.db, {
     postId: req.body.postId,
   });
-  //return res.status(200);
+  return res.status(200).send("Uploaded");
 });
 
 export default handler;

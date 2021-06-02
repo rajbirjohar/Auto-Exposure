@@ -1,31 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
-import { usePost, useCurrentUser, useUser } from "@/hooks/index";
+import { useCurrentUser, useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
-import { addCount } from "@/components/post/posts"
 import toast, { Toaster } from "react-hot-toast";
-import { JsonWebTokenError } from "jsonwebtoken";
+import { HeartIcon, DeleteIcon } from "@/icons/icons";
 
 function Post({ post }) {
   const [userInfo, { mutate }] = useCurrentUser();
   const user = useUser(post.creatorId);
-  // const [isUpdating, setIsUpdating] = useState(false);
   var isUpdating = false;
+  const [currentUser] = useCurrentUser();
+  const isCurrentUser = currentUser?._id === post.creatorId;
 
   const handleClick = async (event) => {
     if (userInfo) {
-      console.log('I am clicked');
       var dupCheck = false;
       var choose;
       event.preventDefault();
       console.log(isUpdating);
       if (isUpdating) return;
       isUpdating = true;
-      const formData = new FormData();
 
-      //console.log(dupCheck);
       for (var i = 0; i < post.likes.length; i++) {
         if (post.likes[i] === userInfo._id) {
           dupCheck = true;
@@ -34,11 +31,9 @@ function Post({ post }) {
 
       if (!dupCheck) {
         choose = "Add";
-      }
-      else {
+      } else {
         choose = "Remove";
       }
-      //console.log(choose);
       const body = {
         postId: post._id,
         choice: choose,
@@ -58,34 +53,29 @@ function Post({ post }) {
             ...postData.post,
           },
         });
-        // setMsg({ message: "Your profile has been updated." });
-        toast.success("Likes Updated!");
       } else {
-        // setMsg({ message: await res.text(), isError: true });
-        toast.error("Likes failed to update!");
         setIsUpdating(false);
-        console.log('Hello');
       }
       isUpdating = false;
-    }
-    else {
+    } else {
       toast.error("Please sign-in!");
     }
   };
-  //const comment = 
 
   const postDelete = async (event) => {
     if (userInfo) {
       const body = {
         postId: post._id,
       };
-      fetch("/api/posts/patch", {
+      const res = await fetch("/api/posts/patch", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-    }
-    else {
+      if (res.status === 200) {
+        toast.success("Post Deleted!");
+      }
+    } else {
       toast.error("Please sign-in!");
     }
   };
@@ -98,12 +88,30 @@ function Post({ post }) {
                   dark:bg-gray-900 dark:hover:bg-gray-800"
     >
       {user && (
-        <Link href={`/user/${user._id}`}>
-          <div className="flex flex-col justify-between h-full">
-            <div className="flex flex-col justify-center h-full">
-              <img src={post.postPicture} className="pb-6" alt="post image" />
+        <div className="flex flex-col justify-between h-full">
+          <div className="flex flex-col justify-center h-full">
+            <img src={post.postPicture} className="pb-6" alt="post image" />
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <button className="flex items-center" onClick={handleClick}>
+                <svg className="text-gray-400 w-5 h-5 mr-1">
+                  <HeartIcon />
+                </svg>
+                {post.likes.length}
+              </button>
+              {isCurrentUser && (
+                <button
+                  className="ring-2 ring-gray-400 dark:ring-gray-600 rounded-sm"
+                  onClick={postDelete}
+                >
+                  <svg className="text-red-500 dark:text-red-400 w-5 h-5">
+                    <DeleteIcon />
+                  </svg>
+                </button>
+              )}
             </div>
-            <div>
+            <Link href={`/user/${user._id}`}>
               <a className="flex text-blue-600 items-center">
                 <img
                   width="27"
@@ -116,22 +124,20 @@ function Post({ post }) {
                   @{user.username}
                 </span>
               </a>
-            </div>
+            </Link>
           </div>
-        </Link>
+        </div>
       )}
       <p>{post.caption}</p>
       <p className="text-sm text-gray-400">
         {new Date(post.createdAt).toLocaleString()}
       </p>
+
       {user && (
         <Link href={`/comments/${post._id}`}>
           <span className="text-medium cursor-pointer">Comments</span>
         </Link>
       )}
-      {/* {console.log(post.caption)} */}
-      <button onClick={handleClick}> Likes: {post.likes.length} </button>
-      <button onClick={postDelete}>Delete</button>
     </div>
   );
 }
@@ -146,8 +152,9 @@ export function usePostPages({ creatorId } = {}) {
 
       // first page, previousPageData is null
       if (index === 0) {
-        return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
-          }`;
+        return `/api/posts?limit=${PAGE_SIZE}${
+          creatorId ? `&by=${creatorId}` : ""
+        }`;
       }
 
       // using oldest posts createdAt date as cursor
@@ -159,12 +166,13 @@ export function usePostPages({ creatorId } = {}) {
         ).getTime() - 1
       ).toJSON();
 
-      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
-        }`;
+      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
+        creatorId ? `&by=${creatorId}` : ""
+      }`;
     },
     fetcher,
     {
-      refreshInterval: 3000, // Refresh every 3 seconds
+      refreshInterval: 1000, // Refresh every 1 seconds
     }
   );
 }
@@ -184,6 +192,7 @@ export default function Posts({ creatorId }) {
 
   return (
     <div>
+      <Toaster />
       <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
         {posts.map((post) => (
           <Post key={post._id} post={post} />

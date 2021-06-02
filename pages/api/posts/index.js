@@ -1,9 +1,7 @@
 import nc from "next-connect";
 import { all } from "@/middlewares/index";
 import multer from "multer";
-import { deletePost, getPosts, insertPost } from "@/db/index";
-import { ReplSet } from "mongodb";
-import { extractPost } from "@/lib/api-helpers";
+import { getPosts, insertPost } from "@/db/index";
 import { v2 as cloudinary } from "cloudinary";
 
 const upload = multer({ dest: "/tmp" });
@@ -30,7 +28,7 @@ handler.get(async (req, res) => {
     req.db,
     req.query.from ? new Date(req.query.from) : undefined,
     req.query.by,
-    req.query.limit ? parseInt(req.query.limit, 10) : undefined
+    req.query.limit ? parseInt(req.query.limit, 9) : undefined
   );
   if (req.query.from && posts.length > 0) {
     // This is safe to cache because from defines
@@ -41,18 +39,23 @@ handler.get(async (req, res) => {
 });
 
 handler.post(upload.single("postPicture"), async (req, res) => {
-  // handler.post(async (req, res) => {
-  console.log(req.body);
   let postPicture;
   if (req.file) {
+    if (
+      !(
+        req.file.mimetype === "image/png" ||
+        req.file.mimetype === "image/jpeg" ||
+        req.file.mimetype === "image/jpg"
+      )
+    ) {
+      return res.status(415).send("Your image must be a png or jpg/jpeg");
+    }
     const image = await cloudinary.uploader.upload(req.file.path);
     postPicture = image.secure_url;
   }
   if (!req.body.caption) {
     return res.status(400).send("You must write something");
   }
-  // if (!req.body.postPicture)
-  //   return res.status(400).send("You must upload a url");
   const post = await insertPost(req.db, {
     caption: req.body.caption,
     creatorId: req.user._id,

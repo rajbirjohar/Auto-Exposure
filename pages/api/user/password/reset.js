@@ -32,7 +32,7 @@ handler.post(async (req, res) => {
     subject: "[nextjs-mongodb-app] Reset your password.",
     html: `
       <div>
-        <p>Hello, ${user.name}</p>
+        <p>Hello ${user.username},</p>
         <p>Please follow <a href="${process.env.WEB_URI}/forget-password/${token._id}">this link</a> to reset your password.</p>
       </div>
       `,
@@ -46,9 +46,6 @@ handler.put(async (req, res) => {
   if (!req.body.password) {
     res.status(400).send("Password not provided");
     return;
-  }
-  if (password != password2) {
-    res.status(400).send("Passwords do not match.");
   }
 
   const deletedToken = await findAndDeleteTokenByIdAndType(

@@ -72,7 +72,7 @@ const SignupPage = () => {
                 type="text"
                 placeholder=""
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -85,11 +85,11 @@ const SignupPage = () => {
                 type="text"
                 placeholder=""
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
           </div>
-          <h3 className="text-xl font-medium my-4">Account Infomation</h3>
+          <h3 className="text-xl font-medium pt-4">Account Infomation</h3>
           <div className="flex flex-col">
             <label className="font-medium text-gray-600 dark:text-gray-300">
               Username
@@ -100,7 +100,7 @@ const SignupPage = () => {
               type="text"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+              dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col">
@@ -113,7 +113,7 @@ const SignupPage = () => {
               type="email"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+              dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col">
@@ -126,7 +126,7 @@ const SignupPage = () => {
               type="password"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-600 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+              dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col pb-4">
@@ -139,7 +139,7 @@ const SignupPage = () => {
               type="password"
               placeholder=""
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+              dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
             />
           </div>
           <div className="flex flex-col space-y-3">
