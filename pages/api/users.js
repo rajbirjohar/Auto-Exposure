@@ -4,7 +4,7 @@ import normalizeEmail from "validator/lib/normalizeEmail";
 import bcrypt from "bcryptjs";
 import { all } from "@/middlewares/index";
 import { extractUser } from "@/lib/api-helpers";
-import { insertUser, findUserByEmail } from "@/db/index";
+import { insertUser, findUserByEmail, findUserByUsername } from "@/db/index";
 const handler = nc();
 
 handler.use(all);
@@ -12,7 +12,7 @@ handler.use(all);
 handler.post(async (req, res) => {
   const { firstname, lastname, username, password, password2 } = req.body;
   const email = normalizeEmail(req.body.email);
-  if (!password || !username || !firstname || !lastname || !email) {
+  if (!password || !username || !firstname || !email) {
     res.status(400).send("Missing field(s)");
     return;
   }
@@ -26,6 +26,10 @@ handler.post(async (req, res) => {
   }
   if (await findUserByEmail(req.db, email)) {
     res.status(403).send("The email has already been used.");
+    return;
+  }
+  if (await findUserByUsername(req.db, username)) {
+    res.status(405).send("The username has already been used.");
     return;
   }
   const hashedPassword = await bcrypt.hash(password, 10);

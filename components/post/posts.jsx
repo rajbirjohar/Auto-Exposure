@@ -1,34 +1,36 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
-import { usePost, useCurrentUser, useUser } from "@/hooks/index";
+import { useCurrentUser, useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { defaultProfilePicture } from "@/lib/default";
-import { addCount } from "@/components/post/posts"
 import toast, { Toaster } from "react-hot-toast";
-import { JsonWebTokenError } from "jsonwebtoken";
+import { HeartIcon, DeleteIcon } from "@/icons/icons";
+import Modal from "@/components/Modal";
+import useModal from "@/components/useModal";
+import TimeAgo from "react-timeago";
 
 // import styles from '@/styles/posts.module.css'
 import { SearchIcon } from '@/components/icons'
 
 function Post({ post }) {
+  const { isShowing, toggle } = useModal();
   const [userInfo, { mutate }] = useCurrentUser();
   const user = useUser(post.creatorId);
-  // const [isUpdating, setIsUpdating] = useState(false);
   var isUpdating = false;
+  const [currentUser] = useCurrentUser();
+  const isCurrentUser = currentUser?._id === post.creatorId;
+  const age = new Date(post.createdAt).toLocaleString();
 
   const handleClick = async (event) => {
     if (userInfo) {
-      console.log('I am clicked');
       var dupCheck = false;
       var choose;
       event.preventDefault();
       console.log(isUpdating);
       if (isUpdating) return;
       isUpdating = true;
-      const formData = new FormData();
 
-      //console.log(dupCheck);
       for (var i = 0; i < post.likes.length; i++) {
         if (post.likes[i] === userInfo._id) {
           dupCheck = true;
@@ -37,11 +39,9 @@ function Post({ post }) {
 
       if (!dupCheck) {
         choose = "Add";
-      }
-      else {
+      } else {
         choose = "Remove";
       }
-      //console.log(choose);
       const body = {
         postId: post._id,
         choice: choose,
@@ -61,80 +61,105 @@ function Post({ post }) {
             ...postData.post,
           },
         });
-        // setMsg({ message: "Your profile has been updated." });
-        toast.success("Likes Updated!");
       } else {
-        // setMsg({ message: await res.text(), isError: true });
-        toast.error("Likes failed to update!");
         setIsUpdating(false);
-        console.log('Hello');
       }
       isUpdating = false;
-    }
-    else {
+    } else {
       toast.error("Please sign-in!");
     }
   };
-  //const comment = 
 
   const postDelete = async (event) => {
     if (userInfo) {
       const body = {
         postId: post._id,
       };
-      fetch("/api/posts/patch", {
+      const res = await fetch("/api/posts/patch", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-    }
-    else {
+      if (res.status === 200) {
+        toast.success("Post Deleted!");
+      }
+    } else {
       toast.error("Please sign-in!");
     }
   };
 
   return (
     <div
-      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
+      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
                   transition duration-200 ease-in-out rounded-md
-                   w-full transform hover:scale-102
+                   w-full transform hover:scale-101
                   dark:bg-gray-900 dark:hover:bg-gray-800"
     >
       {user && (
-        <Link href={`/user/${user._id}`}>
-          <div className="flex flex-col justify-between h-full">
-            <div className="flex flex-col justify-center h-full">
-              <img src={post.postPicture} className="pb-6" alt="post image" />
+        <div className="flex flex-col justify-between h-full">
+          <div className="flex flex-col justify-center h-full">
+            <img src={post.postPicture} className="pb-6" alt="post image" />
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <button className="flex items-center" onClick={handleClick}>
+                <svg className="text-gray-400 w-5 h-5 mr-1">
+                  <HeartIcon />
+                </svg>
+                {post.likes.length}
+              </button>
+              {isCurrentUser && (
+                <>
+                  <button
+                    className="ring-2 ring-red-100 dark:ring-red-500 rounded-sm"
+                    onClick={toggle}
+                  >
+                    <svg className="text-red-500 dark:text-red-200 bg-red-100 dark:bg-red-500 w-5 h-5">
+                      <DeleteIcon />
+                    </svg>
+                  </button>
+                  <Modal
+                    isShowing={isShowing}
+                    hide={toggle}
+                    confirmDelete={postDelete}
+                  />
+                </>
+              )}
             </div>
-            <div>
-              <a className="flex text-blue-600 items-center">
-                <img
-                  width="27"
-                  height="27"
-                  className="rounded-full mr-2"
-                  src={user.profilePicture || defaultProfilePicture(user._id)}
-                  alt={user.firstname}
-                />
-                <span className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-                  @{user.username}
-                </span>
-              </a>
+            <div className="flex space-x-1">
+              <Link href={`/user/${user._id}`}>
+                <a className="flex text-blue-600 items-center">
+                  <img
+                    width="27"
+                    height="27"
+                    className="rounded-full mr-2"
+                    src={user.profilePicture || defaultProfilePicture(user._id)}
+                    alt={user.firstname}
+                  />
+                  <p className="font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
+                    @{user.username}{" "}
+                  </p>
+                </a>
+              </Link>
+              <span className="font-normal text-gray-400 hover:no-underline no-underline">
+                <TimeAgo date={age} />
+              </span>
             </div>
           </div>
-        </Link>
+        </div>
       )}
       <p>{post.caption}</p>
-      <p className="text-sm text-gray-400">
-        {new Date(post.createdAt).toLocaleString()}
-      </p>
+
       {user && (
         <Link href={`/comments/${post._id}`}>
-          <span className="text-medium cursor-pointer">Comments</span>
+          <button
+            className="text-medium cursor-pointer py-2 bg-gray-200
+          hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 mt-4 rounded-sm"
+          >
+            Comments
+          </button>
         </Link>
       )}
-      {/* {console.log(post.caption)} */}
-      <button onClick={handleClick}> Likes: {post.likes.length} </button>
-      <button onClick={postDelete}>Delete</button>
     </div>
   );
 }
@@ -167,7 +192,7 @@ export function usePostPages({ creatorId } = {}) {
     },
     fetcher,
     {
-      refreshInterval: 3000, // Refresh every 3 seconds
+      refreshInterval: 1000, // Refresh every 1 seconds
     }
   );
 }
@@ -198,30 +223,11 @@ export default function Posts({ creatorId }) {
   console.log(searchValue);
   return (
     <div>
-      <div className="">
-        <input
-          aria-label="Enabled Searchbar"
-          type="text"
-          onChange={(e) => setSearchValue(e.target.value)}
-          placeholder="Search Posts"
-          className=""
-        />
-        {/* <svg className="">
-          <SearchIcon />
-        </svg> */}
-      </div>
-
-      <div className="w-full mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 border-2 border-red-200">
-        {!filteredPosts.length &&
-          posts.map((post) => (
-            <Post key={post._id} post={post} />
-          ))
-        }
-        {filteredPosts.length &&
-          filteredPosts.map((post) => (
-            <Post key={post._id} post={post} />
-          ))
-        }
+      <Toaster />
+      <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
+        {posts.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
       </div>
       {!isReachingEnd && (
         <div className="flex w-full mx-auto mt-8 items-center justify-center">

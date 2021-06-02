@@ -46,12 +46,12 @@ handler.patch(upload.single("profilePicture"), async (req, res) => {
   }
 
   console.log(req.body);
-  const { firstname, lastname, username, bio } = req.body;
+  const { firstname, username, bio } = req.body;
 
   const user = await updateUserById(req.db, req.user._id, {
     ...(username && { username }),
     ...(firstname && { firstname }),
-    ...(lastname && { lastname }),
+    // ...(lastname && { lastname }),
     ...(typeof bio === "string" && { bio }),
     ...(profilePicture && { profilePicture }),
   });

@@ -12,8 +12,8 @@ const ProfileSection = () => {
   const [msg, setMsg] = useState({ message: "", isError: false });
 
   useEffect(() => {
-    firstnameRef.current.value = user.firstname;
-    bioRef.current.value = user.bio;
+    firstnameRef.current.value = user?.firstname;
+    bioRef.current.value = user?.bio;
   }, [user]);
 
   const handleSubmit = async (event) => {
@@ -89,31 +89,31 @@ const ProfileSection = () => {
       <Head>
         <title>Auto Exposure | Settings</title>
       </Head>
-      <section className="mx-auto w-full max-w-xl">
+      <section className="mx-auto w-full max-w-lg">
         <Toaster />
         <h1 className="font-bold text-3xl tracking-loose mb-4">Edit Profile</h1>
         {msg.message ? (
           <p className="text-red-500 my-4">{msg.message}</p>
         ) : null}
         <form onSubmit={handleSubmit} className="space-y-2">
-          {!user.emailVerified ? (
+          {!user?.emailVerified ? (
             <p>
               Your email has not been verified. <br />{" "}
               {/* eslint-disable-next-line */}
               <a
                 role="button"
-                className="text-blue-600 underline"
+                className="text-blue-600 dark:text-blue-500 underline"
                 onClick={sendVerificationEmail}
               >
                 Send verification email
               </a>
             </p>
           ) : null}
-          <h3 className="text-xl font-medium my-4">Profile Infomation</h3>
+          <h3 className="text-xl font-medium">Profile Infomation</h3>
           <div className="flex flex-col space-y-4">
             <div className="flex flex-col">
               <label className="font-medium text-gray-600 dark:text-gray-300">
-                First Name
+                Name
               </label>
               <input
                 id="firstname"
@@ -122,7 +122,7 @@ const ProfileSection = () => {
                 placeholder=""
                 ref={firstnameRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                           dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <div className="flex flex-col">
@@ -136,10 +136,10 @@ const ProfileSection = () => {
                 placeholder=""
                 ref={bioRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                           dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col pb-2">
               <label className="font-medium text-gray-600 dark:text-gray-300">
                 Avatar
               </label>
@@ -150,7 +150,7 @@ const ProfileSection = () => {
                 accept="Upload your own profile picture"
                 ref={profilePictureRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
-                dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <button
@@ -168,7 +168,7 @@ const ProfileSection = () => {
           onSubmit={handleSubmitPasswordChange}
           className="space-y-2 min-w-full max-w-sm mt-8"
         >
-          <h3 className="text-xl font-medium my-4">Password Reset</h3>
+          <h3 className="text-xl font-medium mt-4">Password Reset</h3>
           <div className="flex flex-col space-y-4">
             <div className="flex flex-col">
               <label className="font-medium text-gray-600 dark:text-gray-300">
@@ -180,10 +180,10 @@ const ProfileSection = () => {
                 id="oldpassword"
                 required
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                           dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col pb-2">
               <label className="font-medium text-gray-600 dark:text-gray-300">
                 New password
               </label>
@@ -193,7 +193,7 @@ const ProfileSection = () => {
                 id="newpassword"
                 required
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
-                           dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+                           dark:bg-gray-800 dark:ring-gray-500 dark:focus:ring-2 dark:focus:ring-blue-600"
               />
             </div>
             <button

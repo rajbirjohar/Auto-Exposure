@@ -10,6 +10,7 @@ module.exports = {
       90: ".9",
       95: ".95",
       100: "1",
+      101: "1.01",
       102: "1.02",
       105: "1.05",
       110: "1.1",
@@ -25,6 +26,9 @@ module.exports = {
         },
         animation: {
           wiggle: "wiggle 1s ease-in-out infinite",
+        },
+        screens: {
+          "hover-hover": { raw: "(hover: hover)" },
         },
       },
     },

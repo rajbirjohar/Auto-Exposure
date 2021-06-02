@@ -8,7 +8,7 @@ handler.use(all);
 
 handler.put(async (req, res) => {
   if (!req.user) {
-    res.json(401).send("You need to be authenticated.");
+    res.json(401).send("you need to be authenticated");
     return;
   }
   const { oldPassword, newPassword } = req.body;
