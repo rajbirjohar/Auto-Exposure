@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, setState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useCurrentUser } from "@/hooks/index";
 import toast, { Toaster } from "react-hot-toast";
 import CustomDropzone from "@/components/post/dropzone";
@@ -6,12 +6,19 @@ import CustomDropzone from "@/components/post/dropzone";
 export default function PostEditor() {
   const [user] = useCurrentUser();
   const [msg, setMsg] = useState(null);
+  const [image, setImage] = useState();
   const captionRef = useRef();
   const postPictureRef = useRef();
   const formRef = useRef()
 
   if (!user) {
     return <div></div>;
+  }
+
+  const updateImage = (image) => {
+    console.log("Inside updateImage");
+    console.log(image);
+    setImage(image);
   }
 
   async function handleSubmit(e) {
@@ -26,12 +33,16 @@ export default function PostEditor() {
     //   });
     // }
 
+    console.log("formRef...");
     console.log(formRef); // REMOVE ME
     const postPicture = formRef.current[0].files[0];
     if (postPicture) {
       console.log("Post picture exists...");  // REMOVE ME
       console.log(postPicture); // REMOVE ME
       formData.append("postPicture", postPicture);
+    }
+    else if (image) {
+      formData.append("postPicture", image[0]);
     }
 
     // if (postPictureRef.current.files[0]) {
@@ -79,7 +90,7 @@ export default function PostEditor() {
               className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm min-w-full
               dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
             /> */}
-            <CustomDropzone/>
+            <CustomDropzone onImageUpload={updateImage}/>
         </div>
         <div className="flex flex-col pb-4">
           <label className="font-medium">Caption</label>

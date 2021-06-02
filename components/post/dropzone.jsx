@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo, setState } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useDropzone } from 'react-dropzone'
 
 const baseStyle = {
@@ -61,8 +61,14 @@ const img = {
     height: '100%'
 };
 
-export default function CustomDropzone() {
+export default function CustomDropzone({onImageUpload}) {
     const [files, setFiles] = useState([]);
+
+    const handleDrop = (acceptedFiles) => {
+        setFiles(acceptedFiles);
+        onImageUpload(acceptedFiles);
+    }
+
     const {
         getRootProps, 
         getInputProps,
@@ -77,6 +83,7 @@ export default function CustomDropzone() {
             setFiles(acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
             })));
+            handleDrop(acceptedFiles);
         }
         // From Github issue
         // onDrop: (acceptedFiles, e) => {
@@ -121,8 +128,8 @@ export default function CustomDropzone() {
 
     return (
         <section>
-            <div {...getRootProps({style, className: "dropZone", refKey: 'divref' })}>
-                <input {...getInputProps()} />
+            <div {...getRootProps({style, className: "dropzone"})}>
+                <input {...getInputProps()}/>
                 {/* <p>Drag image here, or click to select file</p> */}
                 {!isDragActive && 'Click here or drag an image'}
                 {isDragActive && !isDragReject && "Drop it like it's hot!"}
