@@ -102,7 +102,7 @@ There will be two separate branches for frontend and backend where we implement 
   - Used as our secondary database to hold all the physical images including:
     - Profile Pictures
     - Post Pictures
-    - Default profile pictures come from [here](https://avatar.tobi.sh).
+    - Default profile pictures come from [here](https://boringavatars.com).
 - [SendGrid](https://sendgrid.com)
   - Used as our account verification and password reset medium by sending the users emails.
 
