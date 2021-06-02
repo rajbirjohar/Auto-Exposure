@@ -1,26 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { useSWRInfinite } from "swr";
 import Link from "next/link";
-import { usePost, useCurrentUser, useUser } from "@/hooks/index";
+import { useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
-import { defaultProfilePicture } from "@/lib/default";
-import { addCount } from "@/components/post/posts";
-import toast, { Toaster } from "react-hot-toast";
-import { JsonWebTokenError } from "jsonwebtoken";
 
 function Comment({ post }) {
   const user = useUser(post.creatorId);
-  //const user = useUser(post.creatorId);
-  //console.log('In comments what up');
-  // const [isUpdating, setIsUpdating] = useState(false);
-  var isUpdating = false;
-  console.log("Check message");
-  console.log(post);
   return (
     <div
-      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-xl
+      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
                   transition duration-200 ease-in-out rounded-md
-                   w-full transform hover:scale-102
+                   w-full transform hover-hover:hover:scale-101
                   dark:bg-gray-900 dark:hover:bg-gray-800 mb-4"
     >
       {user && (
@@ -72,12 +62,10 @@ export function usePostPages({ postId } = {}) {
 }
 
 export default function Comments({ postId }) {
-  const { data, error, size, setSize } = usePostPages({ postId });
+  const { data } = usePostPages({ postId });
   const posts = data
     ? data.reduce((acc, val) => [...acc, ...val.posts], [])
     : [];
-
-  console.log(posts);
 
   return (
     <div>
