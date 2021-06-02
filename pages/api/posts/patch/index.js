@@ -8,6 +8,7 @@ import {
   deleteElement,
   deletePost,
   getComments,
+  deleteComments,
 } from "@/db/index";
 import { ReplSet } from "mongodb";
 import { extractPost } from "@/lib/api-helpers";
@@ -101,6 +102,7 @@ handler.delete(async (req, res) => {
   const del = await deletePost(req.db, {
     postId: req.body.postId,
   });
+  const delC = await deleteComments(req.db, req.body.postId);
   return res.status(200).send("Uploaded");
 });
 
