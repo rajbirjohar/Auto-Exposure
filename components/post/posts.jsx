@@ -8,6 +8,9 @@ import { addCount } from "@/components/post/posts"
 import toast, { Toaster } from "react-hot-toast";
 import { JsonWebTokenError } from "jsonwebtoken";
 
+// import styles from '@/styles/posts.module.css'
+import { SearchIcon } from '@/components/icons'
+
 function Post({ post }) {
   const [userInfo, { mutate }] = useCurrentUser();
   const user = useUser(post.creatorId);
@@ -182,12 +185,58 @@ export default function Posts({ creatorId }) {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.posts.length < PAGE_SIZE);
 
+
+  const [searchValue, setSearchValue] = React.useState('')
+  //console.log("Search");
+  //console.log(data?.[0].posts[0].caption);
+  //console.log(typeof data?.[0].posts);
+  // const filteredPosts = Object(data?.[0].posts)
+  //   .filter(
+  //     (post) => {
+  //       console.log(post.caption)
+  //       post.caption.toLowerCase().includes(searchValue.toLowerCase()) || searchValue == ""
+  //       console.log(searchValue)
+  //     }//  ||
+  //     // post.description
+  //     //   ?.toLowerCase()
+  //     //   .includes(searchValue.toLowerCase()) 
+  //   )
+  // console.log(filteredPosts)
+  var filteredPosts = [];
+  for (var i = 0; i < data?.[0].posts?.length; i++) {
+    if (data?.[0].posts[i].caption.toLowerCase().includes(searchValue.toLowerCase()) || searchValue == "") {
+      filteredPosts.push(data?.[0].posts[i]);
+    }
+  }
+  console.log(filteredPosts);
+
+  console.log(searchValue);
   return (
     <div>
-      <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
-        {posts.map((post) => (
-          <Post key={post._id} post={post} />
-        ))}
+      <div className="">
+        <input
+          aria-label="Enabled Searchbar"
+          type="text"
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder="Search Posts"
+          className=""
+        />
+        {/* <svg className="">
+          <SearchIcon />
+        </svg> */}
+      </div>
+
+      <div className="w-full mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 border-2 border-red-200">
+        {!filteredPosts.length &&
+          posts.map((post) => (
+            <Post key={post._id} post={post} />
+          ))
+        }
+        {filteredPosts.length &&
+          filteredPosts.map((post) => (
+            <Post key={post._id} post={post} />
+          ))
+        }
       </div>
       {!isReachingEnd && (
         <div className="flex w-full mx-auto mt-8 items-center justify-center">
