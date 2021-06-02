@@ -32,10 +32,11 @@ Features included or will be included:
 - [x] Sessions
 - [x] Deleting posts
 - [x] Uploading direct images
-- [ ] Commenting
+- [x] Commenting
 - [x] Liking
 - [x] Minimal and clean UI/UX
 - [x] Footer
+- [ ] Search bar
 
 ## Instructions
 
