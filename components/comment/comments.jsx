@@ -32,34 +32,36 @@ function Comment({ post }) {
   };
   return (
     <div
-      className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
+      className="bg-white p-6 shadow-md hover:shadow-lg w-full
                   transition duration-200 ease-in-out rounded-md
                    w-full transform hover-hover:hover:scale-101
                   dark:bg-gray-900 dark:hover:bg-gray-800 mb-4"
     >
       {user && (
-        <div className="flex justify-between h-full">
-          <div className="flex flex-col space-x-1">
-            <Link href={`/user/${user._id}`}>
-              <h3 className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-                @{user.username}{" "}
-              </h3>
-            </Link>
-            <span className="text-gray-400 font-normal hover:no-underline">
-              <TimeAgo date={age} />
-            </span>
-            <span>{post.message}</span>
+        <div className="flex flex-col space-y-2">
+          <div className="flex justify-between">
+            <div className="flex space-x-1">
+              <Link href={`/user/${user._id}`}>
+                <h3 className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
+                  @{user.username}{" "}
+                </h3>
+              </Link>
+              <span className="text-gray-400 font-normal hover:no-underline">
+                <TimeAgo date={age} />
+              </span>
+            </div>
+            {isCurrentUser && (
+              <button
+                className="ring-2 ring-red-100 dark:ring-red-500 rounded-sm my-auto"
+                onClick={commentDelete}
+              >
+                <svg className="text-red-500 dark:text-red-200 bg-red-100 dark:bg-red-500 w-6 h-6">
+                  <DeleteIcon />
+                </svg>
+              </button>
+            )}
           </div>
-          {isCurrentUser && (
-            <button
-              className="ring-2 ring-red-100 dark:ring-red-500 rounded-sm ml-4 my-auto"
-              onClick={commentDelete}
-            >
-              <svg className="text-red-500 dark:text-red-200 bg-red-100 dark:bg-red-500 w-6 h-6">
-                <DeleteIcon />
-              </svg>
-            </button>
-          )}
+          <p className="md:pr-16">{post.message}</p>
         </div>
       )}
     </div>
