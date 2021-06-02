@@ -63,7 +63,7 @@ export default function PostPage({ post }) {
             <div className="flex flex-col space-y-3">
               <div className="flex md:flex-row flex-col space-y-2 md:space-y-0 space-x-2">
                 <h2 className="text-medium text-3xl font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-                  {/* @{user.username}{" "} */}
+                  @{user.username}{" "}
                 </h2>
                 <span className="text-medium w-full text-3xl font-normal text-gray-400 dark:text-gray-500">
                   {new Date(post.createdAt).toLocaleString()}
