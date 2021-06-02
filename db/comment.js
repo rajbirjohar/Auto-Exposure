@@ -22,3 +22,12 @@ export async function insertComment(db, { postId, message, creatorId }) {
     })
     .then(({ ops }) => ops[0]);
 }
+
+export async function deleteComment(db, { postId }) {
+  return db
+    .collection("comments")
+    .deleteOne({
+      _id: postId,
+    })
+    .then(({ value }) => value);
+}
