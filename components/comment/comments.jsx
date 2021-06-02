@@ -23,19 +23,21 @@ function Comment({ post }) {
                    w-full transform hover:scale-102
                   dark:bg-gray-900 dark:hover:bg-gray-800 mb-4"
     >
-      <div className="flex flex-col justify-between h-full">
-        <div className="flex space-x-1">
-          {/* <Link href={`/user/${user._id}`}> */}
-          <h3 className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-            @{user.username}{" "}
-          </h3>
-          {/* </Link> */}
-          <span className="text-gray-400 font-normal hover:no-underline">
-            {new Date(post.createdAt).toLocaleString()}
-          </span>
+      {user && (
+        <div className="flex flex-col justify-between h-full">
+          <div className="flex space-x-1">
+            <Link href={`/user/${user._id}`}>
+              <h3 className="text-medium cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
+                @{user.username}{" "}
+              </h3>
+            </Link>
+            <span className="text-gray-400 font-normal hover:no-underline">
+              {new Date(post.createdAt).toLocaleString()}
+            </span>
+          </div>
+          <span>{post.message}</span>
         </div>
-        <span>{post.message}</span>
-      </div>
+      )}
     </div>
   );
 }

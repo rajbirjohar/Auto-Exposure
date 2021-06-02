@@ -53,27 +53,30 @@ export default function PostPage({ post }) {
         <title>Auto Exposure | {caption}</title>
       </Head>
       <section className="mx-auto w-full max-w-screen-lg">
-        <div className="flex flex-col">
-          <img
-            src={postPicture || defaultProfilePicture(_id)}
-            alt="Image"
-            className="w-full mb-16"
-          />
-          <div className="w-full">
-            <div className="flex flex-col space-y-3">
-              <div className="flex md:flex-row flex-col space-y-2 md:space-y-0 space-x-2">
-                <h2 className="text-medium text-3xl font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
-                  @{user.username}{" "}
-                </h2>
-                <span className="text-medium w-full text-3xl font-normal text-gray-400 dark:text-gray-500">
-                  {new Date(post.createdAt).toLocaleString()}
-                </span>
+        {user && (
+          <div className="flex flex-col">
+            <img
+              src={postPicture || defaultProfilePicture(_id)}
+              alt="Image"
+              className="w-full mb-16"
+            />
+            <div className="w-full">
+              <div className="flex flex-col space-y-3">
+                <div className="flex md:flex-row flex-col space-y-2 md:space-y-0 space-x-2">
+                  <h2 className="text-medium text-3xl font-semibold cursor-pointer text-blue-500 dark:text-blue-400 hover:underline">
+                    @{user.username}{" "}
+                  </h2>
+                  <span className="text-medium w-full text-3xl font-normal text-gray-400 dark:text-gray-500">
+                    {new Date(post.createdAt).toLocaleString()}
+                  </span>
+                </div>
+                <h1 className="font-medium text-3xl tracking-loose">
+                  {caption}
+                </h1>
               </div>
-              <h1 className="font-medium text-3xl tracking-loose">{caption}</h1>
             </div>
           </div>
-        </div>
-
+        )}
         <div>
           <h3 className="text-2xl text-gray-600 font-medium my-4 dark:text-gray-400 dark:text-gray-500">
             Comments
