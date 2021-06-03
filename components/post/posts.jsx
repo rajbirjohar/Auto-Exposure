@@ -46,7 +46,7 @@ function Post({ post }) {
         postId: post._id,
         choice: choose,
       };
-      console.log(body);
+      //console.log(body);
       const res = await fetch("/api/posts/patch", {
         method: "PATCH",
         body: JSON.stringify(body),
@@ -62,7 +62,7 @@ function Post({ post }) {
           },
         });
       } else {
-        setIsUpdating(false);
+        isUpdating = false;
       }
       isUpdating = false;
     } else {
@@ -214,27 +214,41 @@ export default function Posts({ creatorId }) {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.posts.length < PAGE_SIZE);
 
-  // const [searchValue, setSearchValue] = React.useState("");
-  // var filteredPosts = [];
-  // for (var i = 0; i < data?.[0].posts?.length; i++) {
-  //   if (
-  //     data?.[0].posts[i].caption
-  //       .toLowerCase()
-  //       .includes(searchValue.toLowerCase())
-  //   ) {
-  //     filteredPosts.push(data?.[0].posts[i]);
-  //   }
-  // }
-  // console.log(filteredPosts);
-  // console.log(searchValue);
+  const [searchValue, setSearchValue] = React.useState("");
+  var filteredPosts = [];
+  for (var i = 0; i < data?.[0].posts?.length; i++) {
+    if (
+      data?.[0].posts[i].caption
+        .toLowerCase()
+        .includes(searchValue.toLowerCase())
+    ) {
+      filteredPosts.push(data?.[0].posts[i]);
+    }
+  }
+  console.log(filteredPosts);
+  console.log(searchValue);
 
   return (
     <div>
       <Toaster />
+      <div className="w-full md:max-w-lg md:pr-2 mb-6">
+        <label className="font-medium">Search Posts</label>
+        <input
+          aria-label="Enabled Searchbar"
+          type="text"
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder=""
+          className="w-full form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+          dark:bg-gray-800 dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+        />
+      </div>
       <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
-        {posts.map((post) => (
-          <Post key={post._id} post={post} />
-        ))}
+        {!filteredPosts.length &&
+          "We did not find any cars that matched your search!"}
+        {!filteredPosts &&
+          posts.map((post) => <Post key={post._id} post={post} />)}
+        {filteredPosts &&
+          filteredPosts.map((post) => <Post key={post._id} post={post} />)}
       </div>
       {/* {!isReachingEnd && (
         <div className="flex w-full mx-auto mt-8 items-center justify-center">

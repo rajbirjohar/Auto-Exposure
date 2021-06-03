@@ -55,7 +55,7 @@ export async function findPostById(db, userId) {
 export async function updatePost(db, { postId, id }) {
   return db
     .collection("posts")
-    .updateOne({ _id: postId }, { $push: { likes: id } })
+    .updateOne({ _id: postId }, { $addToSet: { likes: id } })
     .then(({ value }) => value);
 }
 
