@@ -93,7 +93,7 @@ function Post({ post }) {
       className="bg-white flex flex-col flex-1 p-6 shadow-md hover:shadow-lg
                   transition duration-200 ease-in-out rounded-md
                    w-full transform hover:scale-101
-                  dark:bg-gray-900 dark:hover:bg-gray-800"
+                  dark:bg-gray-900 dark:hover:bg-gray-800 truncate"
     >
       {user && (
         <div className="flex flex-col justify-between h-full">
@@ -150,7 +150,7 @@ function Post({ post }) {
           </div>
         </div>
       )}
-      <p className="break-normal break-words truncate">{post.caption}</p>
+      <p className="truncate">{post.caption}</p>
 
       {user && (
         <Link href={`/comments/${post._id}`}>
