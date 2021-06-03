@@ -11,8 +11,6 @@ import { extractUser } from "@/lib/api-helpers";
 import { findUserById } from "@/db/index";
 import { defaultProfilePicture } from "@/lib/default";
 
-
-
 export default function UserPage({ user }) {
   const [mounted, setMounted] = React.useState(false);
   const { resolvedTheme, setTheme } = useTheme();
@@ -55,26 +53,24 @@ export default function UserPage({ user }) {
               </h2>
               <p>{bio}</p>
             </div>
-            <div className="flex flex-row cursor-pointer md:mt-0 mt-4">
+            <div className="flex flex-row cursor-pointer space-x-3 mt-4">
               {isCurrentUser && (
                 <Link href="/settings">
                   <button
                     type="button"
-                    className="bg-gray-200 text-black rounded-sm py-2 px-3 mt-4
-                    hover:bg-gray-300 hover:border-gray-300 hover:shadow-lg transition duration-200 ease-in-out
-                              dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white"
+                    className="bg-black text-white rounded-sm px-3 font-medium
+                    hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
+                              dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
                   >
                     Edit Profile
                   </button>
-                  
                 </Link>
-                
               )}
-              
+
               <button
                 aria-label="Toggle Dark Mode"
                 type="button"
-                className="flex flex-row items-center hover:shadow-lg
+                className="hover:shadow-lg p-2
                     transition duration-200 ease-in-out rounded-sm text-black dark:text-white font-medium
                     bg-gray-200 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-800"
                 onClick={() =>
@@ -82,33 +78,29 @@ export default function UserPage({ user }) {
                 }
               >
                 {mounted && (
-                  <span>
+                  <>
                     {resolvedTheme === "dark" ? (
-                      <span className="flex">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          stroke="currentColor"
-                          className="h-5 w-5 flex items-center mr-1"
-                        >
-                          <SunIcon />
-                        </svg>
-                      </span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        className=""
+                      >
+                        <SunIcon />
+                      </svg>
                     ) : (
-                      <span className="flex">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          stroke="currentColor"
-                          className="h-5 w-5 flex items-center mr-1"
-                        >
-                          <MoonIcon />
-                        </svg>
-                      </span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        className=""
+                      >
+                        <MoonIcon />
+                      </svg>
                     )}
-                  </span>
+                  </>
                 )}
               </button>
             </div>
