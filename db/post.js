@@ -1,20 +1,22 @@
 import { nanoid } from "nanoid";
 
 export async function getPosts(db, from = new Date(), by, limit) {
-  return db
-    .collection("posts")
-    .find({
-      // Pagination: Fetch posts from before the input date or fetch from newest
-      ...(from && {
-        createdAt: {
-          $lte: from,
-        },
-      }),
-      ...(by && { creatorId: by }),
-    })
-    .sort({ createdAt: -1 })
-    .limit(limit || 9)
-    .toArray();
+  return (
+    db
+      .collection("posts")
+      .find({
+        // Pagination: Fetch posts from before the input date or fetch from newest
+        ...(from && {
+          createdAt: {
+            $lte: from,
+          },
+        }),
+        ...(by && { creatorId: by }),
+      })
+      .sort({ createdAt: -1 })
+      // .limit(limit || 9)
+      .toArray()
+  );
 }
 
 // export async function getComments(db, id) {

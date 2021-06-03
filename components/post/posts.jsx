@@ -223,18 +223,29 @@ export default function Posts({ creatorId }) {
       filteredPosts.push(data?.[0].posts[i]);
     }
   }
-  // console.log(filteredPosts);
+  console.log(filteredPosts);
+  console.log(searchValue);
 
-  // console.log(searchValue);
   return (
     <div>
       <Toaster />
+      <div className="w-full md:max-w-lg md:pr-2 mb-6">
+        <label className="font-medium">Search Posts</label>
+        <input
+          aria-label="Enabled Searchbar"
+          type="text"
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder=""
+          className="w-full form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
+          dark:bg-gray-800 dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
+        />
+      </div>
       <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}
       </div>
-      {!isReachingEnd && (
+      {/* {!isReachingEnd && (
         <div className="flex w-full mx-auto mt-8 items-center justify-center">
           <button
             type="button"
@@ -247,7 +258,7 @@ export default function Posts({ creatorId }) {
             {isLoadingMore ? "Loading..." : "Load more"}
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
