@@ -14,7 +14,9 @@
 2. [Instructions](#instructions)
 3. [Technologies](#technologies-used)
 4. [File Structure](#file-structure)
-5. [Third Party](#third-party-packages-and-libraries)
+5. [Third Party](#third-party-packages-and-libraries)  
+6. [In Progress](#in-progress)  
+7. [Contact](#more-work-and-contact)
 
 ## Purpose
 
@@ -85,12 +87,6 @@ What we used or will use to build this:
 └── .gitignore
 ```
 
-## Technologies Explained
-
-- NextJS
-  - Framework built on top of react but better in every way.
-  - Hosted on Vercel where we also store the env variables.
-
 ## Third Party Packages and Libraries
 
 - [TailwindCSS](https://tailwindcss.com)
@@ -104,6 +100,8 @@ What we used or will use to build this:
     - urls to Profile Pictures
     - urls to Post Pictures
     - Posts attached to users
+        - Comments
+        - Likes
 - [Cloudinary](https://cloudinary.com)
   - Used as our secondary database to hold all the physical images including:
     - Profile Pictures
@@ -117,10 +115,9 @@ What we used or will use to build this:
 We decided to push some features to the end/abandon because we would rather serve a polished UI/UX rather than buggy code and broken features with lacking UI/UX. For instance:
 - we had a `pagination` fetch in the beginning but it was interfering with our deleting and liking so we ended up disabling it for now until we figure out an elegant solution to the problem.
 
-> When you're a carpenter making a beautiful chest of drawers,   
-> you're not going to use a piece of plywood on the back, even   
-> though it faces the wall and nobody will ever see it.  
-> -- Steve Jobs
+> When you're a carpenter making a beautiful chest of drawers,
+> you're not going to use a piece of plywood on the back, even 
+> though it faces the wall and nobody will ever see it. - Steve Jobs
 
 ## More Work and Contact
 
