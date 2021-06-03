@@ -61,7 +61,7 @@ function Comment({ post }) {
               </button>
             )}
           </div>
-          <p className="md:pr-16">{post.message}</p>
+          <p className="md:pr-16 break-words break-normal">{post.message}</p>
         </div>
       )}
     </div>

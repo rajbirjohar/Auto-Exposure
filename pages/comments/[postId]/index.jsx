@@ -9,6 +9,7 @@ import { defaultProfilePicture } from "@/lib/default";
 import toast, { Toaster } from "react-hot-toast";
 import Comment from "@/components/comment/comments";
 import TimeAgo from "react-timeago";
+import TextareaAutosize from "react-textarea-autosize";
 
 export default function PostPage({ post }) {
   if (!post) return <Error statusCode={404} />;
@@ -98,7 +99,7 @@ export default function PostPage({ post }) {
               autoComplete="off"
               className="md:space-x-4 flex flex-col md:flex-row md:items-center w-full my-4"
             >
-              <input
+              <TextareaAutosize
                 className="flex-grow w-full md:mb-0 mb-4 form-input 
                 border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
                                         dark:bg-black dark:ring-gray-600 dark:focus:ring-2 dark:focus:ring-blue-600"
@@ -108,7 +109,6 @@ export default function PostPage({ post }) {
                 placeholder=""
                 ref={messageRef}
               />
-
               <button
                 id="buttonid"
                 type="submit"

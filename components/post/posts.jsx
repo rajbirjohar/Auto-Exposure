@@ -11,7 +11,7 @@ import useModal from "@/components/useModal";
 import TimeAgo from "react-timeago";
 
 // import styles from '@/styles/posts.module.css'
-import { SearchIcon } from '@/components/icons'
+import { SearchIcon } from "@/components/icons";
 
 function Post({ post }) {
   const { isShowing, toggle } = useModal();
@@ -150,7 +150,7 @@ function Post({ post }) {
           </div>
         </div>
       )}
-      <p>{post.caption}</p>
+      <p className="break-normal break-words truncate">{post.caption}</p>
 
       {user && (
         <Link href={`/comments/${post._id}`}>
@@ -176,8 +176,9 @@ export function usePostPages({ creatorId } = {}) {
 
       // first page, previousPageData is null
       if (index === 0) {
-        return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
-          }`;
+        return `/api/posts?limit=${PAGE_SIZE}${
+          creatorId ? `&by=${creatorId}` : ""
+        }`;
       }
 
       // using oldest posts createdAt date as cursor
@@ -189,8 +190,9 @@ export function usePostPages({ creatorId } = {}) {
         ).getTime() - 1
       ).toJSON();
 
-      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
-        }`;
+      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
+        creatorId ? `&by=${creatorId}` : ""
+      }`;
     },
     fetcher,
     {
@@ -212,11 +214,14 @@ export default function Posts({ creatorId }) {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.posts.length < PAGE_SIZE);
 
-
-  const [searchValue, setSearchValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState("");
   var filteredPosts = [];
   for (var i = 0; i < data?.[0].posts?.length; i++) {
-    if (data?.[0].posts[i].caption.toLowerCase().includes(searchValue.toLowerCase())) {
+    if (
+      data?.[0].posts[i].caption
+        .toLowerCase()
+        .includes(searchValue.toLowerCase())
+    ) {
       filteredPosts.push(data?.[0].posts[i]);
     }
   }
