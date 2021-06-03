@@ -150,7 +150,7 @@ function Post({ post }) {
           </div>
         </div>
       )}
-      <p className="truncate">{post.caption}</p>
+      <p className="truncate pb-2">{post.caption}</p>
 
       {user && (
         <Link href={`/comments/${post._id}`}>
