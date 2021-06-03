@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import { useCurrentUser } from "@/hooks/index";
 import toast, { Toaster } from "react-hot-toast";
+import TextareaAutosize from "react-textarea-autosize";
 
 const ProfileSection = () => {
   const [user, { mutate }] = useCurrentUser();
@@ -129,10 +130,11 @@ const ProfileSection = () => {
               <label className="font-medium text-gray-600 dark:text-gray-300">
                 Biography
               </label>
-              <textarea
+              <TextareaAutosize
                 id="bio"
                 name="bio"
                 type="text"
+                minRows={3}
                 placeholder=""
                 ref={bioRef}
                 className="form-input border-none ring-2 ring-gray-300 focus:ring-2 focus:ring-blue-400 py-2 px-3 rounded-sm
