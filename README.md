@@ -120,3 +120,5 @@ We decided to push some features to the end/abandon because we would rather serv
 ## More Work and Contact
 
 [Rajbir Johar](https://rajbirjohar.com)
+
+[Danial Beg](https://danialbeg.vercel.app/)
