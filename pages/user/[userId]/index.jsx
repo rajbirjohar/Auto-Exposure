@@ -85,7 +85,7 @@ export default function UserPage({ user }) {
                         viewBox="0 0 24 24"
                         fill="currentColor"
                         stroke="currentColor"
-                        className=""
+                        className="h-5 w-5"
                       >
                         <SunIcon />
                       </svg>
@@ -95,7 +95,7 @@ export default function UserPage({ user }) {
                         viewBox="0 0 24 24"
                         fill="currentColor"
                         stroke="currentColor"
-                        className=""
+                        className="h-5 w-5"
                       >
                         <MoonIcon />
                       </svg>
