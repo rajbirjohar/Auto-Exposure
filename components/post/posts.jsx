@@ -46,7 +46,7 @@ function Post({ post }) {
         postId: post._id,
         choice: choose,
       };
-      console.log(body);
+      //console.log(body);
       const res = await fetch("/api/posts/patch", {
         method: "PATCH",
         body: JSON.stringify(body),
@@ -62,7 +62,7 @@ function Post({ post }) {
           },
         });
       } else {
-        setIsUpdating(false);
+        isUpdating = false;
       }
       isUpdating = false;
     } else {
@@ -104,12 +104,12 @@ function Post({ post }) {
           </div>
           <div>
             <div className="flex items-center justify-between mb-2">
-              {/* <button className="flex items-center" onClick={handleClick}>
+              <button className="flex items-center" onClick={handleClick}>
                 <svg className="text-gray-400 w-6 h-6 mr-1">
                   <HeartIcon />
                 </svg>
                 {post.likes.length}
-              </button> */}
+              </button>
               {isCurrentUser && (
                 <>
                   <button

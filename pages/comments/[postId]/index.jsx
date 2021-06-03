@@ -22,57 +22,57 @@ export default function PostPage({ post }) {
   const age = new Date(post.createdAt).toLocaleString();
   var isUpdating = false;
 
-  const handleClick = async (event) => {
-    if (user) {
-      var dupCheck = false;
-      var choose;
-      event.preventDefault();
-      console.log(isUpdating);
-      if (isUpdating) return;
-      isUpdating = true;
+  // const handleClick = async (event) => {
+  //   if (user) {
+  //     var dupCheck = false;
+  //     var choose;
+  //     event.preventDefault();
+  //     console.log(isUpdating);
+  //     if (isUpdating) return;
+  //     isUpdating = true;
 
-      console.log(post.likes);
-      for (var i = 0; i < post.likes.length; i++) {
-        if (post.likes[i] === user._id) {
-          dupCheck = true;
-        }
-      }
+  //     console.log(post.likes);
+  //     for (var i = 0; i < post.likes.length; i++) {
+  //       if (post.likes[i] === user._id) {
+  //         dupCheck = true;
+  //       }
+  //     }
 
-      if (!dupCheck) {
-        choose = "Add";
-      } else {
-        choose = "Remove";
-      }
-      const body = {
-        postId: post._id,
-        choice: choose,
-      };
-      console.log(body);
-      const res = await fetch("/api/posts/patch", {
-        method: "PATCH",
-        body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json" },
-      });
-      isUpdating = false;
-      //console.log(res);
-      if (res.status === 200) {
-        const postData = await res.json();
-        mutate({
-          posts: {
-            ...post,
-            ...postData.post,
-          },
-        });
-        // console.log("Post data");
-        // console.log(postData);
-      } else {
-        isUpdating = false;
-      }
-      isUpdating = false;
-    } else {
-      toast.error("Please sign-in!");
-    }
-  };
+  //     if (!dupCheck) {
+  //       choose = "Add";
+  //     } else {
+  //       choose = "Remove";
+  //     }
+  //     const body = {
+  //       postId: post._id,
+  //       choice: choose,
+  //     };
+  //     console.log(body);
+  //     const res = await fetch("/api/posts/patch", {
+  //       method: "PATCH",
+  //       body: JSON.stringify(body),
+  //       headers: { "Content-Type": "application/json" },
+  //     });
+  //     isUpdating = false;
+  //     //console.log(res);
+  //     if (res.status === 200) {
+  //       const postData = await res.json();
+  //       mutate({
+  //         posts: {
+  //           ...post,
+  //           ...postData.post,
+  //         },
+  //       });
+  //       // console.log("Post data");
+  //       // console.log(postData);
+  //     } else {
+  //       isUpdating = false;
+  //     }
+  //     isUpdating = false;
+  //   } else {
+  //     toast.error("Please sign-in!");
+  //   }
+  // };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -147,12 +147,12 @@ export default function PostPage({ post }) {
           <h3 className="md:text-xl text-gray-600 font-medium md:my-4 dark:text-gray-400">
             Comments
           </h3>
-          <button className="flex items-center" onClick={handleClick}>
+          {/* <button className="flex items-center" onClick={handleClick}>
             <svg className="text-gray-400 w-6 h-6 mr-1">
               <HeartIcon />
             </svg>
             {post.likes.length}
-          </button>
+          </button> */}
           {userLoggedIn ? (
             <form
               onSubmit={handleSubmit}
