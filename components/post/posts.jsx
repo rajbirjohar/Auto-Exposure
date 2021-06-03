@@ -104,12 +104,12 @@ function Post({ post }) {
           </div>
           <div>
             <div className="flex items-center justify-between mb-2">
-              <button className="flex items-center" onClick={handleClick}>
+              {/* <button className="flex items-center" onClick={handleClick}>
                 <svg className="text-gray-400 w-6 h-6 mr-1">
                   <HeartIcon />
                 </svg>
                 {post.likes.length}
-              </button>
+              </button> */}
               {isCurrentUser && (
                 <>
                   <button
@@ -176,9 +176,8 @@ export function usePostPages({ creatorId } = {}) {
 
       // first page, previousPageData is null
       if (index === 0) {
-        return `/api/posts?limit=${PAGE_SIZE}${
-          creatorId ? `&by=${creatorId}` : ""
-        }`;
+        return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
+          }`;
       }
 
       // using oldest posts createdAt date as cursor
@@ -190,9 +189,8 @@ export function usePostPages({ creatorId } = {}) {
         ).getTime() - 1
       ).toJSON();
 
-      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
-        creatorId ? `&by=${creatorId}` : ""
-      }`;
+      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
+        }`;
     },
     fetcher,
     {
@@ -225,9 +223,9 @@ export default function Posts({ creatorId }) {
       filteredPosts.push(data?.[0].posts[i]);
     }
   }
-  console.log(filteredPosts);
+  // console.log(filteredPosts);
 
-  console.log(searchValue);
+  // console.log(searchValue);
   return (
     <div>
       <Toaster />

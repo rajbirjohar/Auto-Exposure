@@ -83,18 +83,26 @@ handler.patch(async (req, res) => {
   console.log(req.body.postId);
   const { _id } = req.user;
   const { postId, choice } = req.body;
+  //var like;
 
   if (choice === "Add") {
     const like = await updatePost(req.db, {
       postId: postId,
       id: _id,
     });
+    console.log("Like");
+    console.log(like);
   } else if (choice === "Remove") {
     const like = await deleteElement(req.db, {
       postId: postId,
       id: _id,
     });
+    console.log("Like");
+    console.log(like);
   }
+  // console.log("Likes");
+  //console.log(req.db.collection("posts").find({ "_id": postId }));
+  // return res.json({ likes: like })
 });
 
 handler.delete(async (req, res) => {

@@ -53,7 +53,7 @@ export async function findPostById(db, userId) {
 export async function updatePost(db, { postId, id }) {
   return db
     .collection("posts")
-    .updateOne({ _id: postId }, { $push: { likes: id } })
+    .updateOne({ _id: postId }, { $addToSet: { likes: id } })
     .then(({ value }) => value);
 }
 
@@ -67,7 +67,7 @@ export async function deleteElement(db, { postId, id }) {
 export async function deletePost(db, { postId }) {
   return db
     .collection("posts")
-    .deleteOne({
+    .delete({
       _id: postId,
     })
     .then(({ value }) => value);
