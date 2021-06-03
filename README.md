@@ -42,6 +42,10 @@ Features included or will be included:
 - [x] Dark Mode
 - [x] Search bar
 
+**KISS** - Keep It Simple Stupid
+- Serverless ready and no Express used at all
+- No SASS, Redux, etc
+
 ## Instructions
 
 1. `git clone https://github.com/CS-UCR/Auto-Exposure.git`
