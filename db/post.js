@@ -69,7 +69,7 @@ export async function deleteElement(db, { postId, id }) {
 export async function deletePost(db, { postId }) {
   return db
     .collection("posts")
-    .delete({
+    .deleteOne({
       _id: postId,
     })
     .then(({ value }) => value);
