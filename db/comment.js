@@ -13,9 +13,10 @@ export async function getComments(db, id) {
 export async function deleteComments(db, id) {
   return db
     .collection("comments")
-    .remove({
+    .deleteMany({
       postId: id,
-    }).then(({ value }) => value);
+    })
+    .then(({ value }) => value);
 }
 
 export async function insertComment(db, { postId, message, creatorId }) {

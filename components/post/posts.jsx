@@ -176,8 +176,9 @@ export function usePostPages({ creatorId } = {}) {
 
       // first page, previousPageData is null
       if (index === 0) {
-        return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
-          }`;
+        return `/api/posts?limit=${PAGE_SIZE}${
+          creatorId ? `&by=${creatorId}` : ""
+        }`;
       }
 
       // using oldest posts createdAt date as cursor
@@ -189,8 +190,9 @@ export function usePostPages({ creatorId } = {}) {
         ).getTime() - 1
       ).toJSON();
 
-      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ""
-        }`;
+      return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
+        creatorId ? `&by=${creatorId}` : ""
+      }`;
     },
     fetcher,
     {
@@ -242,8 +244,10 @@ export default function Posts({ creatorId }) {
       </div>
       <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
         {!filteredPosts.length &&
+          "We did not find any cars that matched your search!"}
+        {!filteredPosts &&
           posts.map((post) => <Post key={post._id} post={post} />)}
-        {filteredPosts.length &&
+        {filteredPosts &&
           filteredPosts.map((post) => <Post key={post._id} post={post} />)}
       </div>
       {/* {!isReachingEnd && (
