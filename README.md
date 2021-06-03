@@ -110,4 +110,5 @@ There will be two separate branches for frontend and backend where we implement 
 ## More Work and Contact
 
 [Rajbir Johar](https://rajbirjohar.com)
+
 [Danial Beg](https://danialbeg.vercel.app/)
