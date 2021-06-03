@@ -25,7 +25,7 @@ handler.post(async (req, res) => {
     subject: `Verification Email for ${process.env.WEB_URI}`,
     html: `
       <div>
-        <p>Hello, ${req.user.name}</p>
+        <p>Hello, ${req.user.firstname}</p>
         <p>Please follow <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
       </div>
       `,
