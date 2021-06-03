@@ -2,6 +2,8 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Error from "next/error";
+import { useTheme } from "next-themes";
+import { MoonIcon, SunIcon } from "@/icons/icons";
 import { all } from "@/middlewares/index";
 import { useCurrentUser } from "@/hooks/index";
 import Posts from "@/components/post/posts";
@@ -10,6 +12,11 @@ import { findUserById } from "@/db/index";
 import { defaultProfilePicture } from "@/lib/default";
 
 export default function UserPage({ user }) {
+  const [mounted, setMounted] = React.useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+
+  React.useEffect(() => setMounted(true), []);
+
   if (!user) return <Error statusCode={404} />;
   const { firstname, username, bio, profilePicture, _id } = user || {};
   const [currentUser] = useCurrentUser();
@@ -46,18 +53,57 @@ export default function UserPage({ user }) {
               </h2>
               <p>{bio}</p>
             </div>
-            {isCurrentUser && (
-              <Link href="/settings">
-                <button
-                  type="button"
-                  className="bg-gray-200 text-black rounded-sm py-2 px-3 mt-4
-                  hover:bg-gray-300 hover:border-gray-300 hover:shadow-lg transition duration-200 ease-in-out
-                             dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white"
-                >
-                  Edit Profile
-                </button>
-              </Link>
-            )}
+            <div className="flex flex-row cursor-pointer space-x-3 mt-4">
+              {isCurrentUser && (
+                <Link href="/settings">
+                  <button
+                    type="button"
+                    className="bg-black text-white rounded-sm px-3 font-medium
+                    hover:bg-gray-800 hover:shadow-lg transition duration-200 ease-in-out
+                              dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-black"
+                  >
+                    Edit Profile
+                  </button>
+                </Link>
+              )}
+
+              <button
+                aria-label="Toggle Dark Mode"
+                type="button"
+                className="hover:shadow-lg p-2
+                    transition duration-200 ease-in-out rounded-sm text-black dark:text-white font-medium
+                    bg-gray-200 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-800"
+                onClick={() =>
+                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                }
+              >
+                {mounted && (
+                  <>
+                    {resolvedTheme === "dark" ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        className=""
+                      >
+                        <SunIcon />
+                      </svg>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        className=""
+                      >
+                        <MoonIcon />
+                      </svg>
+                    )}
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
 
