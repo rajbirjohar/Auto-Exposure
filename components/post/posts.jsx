@@ -214,20 +214,20 @@ export default function Posts({ creatorId }) {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.posts.length < PAGE_SIZE);
 
-  const [searchValue, setSearchValue] = React.useState("");
-  var filteredPosts = [];
-  for (var i = 0; i < data?.[0].posts?.length; i++) {
-    if (
-      data?.[0].posts[i].caption
-        .toLowerCase()
-        .includes(searchValue.toLowerCase())
-    ) {
-      filteredPosts.push(data?.[0].posts[i]);
-    }
-  }
-  console.log(filteredPosts);
+  // const [searchValue, setSearchValue] = React.useState("");
+  // var filteredPosts = [];
+  // for (var i = 0; i < data?.[0].posts?.length; i++) {
+  //   if (
+  //     data?.[0].posts[i].caption
+  //       .toLowerCase()
+  //       .includes(searchValue.toLowerCase())
+  //   ) {
+  //     filteredPosts.push(data?.[0].posts[i]);
+  //   }
+  // }
+  // console.log(filteredPosts);
+  // console.log(searchValue);
 
-  console.log(searchValue);
   return (
     <div>
       <Toaster />
@@ -236,7 +236,7 @@ export default function Posts({ creatorId }) {
           <Post key={post._id} post={post} />
         ))}
       </div>
-      {!isReachingEnd && (
+      {/* {!isReachingEnd && (
         <div className="flex w-full mx-auto mt-8 items-center justify-center">
           <button
             type="button"
@@ -249,7 +249,7 @@ export default function Posts({ creatorId }) {
             {isLoadingMore ? "Loading..." : "Load more"}
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
