@@ -27,7 +27,7 @@ export default function UserPage({ user }) {
         <title>Auto Exposure | {firstname}</title>
       </Head>
       <section className="mx-auto w-full max-w-screen-2xl">
-        <div className="flex md:flex-row flex-col items-center md:space-x-6">
+        <div className="flex md:flex-row flex-col md:items-center md:space-x-6">
           <img
             src={profilePicture || defaultProfilePicture(_id)}
             alt={firstname}
@@ -66,43 +66,44 @@ export default function UserPage({ user }) {
                   </button>
                 </Link>
               )}
-
-              <button
-                aria-label="Toggle Dark Mode"
-                type="button"
-                className="hover:shadow-lg p-2
+              {isCurrentUser && (
+                <button
+                  aria-label="Toggle Dark Mode"
+                  type="button"
+                  className="hover:shadow-lg p-2
                     transition duration-200 ease-in-out rounded-sm text-black dark:text-white font-medium
                     bg-gray-200 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-800"
-                onClick={() =>
-                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
-                }
-              >
-                {mounted && (
-                  <>
-                    {resolvedTheme === "dark" ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        className="h-5 w-5"
-                      >
-                        <SunIcon />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        className="h-5 w-5"
-                      >
-                        <MoonIcon />
-                      </svg>
-                    )}
-                  </>
-                )}
-              </button>
+                  onClick={() =>
+                    setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                  }
+                >
+                  {mounted && (
+                    <>
+                      {resolvedTheme === "dark" ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          className="h-5 w-5"
+                        >
+                          <SunIcon />
+                        </svg>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          className="h-5 w-5"
+                        >
+                          <MoonIcon />
+                        </svg>
+                      )}
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </div>
