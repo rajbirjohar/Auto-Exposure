@@ -241,9 +241,10 @@ export default function Posts({ creatorId }) {
         />
       </div>
       <div className="w-full max-w-screen-2xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
-        {posts.map((post) => (
-          <Post key={post._id} post={post} />
-        ))}
+        {!filteredPosts.length &&
+          posts.map((post) => <Post key={post._id} post={post} />)}
+        {filteredPosts.length &&
+          filteredPosts.map((post) => <Post key={post._id} post={post} />)}
       </div>
       {/* {!isReachingEnd && (
         <div className="flex w-full mx-auto mt-8 items-center justify-center">
