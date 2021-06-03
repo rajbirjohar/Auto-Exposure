@@ -117,9 +117,10 @@ What we used or will use to build this:
 We decided to push some features to the end/abandon because we would rather serve a polished UI/UX rather than buggy code and broken features with lacking UI/UX. For instance:
 - we had a `pagination` fetch in the beginning but it was interfering with our deleting and liking so we ended up disabling it for now until we figure out an elegant solution to the problem.
 
-> When you're a carpenter making a beautiful chest of drawers, 
-> you're not going to use a piece of plywood on the back, even 
-> though it faces the wall and nobody will ever see it. - Steve Jobs
+> When you're a carpenter making a beautiful chest of drawers,   
+> you're not going to use a piece of plywood on the back, even   
+> though it faces the wall and nobody will ever see it.  
+> -- Steve Jobs
 
 ## More Work and Contact
 
