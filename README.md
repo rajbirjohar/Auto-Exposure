@@ -24,8 +24,11 @@ Auto Exposure is a social media site designed for car enthusiasts in mind. You c
 
 Features included or will be included:
 
-- [x] User profiles
-- [x] Editing user profiles
+- [x] Next.JS
+- [x] Static Site Generation
+- [x] Dynamic routes
+- [x] Middleware
+- [x] User profiles and visiting
 - [x] Uploading image urls and captions
 - [x] Authentication
 - [x] Account verification
@@ -36,7 +39,7 @@ Features included or will be included:
 - [x] Deleting comments
 - [x] Liking
 - [x] Minimal and clean UI/UX
-- [x] Footer
+- [x] Dark Mode
 - [x] Search bar
 
 ## Instructions
@@ -78,8 +81,6 @@ What we used or will use to build this:
 └── .gitignore
 ```
 
-There will be two separate branches for frontend and backend where we implement specific features within each branch and merge into master.
-
 ## Technologies Explained
 
 - NextJS
@@ -89,7 +90,7 @@ There will be two separate branches for frontend and backend where we implement 
 ## Third Party Packages and Libraries
 
 - [TailwindCSS](https://tailwindcss.com)
-  - Used for the majority of our styling
+  - Used for the majority of our styling. This was a good move from the start since it greatly speeds up the time it takes to develop and design clean UI without messing with custom CSS.
 - [MongoDB](https://www.mongodb.com)
   - Used as our main database to hold all user-centric information including:
     - First/last names
@@ -106,6 +107,15 @@ There will be two separate branches for frontend and backend where we implement 
     - Default profile pictures come from [here](https://boringavatars.com).
 - [SendGrid](https://sendgrid.com)
   - Used as our account verification and password reset medium by sending the users emails.
+
+## In Progress
+
+We decided to push some features to the end/abandon because we would rather serve a polished UI/UX rather than buggy code and broken features with lacking UI/UX. For instance:
+- we had a `pagination` fetch in the beginning but it was interfering with our deleting and liking so we ended up disabling it for now until we figure out an elegant solution to the problem.
+
+> When you're a carpenter making a beautiful chest of drawers, 
+> you're not going to use a piece of plywood on the back, even 
+> though it faces the wall and nobody will ever see it. - Steve Jobs
 
 ## More Work and Contact
 
